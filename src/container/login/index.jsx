@@ -37,7 +37,9 @@ function LoginPage() {
               </label>
                 <input type="password" value={password} onChange={handlePasswordChange} />
             </div>
-            <button type="submit">Login</button>
+            <div className="input-group">
+              <button type="submit">Login</button>
+            </div>
           </form>
         </div>
         <div className='picSide'>

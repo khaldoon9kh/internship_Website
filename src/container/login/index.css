@@ -1,8 +1,8 @@
 .mainConainer{
   display: flex;
   justify-content: center;
-  background-color: #45a049;
-  height: 85vh;
+  /* background-color: #45a049; */
+  height: 80vh;
   padding: 30px;
 }
 .headerNav{
@@ -15,6 +15,8 @@
   justify-content: center;
   align-items: center;
   width: 100vw;
+  border: 2px solid gray ;
+  border-radius: 10px;
 }
 .formside{
   margin: 0 25px;
@@ -34,6 +36,7 @@ form {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
+    width: 300px;
   }
   
   
@@ -47,11 +50,11 @@ form {
     border-radius: 4px;
     border: 1px solid #ccc;
     font-size: 16px;
-    width: 300px;
+    
   }
   
   button[type="submit"] {
-    background-color: #4CAF50;
+    background-color: #2A62B7;
     color: white;
     padding: 12px 20px;
     border: none;
@@ -59,6 +62,8 @@ form {
     cursor: pointer;
     font-size: 16px;
     margin-top: 20px;
+    display: 'inline-block';
+    width: '100%'
   }
   
   button[type="submit"]:hover {
