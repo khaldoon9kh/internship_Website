@@ -25,16 +25,18 @@ function LoginPage() {
       <div className='formBody'>
         <div className='formside'>
           <form onSubmit={handleSubmit}>
-            <label>
-              Username:
-              <input type="text" value={username} onChange={handleUsernameChange} />
-            </label>
-            <br />
-            <label>
-              Password:
-              <input type="password" value={password} onChange={handlePasswordChange} />
-            </label>
-            <br />
+            <div className="input-group">
+              <label for="username">
+                Student Number:
+              </label>
+                <input id='username' type="text" value={username} onChange={handleUsernameChange} />
+            </div>
+            <div className="input-group">
+              <label for="password">
+                Password:
+              </label>
+                <input type="password" value={password} onChange={handlePasswordChange} />
+            </div>
             <button type="submit">Login</button>
           </form>
         </div>
@@ -42,8 +44,6 @@ function LoginPage() {
           <LoginImg/>
         </div>
       </div>
-      
-      
     </div>
    
   );
