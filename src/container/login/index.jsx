@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { ReactComponent as Logo } from "../../svgs/logo.svg";
 import { ReactComponent as LoginImg } from "../../svgs/loginPic.svg";
 import "./index.css";
+import {app} from '../../firebaseConfig';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 function LoginPage() {
   const [username, setUsername] = useState('');
@@ -17,8 +19,22 @@ function LoginPage() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    console.log(username,password)
     // Handle login logic here
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, username, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        console.log(user)
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage)
+      });
   }
+
 
   return (
     <div className='mainConainer'>
