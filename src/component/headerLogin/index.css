@@ -1,0 +1,9 @@
+.headerLogin {
+  display: flex;
+  align-items: center;
+}
+
+.uniLogo {
+  height: 100px;
+  margin: 0px 50px 0px 100px;
+}
