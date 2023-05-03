@@ -5,7 +5,10 @@ function HeaderLogin() {
   return (
     <div className="headerLogin">
       <img src={uniLogo} alt="Logo" className="uniLogo" />
-      <h2> IMS </h2>
+      <div>
+        <h2> Üsküdar Üniversitesi </h2>
+        <h3>Internship Information System</h3>
+      </div>
     </div>
   );
 }

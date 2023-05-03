@@ -10,6 +10,13 @@
   justify-content: center;
   flex-grow: 3;
 }
+.formHeader{
+  display: flex;
+  justify-content: center;
+}
+.formBody h3{
+  font-size: x-large;
+}
 .formBody{
   display: flex;
   justify-content: center;

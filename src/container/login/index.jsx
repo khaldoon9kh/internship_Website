@@ -4,10 +4,12 @@ import { ReactComponent as LoginImg } from "../../svgs/loginPic.svg";
 import "./index.css";
 import {app} from '../../firebaseConfig';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   function handleUsernameChange(event) {
     setUsername(event.target.value);
@@ -19,7 +21,7 @@ function LoginPage() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(username,password)
+    // console.log(username,password)
     // Handle login logic here
     const auth = getAuth();
     signInWithEmailAndPassword(auth, username, password)
@@ -27,6 +29,8 @@ function LoginPage() {
         // Signed in 
         const user = userCredential.user;
         console.log(user)
+        localStorage.setItem('authToken', userCredential._tokenResponse.idToken);
+        navigate('/welcome');
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -40,18 +44,34 @@ function LoginPage() {
     <div className='mainConainer'>
       <div className='formBody'>
         <div className='formside'>
+          <div className='formHeader'>
+            <h3>
+              Sign In
+            </h3>
+          </div>
           <form onSubmit={handleSubmit}>
             <div className="input-group">
               <label for="username">
                 Student Number:
               </label>
-                <input id='username' type="text" value={username} onChange={handleUsernameChange} />
+                <input 
+                  id='username' 
+                  type="text" 
+                  value={username} 
+                  placeholder='20026754'
+                  onChange={handleUsernameChange} 
+                />
             </div>
             <div className="input-group">
               <label for="password">
                 Password:
               </label>
-                <input type="password" value={password} onChange={handlePasswordChange} />
+                <input 
+                  type="password" 
+                  placeholder='Use your OBS password'
+                  value={password} 
+                  onChange={handlePasswordChange} 
+                />
             </div>
             <div className="input-group">
               <button type="submit">Login</button>
