@@ -2,7 +2,19 @@
   text-align: center;
   margin-top: 50;
 }
+.wrapper {
+  display: flex;
+  flex-direction: row;
+}
+.sidebar {
+  width: 25vw;
+  background-color: #f2f2f2;
+}
 
+.content {
+  flex: 1;
+  /* padding: 20px; */
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
