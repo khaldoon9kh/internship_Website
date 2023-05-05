@@ -1,7 +1,7 @@
 .mainConainer{
   display: flex;
   justify-content: center;
-  /* background-color: #45a049; */
+  background-color: #E9EAEC;
   height: 80vh;
   padding: 30px;
 }
@@ -27,8 +27,9 @@
   justify-content: center;
   align-items: center;
   width: 100vw;
-  border: 2px solid gray ;
+  /* border: 2px solid gray ; */
   border-radius: 10px;
+  background-color: whitesmoke;
 }
 .formside{
   margin: 0 25px;
