@@ -13,9 +13,14 @@
 .formHeader{
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .formBody h3{
   font-size: x-large;
+}
+.formBody h4{
+  color: red;
 }
 .formBody{
   display: flex;

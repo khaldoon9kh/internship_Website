@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   function handleUsernameChange(event) {
@@ -36,6 +37,7 @@ function LoginPage() {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorMessage)
+        setErrorMessage("Your email or password are incorrect"); // Update error message state
       });
   }
 
@@ -48,17 +50,24 @@ function LoginPage() {
             <h3>
               Sign In
             </h3>
+            {errorMessage && (
+            <div className="errorPopup">
+              <h4>
+                {errorMessage}
+              </h4>
+            </div>
+          )}
           </div>
           <form onSubmit={handleSubmit}>
             <div className="input-group">
               <label for="username">
-                Student Number:
+                Student Email:
               </label>
                 <input 
                   id='username' 
                   type="text" 
                   value={username} 
-                  placeholder='20026754'
+                  placeholder='user@st.uskudar.edu.tr'
                   onChange={handleUsernameChange} 
                 />
             </div>
