@@ -2,7 +2,8 @@ import './App.css';
 import HeaderLogin from "../src/component/headerLogin";
 import LoginPage from "../src/container/login";
 import WelcomePage from "../src/container/welcom";
-import SideBar from '../src/component/navSidebar'
+import SideBar from '../src/component/navSidebar' 
+import Header from '../src/component/header'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
@@ -21,6 +22,7 @@ function App() {
           <SideBar/>
         </div>
         <div className="content">
+          <Header/>
           <Routes>
             <Route path="/" element={<LoginPage />} />
             <Route path="/welcome" element={<WelcomePage />} />
