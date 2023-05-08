@@ -1,0 +1,50 @@
+.user-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  width: 200px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.admin-button {
+  background-color: #007bff;
+}
+
+.student-button {
+  background-color: #28a745;
+}
+
+.coordinator-button {
+  background-color: #ffc107;
+}
+
+.center-button {
+  background-color: #dc3545;
+}
+
+.button:hover {
+  background-color: #0069d9;
+}
