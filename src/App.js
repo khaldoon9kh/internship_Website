@@ -27,6 +27,7 @@ function App() {
           <HeaderLogin/>
           <Routes>
             <Route path="/" element={<UserSelector />} />
+            <Route path="/login/:userType" element={<LoginPage />} />
             {/* <Route path="/welcome" element={<WelcomePage />} /> */}
           </Routes>
         </div>
