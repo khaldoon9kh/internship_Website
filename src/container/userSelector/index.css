@@ -3,14 +3,28 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  background-color: whitesmoke;
+  height: 85vh;
+}
+.usersContain{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  height: 95%;
+  border-radius: 10px;
+  background-color: white;
+  flex-direction: column;
 }
 
 .button-container {
+  /* background-color: orange; */
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 40px;
+  width: 50%;
 }
 
 .button {
@@ -18,18 +32,19 @@
   align-items: center;
   justify-content: center;
   height: 60px;
-  width: 200px;
-  border-radius: 5px;
+  width: 100%;
+  border: 1px solid rgba(128, 128, 128, 0.904);
+  border-radius: 10px;
   font-size: 18px;
   font-weight: bold;
-  color: white;
+  color: black;
   text-transform: uppercase;
   text-decoration: none;
-  margin: 10px;
+  margin: 5px 0;
   transition: background-color 0.3s ease;
 }
 
-.admin-button {
+/* .admin-button {
   background-color: #007bff;
 }
 
@@ -43,7 +58,7 @@
 
 .center-button {
   background-color: #dc3545;
-}
+} */
 
 .button:hover {
   background-color: #0069d9;
