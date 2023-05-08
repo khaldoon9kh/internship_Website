@@ -1,0 +1,85 @@
+.mainConainer{
+  display: flex;
+  justify-content: center;
+  background-color: #E9EAEC;
+  height: 80vh;
+  padding: 30px;
+}
+.headerNav{
+  display: flex;
+  justify-content: center;
+  flex-grow: 3;
+}
+.formHeader{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.formBody h3{
+  font-size: x-large;
+}
+.formBody h4{
+  color: red;
+}
+.formBody{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  /* border: 2px solid gray ; */
+  border-radius: 10px;
+  background-color: whitesmoke;
+}
+.formside{
+  margin: 0 25px;
+  flex-grow: 10;
+}
+.picSide{
+  display: flex;
+  flex-grow: 5;
+  justify-content: center;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    width: 300px;
+  }
+  
+  
+  label {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  
+  input {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    
+  }
+  
+  button[type="submit"] {
+    background-color: #2A62B7;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    display: 'inline-block';
+    width: '100%'
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
