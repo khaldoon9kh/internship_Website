@@ -24,8 +24,8 @@ function App() {
         <div className="content">
           <Header/>
           <Routes>
-            <Route path="/" element={<LoginPage />} />
-            <Route path="/welcome" element={<WelcomePage />} />
+            <Route path="/" element={<WelcomePage />} />
+            {/* <Route path="/welcome" element={<WelcomePage />} /> */}
           </Routes>
         </div>
       </div>
