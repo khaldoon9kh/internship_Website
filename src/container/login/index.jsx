@@ -4,13 +4,15 @@ import { ReactComponent as LoginImg } from "../../svgs/loginPic.svg";
 import "./index.css";
 import {app} from '../../firebaseConfig';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const { userType } = useParams();
   const navigate = useNavigate();
+  console.log(userType)
 
   function handleUsernameChange(event) {
     setUsername(event.target.value);

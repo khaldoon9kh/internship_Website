@@ -3,7 +3,8 @@ import HeaderLogin from "../src/component/headerLogin";
 import LoginPage from "../src/container/login";
 import WelcomePage from "../src/container/welcom";
 import SideBar from '../src/component/navSidebar' 
-import Header from '../src/component/header'
+import Header from '../src/component/header';
+import UserSelector from '../src/container/userSelector'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
@@ -18,13 +19,15 @@ function App() {
     // </Router>
     <Router>
       <div className="wrapper">
-        <div className="sidebar">
+        {/* <div className="sidebar">
           <SideBar/>
-        </div>
+        </div> */}
         <div className="content">
-          <Header/>
+          {/* <Header/> */}
+          <HeaderLogin/>
           <Routes>
-            <Route path="/" element={<WelcomePage />} />
+            <Route path="/" element={<UserSelector />} />
+            <Route path="/login/:userType" element={<LoginPage />} />
             {/* <Route path="/welcome" element={<WelcomePage />} /> */}
           </Routes>
         </div>
