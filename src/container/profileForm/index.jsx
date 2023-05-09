@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './index.css'
 
 
 const ProfileForm = () => {
@@ -25,39 +26,134 @@ const ProfileForm = () => {
   };
 
   return (
-    <form className="profile-form" onSubmit={handleFormSubmit}>
-      <input type="text" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-      <input type="text" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-      <select value={faculty} onChange={(e) => setFaculty(e.target.value)}>
-        <option value="">Select Faculty</option>
-        {Object.keys(faculties).map((faculty) => (
-          <option key={faculty} value={faculty}>
-            {faculty}
-          </option>
-        ))}
-      </select>
-      <select value={department} onChange={(e) => setDepartment(e.target.value)}>
-        <option value="">Select Department</option>
-        {faculty &&
-          faculties[faculty].map((department) => (
-            <option key={department} value={department}>
-              {department}
-            </option>
-          ))}
-      </select>
-      <select value={grade} onChange={(e) => setGrade(e.target.value)}>
-        <option value="">Select Grade</option>
-        {grades.map((grade) => (
-          <option key={grade} value={grade}>
-            {grade}
-          </option>
-        ))}
-      </select>
-      <input type="email" placeholder="Email Address" value={email} onChange={(e) => setEmail(e.target.value)} />
-      <input type="email" placeholder="University Email" value={universityEmail} onChange={(e) => setUniversityEmail(e.target.value)} />
-      <input type="tel" placeholder="Phone Number" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
-      <button type="submit">Submit</button>
-    </form>
+    <div className="profile-form-outerContainer">
+      <div className='profile-form-mainContainer'> 
+        <div className='profile-form-HeaderCont'>
+          <h1>Profile</h1>
+          <p>Update your personal details here.</p>
+        </div>
+        <div className='separator'>
+        </div>
+        <form onSubmit={handleFormSubmit}>
+          <div className="profile-form">
+            <div className="input-group">
+              <label htmlFor="username">
+                Name:
+              </label>
+              <input
+                id='username' 
+                type="text" 
+                placeholder="First Name" 
+                value={firstName} 
+                onChange={(e) => setFirstName(e.target.value)} 
+              />
+            </div>
+            <div className="input-group">
+              <label htmlFor="lastName">
+                Surname:
+              </label>
+              <input 
+                id='lastName'
+                type="text" 
+                placeholder="Last Name" 
+                value={lastName} 
+                onChange={(e) => setLastName(e.target.value)} 
+              />
+            </div>
+            <div className="input-group">
+              <label htmlFor="faculty">
+                Faculty
+              </label>
+              <select 
+                id='faculty'
+                value={faculty} 
+                onChange={(e) => setFaculty(e.target.value)}
+                >
+                <option value="">Select Faculty</option>
+                {Object.keys(faculties).map((faculty) => (
+                  <option key={faculty} value={faculty}>
+                    {faculty}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="input-group">
+              <label htmlFor="department">
+                Department
+              </label>
+              <select 
+                id='department'
+                value={department} 
+                onChange={(e) => setDepartment(e.target.value)}
+                >
+                <option value="">Select Department</option>
+                {faculty &&
+                  faculties[faculty].map((department) => (
+                    <option key={department} value={department}>
+                      {department}
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <div className="input-group">
+              <label htmlFor="grade">
+                Grade
+              </label>
+              <select 
+                id='grade'
+                value={grade} 
+                onChange={(e) => setGrade(e.target.value)}
+              >
+                <option value="">Select Grade</option>
+                {grades.map((grade) => (
+                  <option key={grade} value={grade}>
+                    {grade}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div className="profile-form">
+            <div className="input-group">
+              <label htmlFor="email">
+                Email Address
+              </label>
+              <input 
+                htmlFor='email'
+                type="email" 
+                placeholder="Email Address" 
+                value={email} 
+                onChange={(e) => setEmail(e.target.value)} 
+              />
+            </div>
+            <div className="input-group">
+              <label htmlFor="universityEmail">
+                University Email
+              </label>
+              <input 
+                type="email" 
+                placeholder="University Email" 
+                value={universityEmail} 
+                onChange={(e) => setUniversityEmail(e.target.value)} 
+              />
+            </div>
+            <div className="input-group">
+              <label htmlFor="phoneNumber">
+                Phone Number
+              </label>
+              <input 
+                id='phoneNumber'
+                type="tel" 
+                placeholder="Phone Number" 
+                value={phoneNumber} 
+                onChange={(e) => setPhoneNumber(e.target.value)} 
+                />
+            </div>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
   );
 };
 
