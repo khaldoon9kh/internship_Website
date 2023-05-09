@@ -1,7 +1,7 @@
 .profile-form-outerContainer{
   display: flex;
   width: 79vw;
-  height: 88vh;
+  /* height: 88vh; */
   justify-content: center;
   background-color: #E9EAEC;
   /* height: 80vh; */
@@ -62,17 +62,26 @@
   flex-grow: 5;
   justify-content: center;
 }
-.profile-form {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
+.profile-form-first {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 20px;
+  width: 100%;
+}
+
+.profile-form-second {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 20px;
+  width: 100%;
 }
 
 .input-group {
   display: flex;
   flex-direction: column;
-  flex-grow: 6;
+  flex-grow: 7;
   margin: 10px 20px;
 }
   

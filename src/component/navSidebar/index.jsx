@@ -4,7 +4,7 @@ import "./index.css";
 function SideBar() {
   return (
     <div className="sideMainCont">
-     
+      
     </div>
   );
 }
