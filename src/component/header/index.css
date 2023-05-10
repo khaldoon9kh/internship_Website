@@ -1,5 +1,13 @@
 .headerMainCont {
-  width: 80vw;
-  background-color: red;
+  flex-grow: 1;
+  background-color: #ffff;
   height: 10vh;
+  display: flex;
+  justify-content: flex-end;
+}
+.profileImgCont{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 20px;
 }

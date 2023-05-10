@@ -33,7 +33,7 @@ function LoginPage() {
         const user = userCredential.user;
         console.log(user)
         localStorage.setItem('authToken', userCredential._tokenResponse.idToken);
-        navigate('/welcome');
+        navigate('/profile');
       })
       .catch((error) => {
         const errorCode = error.code;

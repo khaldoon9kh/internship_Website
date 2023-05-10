@@ -5,9 +5,23 @@ import { ReactComponent as ProfileLogo } from "../../svgs/profile.svg";
 import { ReactComponent as JobCenter } from "../../svgs/briefcase-1944.svg";
 import { ReactComponent as LogoutLogo } from "../../svgs/logOut.svg";
 import uniLogo from '../../img/uni_logo.png';
+import {app} from '../../firebaseConfig';
+import { getAuth } from "firebase/auth";
+import { useNavigate, useParams } from 'react-router-dom';
 import "./index.css";
 
 function SideBar() {
+  const navigate = useNavigate();
+  function signOut() {
+    getAuth.signOut().then(() => {
+      // Sign-out successful.
+      localStorage.removeItem('authToken');
+      navigate('/');
+    }).catch((error) => {
+      // An error happened.
+      console.log(error);
+    });
+  }
   return (
     <div className="sideMainCont">
       <div className="logoCont">
@@ -39,7 +53,9 @@ function SideBar() {
         </div>
       </div>
       <div className="navItemsCont-down">
-        <div className="navbar-container">
+        <div 
+          className="navbar-container"
+        >
           <LogoutLogo/>
           <a href="/" className="navbar-link">Log out</a>
         </div>
