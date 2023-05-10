@@ -1,0 +1,20 @@
+.jobs-OuterCont{
+  display: flex;
+  /* width: 79vw; */
+  height: 88vh;
+  justify-content: center;
+  background-color: #E9EAEC;
+  /* height: 80vh; */
+  padding: 10px;
+}
+.jobs-innerCont{
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center;
+  align-items: center; */
+  width: 100%;
+  padding: 15px;
+  /* border: 2px solid gray ; */
+  border-radius: 10px;
+  background-color: white;
+}
