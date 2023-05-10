@@ -11,31 +11,41 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 function App() {
-  return (
-    // <Router>
-    //   <HeaderLogin/>
-    //   <Routes>
-    //     <Route path="/" element={<LoginPage />} />
-    //     <Route path="/welcome" element={<WelcomePage />} />
-    //   </Routes>
-    // </Router>
-    <Router>
-      <div className="wrapper">
-        <div className="sidebar">
-          <SideBar/>
+
+  const authToken = localStorage.getItem('authToken');
+
+
+  // if (authToken) {
+    return (  
+      <Router>
+        <div className="wrapper">
+          <div className="sidebar">
+            <SideBar/>
+          </div>
+          <div className="content">
+            <Header/>
+            <Routes>
+              <Route path="/profile" element={<ProfileForm />} />
+              {/* <Route path="/login/:userType" element={<LoginPage />} /> */}
+              {/* <Route path="/welcome" element={<WelcomePage />} /> */}
+            </Routes>
+          </div>
         </div>
-        <div className="content">
-          <Header/>
-          <Routes>
-            <Route path="/" element={<CoordinatorDashboard />} />
-            <Route path="/login/:userType" element={<LoginPage />} />
-            {/* <Route path="/welcome" element={<WelcomePage />} /> */}
-          </Routes>
-        </div>
-      </div>
-    </Router>
-      
-  );
+      </Router> 
+    );
+  // } else {
+  //   return(
+  //     <Router>
+  //       <HeaderLogin/>
+  //       <Routes>
+  //         <Route path="/" element={<UserSelector />} />
+  //         <Route path="/login/:userType" element={<LoginPage />} />
+  //       </Routes>
+  //     </Router>
+  //   )
+  //   // Authentication token does not exist in localStorage
+  // }
+  
 }
 
 export default App;

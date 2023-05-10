@@ -35,7 +35,7 @@ const ProfileForm = () => {
         <div className='separator'>
         </div>
         <form onSubmit={handleFormSubmit}>
-          <div className="profile-form">
+          <div className="profile-form-first">
             <div className="input-group">
               <label htmlFor="username">
                 Name:
@@ -113,7 +113,7 @@ const ProfileForm = () => {
               </select>
             </div>
           </div>
-          <div className="profile-form">
+          <div className="profile-form-second">
             <div className="input-group">
               <label htmlFor="email">
                 Email Address
