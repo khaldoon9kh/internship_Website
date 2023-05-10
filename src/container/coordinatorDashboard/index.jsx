@@ -32,15 +32,7 @@ function CoordinatorDashboard() {
           </div>
           
         </div>
-        <div className='coordinator-dashboeard-internshipCells'>
-          {/* <div class="flex-container">
-            <div>1
-              <h4 className='internship-name'>Software Internship</h4>
-              <h6 className='internship-dateSent'>date sent</h6>
-            </div>
-            <div>2</div>
-            <div>3</div>
-          </div> */}
+        <div className='coordinator-dashboeard-internshipCells'> 
         </div>
       
         <div className='coordinator-dashboeard-internshipCells'></div>
