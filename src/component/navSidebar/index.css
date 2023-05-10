@@ -2,24 +2,31 @@
 .sideMainCont {
   width: 20vw;
   background-color: white;
-  height: 100vh;
+  flex-grow: 1;
+  height: 100%;
   padding-top: 4px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
 }
+.navItemsCont-top{
+  flex-grow: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-left: 20px;
+}
 .navbar-container {
   display: flex;
   padding: 8px;
-  gap:4px;
   align-items: flex-start;
+  margin: 10px 0px;
 }
-.navbar-icon {
-  width: 30px;
-  height: 30px;
-  fill: #333;
-  margin-right: -18px;
+.navbar-container svg {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
 }
 
 .navbar-link {
@@ -28,14 +35,18 @@
   margin: 0;
   text-decoration: none;
 }
-.logo{
-  padding-left:15px;
-  padding-bottom: 50px;
+.logoCont{
+  display: flex;
+  align-items: flex-start;
+  padding-left: 20px;
+  flex-grow: 1;
 }
 .my-image {
-  width: 140px;
-  height: 65px;
+  width: 70%;
+  height: auto;
 }
-.specail{
-  padding-top: 100px;
+.navItemsCont-down{
+  flex-grow: 1;
+  justify-content: flex-start;
+  padding-left: 20px;
 }
