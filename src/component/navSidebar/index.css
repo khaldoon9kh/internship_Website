@@ -1,5 +1,41 @@
+
 .sideMainCont {
   width: 20vw;
-  background-color: green;
+  background-color: white;
   height: 100vh;
+  padding-top: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.navbar-container {
+  display: flex;
+  padding: 8px;
+  gap:4px;
+  align-items: flex-start;
+}
+.navbar-icon {
+  width: 30px;
+  height: 30px;
+  fill: #333;
+  margin-right: -18px;
+}
+
+.navbar-link {
+  font-size: 16px;
+  color:black;
+  margin: 0;
+  text-decoration: none;
+}
+.logo{
+  padding-left:15px;
+  padding-bottom: 50px;
+}
+.my-image {
+  width: 140px;
+  height: 65px;
+}
+.specail{
+  padding-top: 100px;
 }
