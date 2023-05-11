@@ -7,6 +7,7 @@ import Header from '../src/component/header';
 import UserSelector from '../src/container/userSelector'
 import ProfileForm from "../src/container/profileForm";
 import CoordinatorDashboard from "../src/container/coordinatorDashboard";
+import AnnouncPage from "../src/container/announcmentPage";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
@@ -25,7 +26,7 @@ function App() {
           <div className="content">
             <Header/>
             <Routes>
-              <Route path="/profile" element={<ProfileForm />} />
+              <Route path="/" element={<AnnouncPage />} />
               {/* <Route path="/login/:userType" element={<LoginPage />} /> */}
               {/* <Route path="/welcome" element={<WelcomePage />} /> */}
             </Routes>
