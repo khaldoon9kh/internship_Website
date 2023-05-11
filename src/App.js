@@ -6,6 +6,7 @@ import SideBar from '../src/component/navSidebar'
 import Header from '../src/component/header';
 import UserSelector from '../src/container/userSelector'
 import ProfileForm from "../src/container/profileForm";
+import JobOffers from "../src/container/jobOffers";
 import CoordinatorDashboard from "../src/container/coordinatorDashboard";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -25,7 +26,7 @@ function App() {
           <div className="content">
             <Header/>
             <Routes>
-              <Route path="/profile" element={<ProfileForm />} />
+              <Route path="/" element={<JobOffers />} />
               {/* <Route path="/login/:userType" element={<LoginPage />} /> */}
               {/* <Route path="/welcome" element={<WelcomePage />} /> */}
             </Routes>
