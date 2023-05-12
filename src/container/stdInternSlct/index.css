@@ -1,43 +1,56 @@
-.user-selector {
+.internSelectorMainCont {
   display: flex;
+  flex-grow: 1;
+  margin: 15px;
+  border-radius: 10px;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   background-color: whitesmoke;
-  height: 85vh;
 }
-.usersContain{
+.intenrContain{
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 95%;
-  height: 95%;
-  border-radius: 10px;
-  background-color: white;
+  flex-grow: 1;
   flex-direction: column;
 }
 
-.button-container {
-  /* background-color: orange; */
+.intenrButtonContainer {
   display: flex;
+  flex-grow: 9;
   flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 40px;
-  width: 50%;
+  margin: 20px;
 }
 
-.selectorHeader{
+.intenrSelectorHeader{
+  flex-grow: 1;
+  display: flex;
   font-family: 'DM Sans';
+  justify-content: center;
+  align-items: center;
 }
 
-.button {
+.internButtonHeader{
+  width: 25%;
+  margin: 10px;
+}
+.internButtonBody {
+  width: 75%;
+  margin: 10px;
+}
+
+.internSelectorSeparator{
+  display: flex;
+  background-color: red;
+  height: 10px;
+}
+
+.internButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 60px;
+  height: 100px;
   width: 100%;
-  border: 1px solid #09B3AD;
+  border: 2px solid #C8D8D7;
   border-radius: 10px;
   font-size: 18px;
   font-weight: bold;
@@ -45,8 +58,17 @@
   color: black;
   text-transform: uppercase;
   text-decoration: none;
-  margin: 5px 0;
+  margin: 5px 0 20px ;
+  box-shadow: 10px 10px 5px lightblue;
   transition: background-color 0.3s ease;
+}
+
+.buttonSeparator{
+  display: flex;
+  flex-grow: 0;
+  background-color: #C8D8D7;
+  width: 5px;
+  height: 80%;
 }
 
 /* .admin-button {
