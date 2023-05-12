@@ -15,8 +15,9 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 function App() {
-  // const [loading, setLoading] = useState(true);
-  const [logedIn, setLogedIn] = useState(false)
+  const [loading, setLoading] = useState(true);
+  const [logedIn, setLogedIn] = useState(false);
+  const [userType, setUserType] = useState(null)
 
   // const getUserTypeById = async (userId) => {
   //   try {
@@ -59,53 +60,56 @@ function App() {
     if (authToken) {
       const userType = getUserTypeById(authToken);
       // Authentication token exists in localStorage, do something with it
+      setUserType(userType)
       setLogedIn(true)
     } else {
       // Authentication token does not exist in localStorage
       setLogedIn(false)
     }
-    // setLoading(false);
+    setLoading(false);
   }, [])
 
 
-  // if (loading) {
-  //   // Show a loading indicator while the check is in progress
-  //   return <div>Loading...</div>;
-  // }
+  if (loading && userType === null) {
+    // Show a loading indicator while the check is in progress
+    return <div>Loading...</div>;
+  }else{
+    if (logedIn) {
+      return (  
+        <Router>
+          <div className="wrapper">
+            <div className="sidebar">
+              <SideBar/>
+            </div>
+            <div className="content">
+              <Header/>
+              <Routes>
+                <Route
+                  path="/profile"
+                  element={<ProfileForm />}
+                />
+                {/* <Route path="/login/:userType" element={<LoginPage />} /> */}
+                {/* <Route path="/welcome" element={<WelcomePage />} /> */}
+              </Routes>
+            </div>
+          </div>
+        </Router> 
+      );
+    } else {
+      return(
+        <Router>
+          <HeaderLogin/>
+          <Routes>
+            <Route path="/" element={<UserSelector />} />
+            <Route path="/login/:userType" element={<LoginPage />} />
+          </Routes>
+        </Router>
+      )
+      // Authentication token does not exist in localStorage
+    }
 
-  if (logedIn) {
-    return (  
-      <Router>
-        <div className="wrapper">
-          <div className="sidebar">
-            <SideBar/>
-          </div>
-          <div className="content">
-            <Header/>
-            <Routes>
-              <Route
-                path="/profile"
-                element={<ProfileForm />}
-              />
-              {/* <Route path="/login/:userType" element={<LoginPage />} /> */}
-              {/* <Route path="/welcome" element={<WelcomePage />} /> */}
-            </Routes>
-          </div>
-        </div>
-      </Router> 
-    );
-  } else {
-    return(
-      <Router>
-        <HeaderLogin/>
-        <Routes>
-          <Route path="/" element={<UserSelector />} />
-          <Route path="/login/:userType" element={<LoginPage />} />
-        </Routes>
-      </Router>
-    )
-    // Authentication token does not exist in localStorage
   }
+
   
 }
 
