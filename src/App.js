@@ -11,6 +11,8 @@ import Header from '../src/component/header';
 import UserSelector from '../src/container/userSelector'
 import ProfileForm from "../src/container/profileForm";
 import CoordinatorDashboard from "../src/container/coordinatorDashboard";
+import CareerDashboard from "./container/career-Dashboard";
+import AdminDashboard from "../src/container/adminDashboard";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
@@ -79,40 +81,29 @@ function App() {
             <div className="content">
               <Header/>
               <Routes>
-                {userType === "admin" 
-                  ? 
+                {
                   <Route
                     path="/dashboard"
                     element={
                       userType === "admin" 
                       ? 
-                      <CoordinatorDashboard /> 
+                      <AdminDashboard /> 
                       :
                       userType === "student"
                       ?
                       <ProfileForm />
-                      : null
+                      : 
+                      userType === "careerCenter"
+                      ?
+                      <CareerDashboard />
+                      :
+                      userType === "coordinator"
+                      ?
+                      <CoordinatorDashboard />
+                      :
+                      null
                     }
                   />
-                  // : userType === "student"
-                  // ?
-                  // <Route
-                  //   path="/profile"
-                  //   element={<ProfileForm />}
-                  // />
-                  // : userType === "coordinator"
-                  // ?
-                  // <Route
-                  //   path="/dashboard"
-                  //   element={<CoordinatorDashboard />}
-                  // />
-                  // : userType === "careerCenter"
-                  // ?
-                  // <Route
-                  //   path="/profile"
-                  //   element={<ProfileForm />}
-                  // />
-                  : null
                 }
                 {/* <Route
                   path="/profile"
