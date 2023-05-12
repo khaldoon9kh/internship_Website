@@ -34,6 +34,7 @@ function LoginPage() {
         console.log(user)
         localStorage.setItem('authToken', userCredential._tokenResponse.idToken);
         navigate('/profile');
+        window.location.reload();
       })
       .catch((error) => {
         const errorCode = error.code;

@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import HeaderLogin from "../src/component/headerLogin";
 import LoginPage from "../src/container/login";
@@ -11,11 +12,29 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 function App() {
+  // const [loading, setLoading] = useState(true);
+  const [logedIn, setLogedIn] = useState(false)
 
-  const authToken = localStorage.getItem('authToken');
+  useEffect(() => {
+    const authToken = localStorage.getItem('authToken');
+    console.log("this is authToken", authToken )
+    if (authToken) {
+      // Authentication token exists in localStorage, do something with it
+      setLogedIn(true)
+    } else {
+      // Authentication token does not exist in localStorage
+      setLogedIn(false)
+    }
+    // setLoading(false);
+  }, [])
 
 
-  // if (authToken) {
+  // if (loading) {
+  //   // Show a loading indicator while the check is in progress
+  //   return <div>Loading...</div>;
+  // }
+
+  if (logedIn) {
     return (  
       <Router>
         <div className="wrapper">
@@ -25,7 +44,10 @@ function App() {
           <div className="content">
             <Header/>
             <Routes>
-              <Route path="/profile" element={<ProfileForm />} />
+              <Route
+                path="/profile"
+                element={<ProfileForm />}
+              />
               {/* <Route path="/login/:userType" element={<LoginPage />} /> */}
               {/* <Route path="/welcome" element={<WelcomePage />} /> */}
             </Routes>
@@ -33,18 +55,18 @@ function App() {
         </div>
       </Router> 
     );
-  // } else {
-  //   return(
-  //     <Router>
-  //       <HeaderLogin/>
-  //       <Routes>
-  //         <Route path="/" element={<UserSelector />} />
-  //         <Route path="/login/:userType" element={<LoginPage />} />
-  //       </Routes>
-  //     </Router>
-  //   )
-  //   // Authentication token does not exist in localStorage
-  // }
+  } else {
+    return(
+      <Router>
+        <HeaderLogin/>
+        <Routes>
+          <Route path="/" element={<UserSelector />} />
+          <Route path="/login/:userType" element={<LoginPage />} />
+        </Routes>
+      </Router>
+    )
+    // Authentication token does not exist in localStorage
+  }
   
 }
 
