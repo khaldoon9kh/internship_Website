@@ -16,11 +16,25 @@ function InternSelector() {
         >
         </div>
         <div className="intenrButtonContainer">
-          <Link to="/login/admin" className="button firstInternButton">
-            Admin
+          <Link className="internButton firstInternButton">
+            <div className='internButtonHeader'>
+              <h1>Summer Practice 1 </h1>
+            </div>
+            <div className="buttonSeparator">
+            </div>
+            <div className='internButtonBody'>
+              <p>First Internship Description</p>
+            </div>
           </Link>
-          <Link to="/login/student" className="button SecondInternButton">
-            Student
+          <Link className="internButton SecondInternButton">
+            <div className='internButtonHeader'>
+              <h1>Summer Practice 2</h1>
+            </div>
+            <div className="buttonSeparator">
+            </div>
+            <div className='internButtonBody'>
+              <p>Second Internship Description</p>
+            </div>
           </Link>
         </div>
       </div>

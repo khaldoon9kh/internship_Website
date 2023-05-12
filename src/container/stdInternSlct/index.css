@@ -15,14 +15,10 @@
 }
 
 .intenrButtonContainer {
-  /* background-color: orange; */
   display: flex;
   flex-grow: 9;
   flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 40px;
-  width: 50%;
+  margin: 20px;
 }
 
 .intenrSelectorHeader{
@@ -33,19 +29,28 @@
   align-items: center;
 }
 
+.internButtonHeader{
+  width: 25%;
+  margin: 10px;
+}
+.internButtonBody {
+  width: 75%;
+  margin: 10px;
+}
+
 .internSelectorSeparator{
   display: flex;
   background-color: red;
   height: 10px;
 }
 
-.button {
+.internButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 60px;
+  height: 100px;
   width: 100%;
-  border: 1px solid #09B3AD;
+  border: 2px solid #C8D8D7;
   border-radius: 10px;
   font-size: 18px;
   font-weight: bold;
@@ -53,8 +58,17 @@
   color: black;
   text-transform: uppercase;
   text-decoration: none;
-  margin: 5px 0;
+  margin: 5px 0 20px ;
+  box-shadow: 10px 10px 5px lightblue;
   transition: background-color 0.3s ease;
+}
+
+.buttonSeparator{
+  display: flex;
+  flex-grow: 0;
+  background-color: #C8D8D7;
+  width: 5px;
+  height: 80%;
 }
 
 /* .admin-button {
