@@ -31,6 +31,7 @@ function App() {
         if (docSnap.exists()) {
           const userData = docSnap.data();
           console.log("User Type:", userData.type);
+          localStorage.setItem('userType', userData.type);
           setUserType(userData.type)
           return userData.type; // Return the user type
         } else {
@@ -81,15 +82,24 @@ function App() {
                 {userType === "admin" 
                   ? 
                   <Route
-                    path="/profile"
-                    element={<CoordinatorDashboard />}
+                    path="/dashboard"
+                    element={
+                      userType === "admin" 
+                      ? 
+                      <CoordinatorDashboard /> 
+                      :
+                      userType === "student"
+                      ?
+                      <ProfileForm />
+                      : null
+                    }
                   />
-                  : userType === "student"
-                  ?
-                  <Route
-                    path="/profile"
-                    element={<ProfileForm />}
-                  />
+                  // : userType === "student"
+                  // ?
+                  // <Route
+                  //   path="/profile"
+                  //   element={<ProfileForm />}
+                  // />
                   // : userType === "coordinator"
                   // ?
                   // <Route
