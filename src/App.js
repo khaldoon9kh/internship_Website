@@ -80,7 +80,10 @@ function App() {
               <SideBar userType={userType} authToken={authToken}/>
             </div>
             <div className="content">
-              <Header/>
+              <div className="headerWrapper">
+                <Header/>
+              </div>
+              <div className="mainContent">
               <Routes>
                 {
                   <Route
@@ -113,6 +116,7 @@ function App() {
                 {/* <Route path="/login/:userType" element={<LoginPage />} /> */}
                 {/* <Route path="/welcome" element={<WelcomePage />} /> */}
               </Routes>
+              </div>
             </div>
           </div>
         </Router> 
