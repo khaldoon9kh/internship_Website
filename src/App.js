@@ -11,6 +11,7 @@ import Header from '../src/component/header';
 import UserSelector from '../src/container/userSelector'
 import ProfileForm from "../src/container/profileForm";
 import CoordinatorDashboard from "../src/container/coordinatorDashboard";
+import InternSelector from "../src/container/stdInternSlct";
 import CareerDashboard from "./container/career-Dashboard";
 import AdminDashboard from "../src/container/adminDashboard";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -91,7 +92,7 @@ function App() {
                       :
                       userType === "student"
                       ?
-                      <ProfileForm />
+                      <InternSelector />
                       : 
                       userType === "careerCenter"
                       ?
