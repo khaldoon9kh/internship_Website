@@ -33,9 +33,9 @@ function SideBar({userType, authToken}) {
     return (
       <div className="sideMainCont">
         <div className="logoCont">
-          <img src={uniLogo} alt="Logo" className="my-image" />
-          <div>
-            <h3>Internship Information System</h3>
+          <img src={uniLogo} alt="Logo" className="logo-image" />
+          <div className="logoHeader">
+            <h3>IIS</h3>
           </div>
         </div>
         <div className="navItemsCont-top">

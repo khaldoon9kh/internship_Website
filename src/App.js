@@ -54,11 +54,21 @@ function App() {
   }, [])
 
 
-  if (loading || userType === null) {
-    // Show a loading indicator while the check is in progress
-    return <div>Loading...</div>;
+  if (!logedIn){
+    return(
+      <Router>
+        <HeaderLogin/>
+        <Routes>
+          <Route path="/" element={<UserSelector />} />
+          <Route path="/login/:userType" element={<LoginPage />} />
+        </Routes>
+      </Router>
+    )
   }else{
-    if (logedIn) {
+    if (loading || userType === null || authToken === null) {
+      // Show a loading indicator while the check is in progress
+      return <div>Loading...</div>;
+    }else{
       return (  
         <Router>
           <div className="wrapper">
@@ -68,10 +78,36 @@ function App() {
             <div className="content">
               <Header/>
               <Routes>
-                <Route
+                {userType === "admin" 
+                  ? 
+                  <Route
+                    path="/profile"
+                    element={<CoordinatorDashboard />}
+                  />
+                  : userType === "student"
+                  ?
+                  <Route
+                    path="/profile"
+                    element={<ProfileForm />}
+                  />
+                  // : userType === "coordinator"
+                  // ?
+                  // <Route
+                  //   path="/dashboard"
+                  //   element={<CoordinatorDashboard />}
+                  // />
+                  // : userType === "careerCenter"
+                  // ?
+                  // <Route
+                  //   path="/profile"
+                  //   element={<ProfileForm />}
+                  // />
+                  : null
+                }
+                {/* <Route
                   path="/profile"
                   element={<ProfileForm />}
-                />
+                /> */}
                 {/* <Route path="/login/:userType" element={<LoginPage />} /> */}
                 {/* <Route path="/welcome" element={<WelcomePage />} /> */}
               </Routes>
@@ -79,21 +115,8 @@ function App() {
           </div>
         </Router> 
       );
-    } else {
-      return(
-        <Router>
-          <HeaderLogin/>
-          <Routes>
-            <Route path="/" element={<UserSelector />} />
-            <Route path="/login/:userType" element={<LoginPage />} />
-          </Routes>
-        </Router>
-      )
-      // Authentication token does not exist in localStorage
     }
-
   }
-
   
 }
 

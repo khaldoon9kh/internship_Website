@@ -41,9 +41,12 @@
   padding-left: 20px;
   flex-grow: 1;
 }
-.my-image {
-  width: 70%;
+.logo-image {
+  width: 60%;
   height: auto;
+}
+.logoHeader{
+  margin-top: 6px;
 }
 .navItemsCont-down{
   flex-grow: 1;
