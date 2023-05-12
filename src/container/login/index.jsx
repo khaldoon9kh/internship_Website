@@ -30,9 +30,9 @@ function LoginPage() {
     signInWithEmailAndPassword(auth, username, password)
       .then((userCredential) => {
         // Signed in 
-        const user = userCredential.user;
+        const user = userCredential.user.uid;
         console.log(user)
-        localStorage.setItem('authToken', userCredential._tokenResponse.idToken);
+        localStorage.setItem('authToken', user);
         navigate('/profile');
         window.location.reload();
       })
