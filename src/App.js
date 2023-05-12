@@ -17,28 +17,12 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 function App() {
   const [loading, setLoading] = useState(true);
   const [logedIn, setLogedIn] = useState(false);
+  const [authToken, setAuthToken] = useState(localStorage.getItem('authToken'));
   const [userType, setUserType] = useState(null)
-
-  // const getUserTypeById = async (userId) => {
-  //   try {
-  //     const docRef = doc(db, "users", userId);
-  //     const docSnap = await getDoc(docRef);
-  //     if (docSnap.exists()) {
-  //       const userData = docSnap.data();
-  //       console.log("User Type:", userData.type);
-  //       return userData.type; // Return the user type
-  //     } else {
-  //       console.log("No such document!");
-  //       return null;
-  //     }
-  //   } catch (error) {
-  //     console.log("Error retrieving user type:", error);
-  //     return null;
-  //   }
-  // };
   
   useEffect(() => {
-    const authToken = localStorage.getItem('authToken');
+    const fetchAuthToken = localStorage.getItem('authToken');
+    setAuthToken(fetchAuthToken);
     console.log("this is authToken", authToken )
     const getUserTypeById = async (userId) => {
       try {
@@ -47,6 +31,7 @@ function App() {
         if (docSnap.exists()) {
           const userData = docSnap.data();
           console.log("User Type:", userData.type);
+          setUserType(userData.type)
           return userData.type; // Return the user type
         } else {
           console.log("No such document!");
@@ -57,10 +42,9 @@ function App() {
         return null;
       }
     };
-    if (authToken) {
+    if (fetchAuthToken) {
       const userType = getUserTypeById(authToken);
       // Authentication token exists in localStorage, do something with it
-      setUserType(userType)
       setLogedIn(true)
     } else {
       // Authentication token does not exist in localStorage
@@ -70,7 +54,7 @@ function App() {
   }, [])
 
 
-  if (loading && userType === null) {
+  if (loading || userType === null) {
     // Show a loading indicator while the check is in progress
     return <div>Loading...</div>;
   }else{
@@ -79,7 +63,7 @@ function App() {
         <Router>
           <div className="wrapper">
             <div className="sidebar">
-              <SideBar/>
+              <SideBar userType={userType} authToken={authToken}/>
             </div>
             <div className="content">
               <Header/>
