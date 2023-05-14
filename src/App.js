@@ -10,8 +10,11 @@ import SideBar from '../src/component/navSidebar'
 import Header from '../src/component/header';
 import UserSelector from '../src/container/userSelector'
 import ProfileForm from "../src/container/profileForm";
-import AdminPanel from "../src/container/adminPanel";
+import JobOffers from "../src/container/jobOffers";
 import CoordinatorDashboard from "../src/container/coordinatorDashboard";
+import CoordinatorMessage from "../src/container/coordinatorMessage";
+import Applicationstatus from "../src/container/applicationStatus";
+import AdminPanel from "../src/container/adminPanel";
 import InternSelector from "../src/container/stdInternSlct";
 import CareerDashboard from "./container/career-Dashboard";
 import AdminDashboard from "../src/container/adminDashboard";
