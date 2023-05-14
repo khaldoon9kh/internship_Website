@@ -66,7 +66,7 @@ function SideBar({userType, authToken}) {
           >
             <JobCenter/>
             Career center
-          </NavLink>;
+          </NavLink>
           <div className="navbar-container">
             <NotLogo/>
             <a href="/" className="navbar-link">Notification</a>
