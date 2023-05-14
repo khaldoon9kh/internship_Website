@@ -10,8 +10,9 @@
 }
 .sidebar {
   flex: 0 0 auto;
-  height: 100vh;
+  /* height: 100vh; */
   background-color: red;
+  display: flex;
 }
 .headerWrapper{
   flex-grow: 1;

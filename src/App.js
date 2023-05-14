@@ -99,7 +99,7 @@ function App() {
                       :
                       userType === "student"
                       ?
-                      <JobOffers />
+                      <ProfileForm />
                       : 
                       userType === "careerCenter"
                       ?
@@ -117,7 +117,7 @@ function App() {
                   path="/profile"
                   element={<ProfileForm />}
                 /> */}
-                {/* <Route path="/login/:userType" element={<LoginPage />} /> */}
+                <Route path="/jobOffers" element={<JobOffers />} />
                 {/* <Route path="/welcome" element={<WelcomePage />} /> */}
               </Routes>
               </div>
