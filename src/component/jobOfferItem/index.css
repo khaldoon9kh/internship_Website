@@ -1,17 +1,33 @@
   .job-offer-item {
     display: flex;
-    flex-direction: column;
+    flex-grow: 5;
     background-color: white;
     /* width: 970px; */
-    padding: 20px;
-    
+    padding: 10px;
+    box-shadow: 5px 10px 20px lightblue;
+    border: 2px solid rgba(173, 216, 230, 0.615);
+    border-radius: 5px;
+    margin: 10px 0px;
     
   }
   .logo-container {
     display: flex;
+
+  }
+
+  .location-time{
+    display: flex;
+    margin: 5px 0px;
+    /* justify-content: space-evenly; */
+  }
+  .info-cont{
+    display: flex;
+    flex-grow: 2;
+    max-width: 10rem;
     align-items: center;
-  
-    
+  }
+  .info-cont p{
+    margin: 0px;
   }
   
   .logo {
@@ -23,27 +39,15 @@
     
   }
   
-  .company-name {
-    margin-top: -60px;
-    margin-left: 0;
+  .company-name h2, .company-name h4 {
+    margin: 0px;
   }
   
   .job-description {
-    margin-top: -46px;
-    margin-left: 88px;
   }
-  .location-time{
-    display: flex;
-    justify-content: space-evenly;
-    margin-right: 500px;
-    margin-top: -18px;
-  }
-  
-  h3 {
-    margin-top: -15px;
-    margin-left: 0px;
-    align-items: center;
-  }
+
+
+
   #search{
     width: 220px;
   }

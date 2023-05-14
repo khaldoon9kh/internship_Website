@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { ReactComponent as locationLogo } from "../../svgs/MapPinLine.svg";
-import { ReactComponent as timeLogo } from "../../svgs/Vector (Stroke).svg";
 import JobOfferItem from '../../component/jobOfferItem'
 import './index.css'
 
@@ -24,6 +22,9 @@ const JobOffers = () => {
       </div> */}
     </div>
     <div class="job-offers-container">
+      <JobOfferItem/>
+      <JobOfferItem/>
+      <JobOfferItem/>
       <JobOfferItem/>
       
     </div>
