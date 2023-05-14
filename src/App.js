@@ -28,7 +28,7 @@ function App() {
           <div className="content">
             <Header/>
             <Routes>
-              <Route path="/" element={<Applicationstatus/>} />
+              <Route path="/" element={<CoordinatorMessage/>} />
               {/* <Route path="/login/:userType" element={<LoginPage />} /> */}
               {/* <Route path="/welcome" element={<WelcomePage />} /> */}
             </Routes>
