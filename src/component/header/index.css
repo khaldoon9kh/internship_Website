@@ -1,7 +1,7 @@
 .headerMainCont {
   flex-grow: 1;
-  background-color: #ffff;
-  height: 10vh;
+  background-color: #1DB2AC;
+  /* height: 75px; */
   display: flex;
   justify-content: flex-end;
 }
