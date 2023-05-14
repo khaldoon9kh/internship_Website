@@ -99,7 +99,7 @@ function App() {
                       :
                       userType === "student"
                       ?
-                      <InternSelector />
+                      <JobOffers />
                       : 
                       userType === "careerCenter"
                       ?
