@@ -1,9 +1,9 @@
 
 .sideMainCont {
   width: 20vw;
-  background-color: white;
+  background-color: #1DB2AC;
   flex-grow: 1;
-  height: 100%;
+  height: 100vh;
   padding-top: 4px;
   display: flex;
   flex-direction: column;
@@ -41,9 +41,12 @@
   padding-left: 20px;
   flex-grow: 1;
 }
-.my-image {
-  width: 70%;
+.logo-image {
+  width: 60%;
   height: auto;
+}
+.logoHeader{
+  margin-top: 6px;
 }
 .navItemsCont-down{
   flex-grow: 1;
