@@ -8,6 +8,8 @@ import UserSelector from '../src/container/userSelector'
 import ProfileForm from "../src/container/profileForm";
 import JobOffers from "../src/container/jobOffers";
 import CoordinatorDashboard from "../src/container/coordinatorDashboard";
+import CoordinatorMessage from "../src/container/coordinatorMessage";
+import Applicationstatus from "../src/container/applicationStatus";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
@@ -26,7 +28,7 @@ function App() {
           <div className="content">
             <Header/>
             <Routes>
-              <Route path="/" element={<JobOffers />} />
+              <Route path="/" element={<Applicationstatus/>} />
               {/* <Route path="/login/:userType" element={<LoginPage />} /> */}
               {/* <Route path="/welcome" element={<WelcomePage />} /> */}
             </Routes>

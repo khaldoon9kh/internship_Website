@@ -1,0 +1,49 @@
+    body{
+    background-color: rgb(182, 180, 180);
+    }
+    .all{
+        background-color: white;
+        margin-top: -18px;
+        padding-left: 6px;
+        height: 589px;
+    }
+    *{
+        box-sizing: border-box;
+    }
+    .status-wrapper{
+        display: flex;
+        justify-content: flex-start;
+        gap: 5px;
+        width: 800px;
+        border-top: 1px solid #E9EAEC;
+    
+    }
+    .status-container{
+       width: 400px;
+        
+    }
+    
+    .secondcon{
+    
+    width: 400px;
+    
+    }
+    .detalis{
+        align-items: center;
+    
+    }
+    .comingDetali{
+        background-color: white;
+        border: 1px solid #E9EAEC;
+        border-radius: 3px;
+        width: 220px;
+        height: 30px;
+        margin-top: -8px;
+        
+    }
+    h5{
+    padding: 4px;
+    }
+    .specail{
+        margin-top: -15px;
+    }
