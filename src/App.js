@@ -100,7 +100,7 @@ function App() {
                       :
                       userType === "student"
                       ?
-                      <AdminPanel />
+                      <AnnouncPage />
                       : 
                       userType === "careerCenter"
                       ?
