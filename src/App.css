@@ -29,7 +29,7 @@
 .mainContent{
   display: flex;
   flex-grow: 9;
-  background-color: #C8D8D7;
+  background-color: whitesmoke;
 }
 .content {
   display: flex;
