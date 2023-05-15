@@ -5,7 +5,6 @@ import { ReactComponent as NotLogo } from "../../svgs/notification.svg";
 import { ReactComponent as ProfileLogo } from "../../svgs/profile.svg";
 import { ReactComponent as JobCenter } from "../../svgs/briefcase-1944.svg";
 import { ReactComponent as LogoutLogo } from "../../svgs/logOut.svg";
-import uniLogo from '../../img/uni_logo.png';
 import {app} from '../../firebaseConfig';
 import { getAuth } from "firebase/auth";
 import { useNavigate, useParams, NavLink } from 'react-router-dom';
@@ -32,12 +31,6 @@ function SideBar({userType, authToken}) {
   else{
     return (
       <div className="sideMainCont">
-        <div className="logoCont">
-          <img src={uniLogo} alt="Logo" className="logo-image" />
-          <div className="logoHeader">
-            <h3>IIS</h3>
-          </div>
-        </div>
         <div className="navItemsCont-top">
           <div className="navbar-container">
             <ProfileLogo/>

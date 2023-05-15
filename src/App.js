@@ -82,15 +82,15 @@ function App() {
     }else{
       return (  
         <Router>
-          <div className="wrapper">
-            <div className="sidebar">
-              <SideBar userType={userType} authToken={authToken}/>
-            </div>
-            <div className="content">
+          <div className="wrapper_Logedin">
               <div className="headerWrapper">
                 <Header/>
               </div>
+            <div className="content">
               <div className="mainContent">
+                <div className="sidebar">
+                  <SideBar userType={userType} authToken={authToken}/>
+                </div>
               <Routes>
                 {
                   <Route
