@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   height: 15vh;
+  flex-grow: 1;
   background-color: #C8D8D7;
 }
 .headerLogin h2, h3 {

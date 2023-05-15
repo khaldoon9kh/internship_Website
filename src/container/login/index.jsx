@@ -47,24 +47,19 @@ function LoginPage() {
 
   return (
     <div className='mainConainer'>
-      <div className='formBody'>
-        <div className='formside'>
-          <div className='formHeader'>
-            <h3>
-              Sign In
-            </h3>
+      <div className='loginFormBody'>
+        <div className='formRightSide'>
+          <form className='loginformCont' onSubmit={handleSubmit}>
             {errorMessage && (
-            <div className="errorPopup">
-              <h4>
-                {errorMessage}
-              </h4>
-            </div>
-          )}
-          </div>
-          <form onSubmit={handleSubmit}>
+              <div className="errorPopup">
+                <h4>
+                  {errorMessage}
+                </h4>
+              </div>
+            )}
             <div className="input-group">
               <label for="username">
-                Student Email:
+                Email:
               </label>
                 <input 
                   id='username' 
@@ -90,8 +85,17 @@ function LoginPage() {
             </div>
           </form>
         </div>
-        <div className='picSide'>
-          <LoginImg/>
+        <div className='LogInSeparator'>
+        </div>
+        <div className='formLeftSide'>
+          <h1>
+            To login to the system, you must use your OBS  email and password.
+          </h1>
+          <br></br>
+          <h3>
+            Your Automation Username: Your School Number <br/>
+            Password: Your name’s first letter as capital, Your Turkish ID number and * sign. (A12345678901*)
+          </h3>
         </div>
       </div>
     </div>
