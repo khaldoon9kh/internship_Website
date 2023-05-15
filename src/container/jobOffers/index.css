@@ -1,0 +1,38 @@
+
+  .job-offer-page {
+    /* max-width: 800px; */
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    padding: 34px;
+    background-color: #fff;
+    border-radius: 10px;
+  }
+  
+  .job-offer-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    flex-grow: 1;
+    /* background-color: #0052a3; */
+  }
+  .job-offer-header h1, .job-offer-header h3{
+    margin: 10px 0;
+  }
+  .jobOfferBody{
+    flex-grow: 1;
+    width: 100%;
+    /* background-color: red; */
+  }
+  
+  .job-offers-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    /* gap: 20px; */
+    flex-grow: 9;
+    /* height: 30px; */
+  }
+ 

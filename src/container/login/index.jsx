@@ -30,10 +30,11 @@ function LoginPage() {
     signInWithEmailAndPassword(auth, username, password)
       .then((userCredential) => {
         // Signed in 
-        const user = userCredential.user;
-        console.log(user)
-        localStorage.setItem('authToken', userCredential._tokenResponse.idToken);
-        navigate('/profile');
+        const userID = userCredential.user.uid;
+        console.log(userID)
+        localStorage.setItem('authToken', userID);
+        navigate('/dashboard');
+        window.location.reload();
       })
       .catch((error) => {
         const errorCode = error.code;
