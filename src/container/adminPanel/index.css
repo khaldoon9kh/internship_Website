@@ -1,6 +1,8 @@
 .admin-panel-outerContainer{
   background-color: rgb(245, 245, 245);
+  flex:1;
   height: 100%;
+  width: 100%;
   padding: 30px;
   font-family: "DM Sans";
 }
@@ -57,12 +59,13 @@
   margin-top: 7px;
 }
 
-.flex-container {
+.intern-input-group {
   display: flex;
+  align-items: center;
   width: 100%;
   height: 50px;
   border-radius: 10px;
-  margin-bottom: 23px;
+  /* margin-bottom: 23px; */
   font-family: 'DM Sans';
   color: #6A6A6A;
 }

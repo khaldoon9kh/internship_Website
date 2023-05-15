@@ -1,89 +1,38 @@
-body{
-    background-color: rgb(204, 202, 202);
-  }
+
   .job-offer-page {
-    max-width: 800px;
-    margin: 0 auto;
-    margin-left: 1px;
+    /* max-width: 800px; */
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    padding: 34px;
+    background-color: #fff;
+    border-radius: 10px;
   }
   
   .job-offer-header {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 10px;
-    
+    flex-grow: 1;
+    /* background-color: #0052a3; */
+  }
+  .job-offer-header h1, .job-offer-header h3{
+    margin: 10px 0;
+  }
+  .jobOfferBody{
+    flex-grow: 1;
+    width: 100%;
+    /* background-color: red; */
   }
   
-  .job-offer-container {
+  .job-offers-container {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    gap: 20px;
-    height: 30px;
-  }
-  
-  .job-offer {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    width: 970px;
-    padding: 20px;
-    
-    
-  }
-  .logo-container {
-    display: flex;
-    align-items: center;
-  
-    
-  }
-  
-  .logo {
-    margin-right: 12px;   
-  }
-  .logo img {
-    max-width: 75px;
-    height:auto;
-    
-  }
-  
-  .company-name {
-    margin-top: -60px;
-    margin-left: 0;
-  }
-  
-  .job-description {
-    margin-top: -46px;
-    margin-left: 88px;
-  }
-  .location-time{
-    display: flex;
-    justify-content: space-evenly;
-    margin-right: 500px;
-    margin-top: -18px;
-  }
-  
-  h3 {
-    margin-top: -15px;
-    margin-left: 0px;
-    align-items: center;
-  }
-  #search{
-    width: 220px;
-  }
-
-  button {
-    background-color: #0066cc;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  button:hover {
-    background-color: #0052a3;
+    /* gap: 20px; */
+    flex-grow: 9;
+    /* height: 30px; */
   }
  

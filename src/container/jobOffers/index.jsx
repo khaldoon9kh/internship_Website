@@ -1,50 +1,34 @@
 import React, { useState } from 'react';
-import { ReactComponent as locationLogo } from "../../svgs/MapPinLine.svg";
-import { ReactComponent as timeLogo } from "../../svgs/Vector (Stroke).svg";
+import JobOfferItem from '../../component/jobOfferItem'
 import './index.css'
 
 
 const JobOffers = () => {
   
   return (
-    <div class="job-offer-page">
-  <div class="job-offer-header">
-    <h1>Job Offers</h1>
-    
-    <div class="search-box">
-    <input id='search' type="text" placeholder="Search..."/>
-      <button>Search</button>
+  <div class="job-offer-page">
+    <div class="job-offer-header">
+      <h1>Job Offers</h1>
+      <div className='jobOfferBody'>
+        <h3>
+          You may browse for an internship here
+        </h3>
+        <hr/>
+      </div>
+      
+      {/* <div class="search-box">
+      <input id='search' type="text" placeholder="Search..."/>
+        <button>Search</button>
+      </div> */}
+    </div>
+    <div class="job-offers-container">
+      <JobOfferItem/>
+      <JobOfferItem/>
+      <JobOfferItem/>
+      <JobOfferItem/>
+      
     </div>
   </div>
-  
-  <div class="job-offer-container">
-    <div class="job-offer">
-      <div class="logo-container">
-        <div class="logo">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png" alt="Company Logo" />
-        </div>
-        <div class="company-name">
-          <h2>Facebook</h2>
-   
-        </div>
-      </div>
-      <div class="job-description">
-        <h3>Content controller</h3>
-        <div class="location-time">
-          <locationLogo/>
-        <span>Istanbul</span>
-        <span>Full time</span>
-        <timeLogo/>
-        <span>30 min ago</span>
-        </div>
-        <p>As HOP Health Platform, we aim to be a leading online platform in health issues. We are looking for a content editor to create, edit and publish health related content.
-In this role, you will produce informative, reliable and impressive content on health-related topics, edit posts and develop content strategies to improve the quality of our platform.</p>
-        
-      </div>
-    </div>
-    
-  </div>
-</div>
 
 
 

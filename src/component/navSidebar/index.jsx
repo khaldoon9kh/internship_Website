@@ -8,7 +8,7 @@ import { ReactComponent as LogoutLogo } from "../../svgs/logOut.svg";
 import uniLogo from '../../img/uni_logo.png';
 import {app} from '../../firebaseConfig';
 import { getAuth } from "firebase/auth";
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, NavLink } from 'react-router-dom';
 import "./index.css";
 
 function SideBar({userType, authToken}) {
@@ -51,10 +51,22 @@ function SideBar({userType, authToken}) {
             <MailLogo/>
             <a href="/" className="navbar-link">Mail</a>
           </div>
-          <div className="navbar-container">
-            <JobCenter/>
-            <a href="/" className="navbar-link">Career center</a>
+          <div 
+            className="navbar-container"
+          >
+            
+            <p className="navbar-link">Career center</p>
           </div>
+          <NavLink
+            to="/jobOffers"
+            className={({ isActive, isPending }) =>
+              isPending ? "navbar-container" : isActive ? "navbar-container" : ""
+            }
+            // className="navbar-container"
+          >
+            <JobCenter/>
+            Career center
+          </NavLink>
           <div className="navbar-container">
             <NotLogo/>
             <a href="/" className="navbar-link">Notification</a>
