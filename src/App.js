@@ -66,11 +66,13 @@ function App() {
   if (!logedIn){
     return(
       <Router>
+        <div className="wrapper_notLogged">
         <HeaderLogin/>
         <Routes>
           <Route path="/" element={<UserSelector />} />
           <Route path="/login/:userType" element={<LoginPage />} />
         </Routes>
+        </div>
       </Router>
     )
   }else{
@@ -100,7 +102,7 @@ function App() {
                       :
                       userType === "student"
                       ?
-                      <AnnouncPage />
+                      <ProfileForm />
                       : 
                       userType === "careerCenter"
                       ?

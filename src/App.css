@@ -1,16 +1,21 @@
 .App {
   text-align: center;
   margin-top: 50;
+  font-family: 'DM Sans';
 }
-/* #root {
-  background-color: red;
-  flex-grow: 1;
-} */
+.wrapper_notLogged{
+  display: flex;
+  flex-direction: column;
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: #C8D8D7;
+}
 .wrapper {
   display: flex;
   flex-direction: row;
   flex-grow: 1;
   height: 100%;
+  min-width: 100vw;
   min-height: 100vh;
   background-color: #C8D8D7;
 }
