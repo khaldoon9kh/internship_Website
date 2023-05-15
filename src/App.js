@@ -88,9 +88,7 @@ function App() {
               </div>
             <div className="content">
               <div className="mainContent">
-                <div className="sidebar">
-                  <SideBar userType={userType} authToken={authToken}/>
-                </div>
+              <SideBar userType={userType} authToken={authToken}/>
               <Routes>
                 {
                   <Route
@@ -121,6 +119,13 @@ function App() {
                   element={<ProfileForm />}
                 /> */}
                 <Route path="/jobOffers" element={<JobOffers />} />
+                <Route path="/announcment" element={<AnnouncPage />} />
+                <Route path="/coordinatorMessage" element={<CoordinatorMessage />} />
+                <Route path="/applicationStatus" element={<Applicationstatus />} />
+                <Route path="/adminPanel" element={<AdminPanel />} />
+                <Route path="/internSelector" element={<InternSelector />} />
+                <Route path="/jobOffers" element={<JobOffers/>} />
+                <Route path="/profileForm" element={<ProfileForm />} />
                 {/* <Route path="/welcome" element={<WelcomePage />} /> */}
               </Routes>
               </div>

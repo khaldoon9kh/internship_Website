@@ -3,7 +3,7 @@ import { ReactComponent as NotificationLogo } from "../../svgs/notification-stat
 import { ReactComponent as MailLogo } from "../../svgs/message-notif.svg";
 import { ReactComponent as NotLogo } from "../../svgs/notification.svg";
 import { ReactComponent as ProfileLogo } from "../../svgs/profile.svg";
-import { ReactComponent as JobCenter } from "../../svgs/briefcase-1944.svg";
+import { ReactComponent as JobCenter } from "../../svgs/receipt-edit.svg";
 import { ReactComponent as LogoutLogo } from "../../svgs/logOut.svg";
 import {app} from '../../firebaseConfig';
 import { getAuth } from "firebase/auth";
@@ -32,24 +32,36 @@ function SideBar({userType, authToken}) {
     return (
       <div className="sideMainCont">
         <div className="navItemsCont-top">
-          <div className="navbar-container">
-            <ProfileLogo/>
-            <a href="/" className="navbar-link">Profile</a>
-          </div>
-          <div className="navbar-container">
-            <NotificationLogo/>
-            <a href="/" className="navbar-link">Application status</a>
-          </div>
-          <div className="navbar-container">
-            <MailLogo/>
-            <a href="/" className="navbar-link">Mail</a>
-          </div>
-          <div 
-            className="navbar-container"
+          <NavLink
+            to="/profileForm"
+            className={({ isActive, isPending }) =>
+              isPending ? "navbar-container" : isActive ? "navbar-container" : ""
+            }
+            // className="navbar-container"
           >
-            
-            <p className="navbar-link">Career center</p>
-          </div>
+            <ProfileLogo/>
+            Profile
+          </NavLink>
+          <NavLink
+            to="/profileForm"
+            className={({ isActive, isPending }) =>
+              isPending ? "navbar-container" : isActive ? "navbar-container" : ""
+            }
+            // className="navbar-container"
+          >
+            <NotificationLogo/>
+            Application status
+          </NavLink>
+          <NavLink
+            to="/profileForm"
+            className={({ isActive, isPending }) =>
+              isPending ? "navbar-container" : isActive ? "navbar-container" : ""
+            }
+            // className="navbar-container"
+          >
+            <MailLogo/>
+            Mail
+          </NavLink>
           <NavLink
             to="/jobOffers"
             className={({ isActive, isPending }) =>
@@ -60,18 +72,26 @@ function SideBar({userType, authToken}) {
             <JobCenter/>
             Career center
           </NavLink>
-          <div className="navbar-container">
+          <NavLink
+            to="/profileForm"
+            className={({ isActive, isPending }) =>
+              isPending ? "navbar-container" : isActive ? "navbar-container" : ""
+            }
+            // className="navbar-container"
+          >
             <NotLogo/>
-            <a href="/" className="navbar-link">Notification</a>
-          </div>
-        </div>
-        <div className="navItemsCont-down">
-          <div 
-            className="navbar-container"
+            Notification
+          </NavLink>
+          <NavLink
+            to="/profileForm"
+            className={({ isActive, isPending }) =>
+              isPending ? "navbar-container" : isActive ? "navbar-container" : ""
+            }
+            // className="navbar-container"
           >
             <LogoutLogo/>
-            <a href="/" className="navbar-link">Log out</a>
-          </div>
+            Log out
+          </NavLink>
         </div>
       </div>
     );
