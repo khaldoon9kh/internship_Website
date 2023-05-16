@@ -16,7 +16,7 @@ import AnnouncPage from "../src/container/announcmentPage";
 import CoordinatorMessage from "../src/container/coordinatorMessage";
 import Applicationstatus from "../src/container/applicationStatus";
 import AdminPanel from "../src/container/adminPanel";
-import InternSelector from "../src/container/stdInternSlct";
+import InternSelector from "./container/internSelector";
 import CareerDashboard from "./container/career-Dashboard";
 import AdminDashboard from "../src/container/adminDashboard";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';

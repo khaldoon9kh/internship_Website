@@ -13,6 +13,22 @@
   flex-grow: 1;
   flex-direction: column;
 }
+.internButtonBody-status, .internStatusCont{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.internStatusCont{
+  margin: 5px 10px;
+  padding: 10px;
+  border: 2px solid #C8D8D7;
+  background-color: #09B3AD;
+  border-radius: 10px;
+}
+.internStatusCont p {
+  margin: 0px;
+  color: aliceblue;
+}
 
 .intenrButtonContainer {
   display: flex;
@@ -36,6 +52,21 @@
 .internButtonBody {
   width: 75%;
   margin: 10px;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+}
+.internButtonBody h2, .internButtonBody h3{
+  font-size: 15px;
+  margin: 0px 10px 0px 0px;
+}
+.internButtonBody-details{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.internDetailsCont{
+  display: flex;
 }
 
 .internSelectorSeparator{
