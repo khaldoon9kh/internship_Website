@@ -1,6 +1,7 @@
 .profile-form-outerContainer{
   display: flex;
-  width: 79vw;
+  width: 100%;
+  /* width: 79vw; */
   /* height: 88vh; */
   justify-content: center;
   background-color: #E9EAEC;

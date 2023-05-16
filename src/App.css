@@ -26,7 +26,7 @@
   display: flex;
 }
 .headerWrapper{
-  flex-grow: 1;
+  /* flex-grow: 1; */
   display: flex;
 }
 .mainContent{
@@ -37,7 +37,7 @@
 .content {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 9;
   min-width: 80vw;
   flex-grow: 1;
   /* padding: 20px; */
