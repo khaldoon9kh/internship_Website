@@ -66,11 +66,13 @@ function App() {
   if (!logedIn){
     return(
       <Router>
+        <div className="wrapper_notLogged">
         <HeaderLogin/>
         <Routes>
           <Route path="/" element={<UserSelector />} />
           <Route path="/login/:userType" element={<LoginPage />} />
         </Routes>
+        </div>
       </Router>
     )
   }else{
@@ -80,15 +82,13 @@ function App() {
     }else{
       return (  
         <Router>
-          <div className="wrapper">
-            <div className="sidebar">
-              <SideBar userType={userType} authToken={authToken}/>
-            </div>
-            <div className="content">
+          <div className="wrapper_Logedin">
               <div className="headerWrapper">
                 <Header/>
               </div>
+            <div className="content">
               <div className="mainContent">
+              <SideBar userType={userType} authToken={authToken}/>
               <Routes>
                 {
                   <Route
@@ -100,7 +100,7 @@ function App() {
                       :
                       userType === "student"
                       ?
-                      <AnnouncPage />
+                      <ProfileForm />
                       : 
                       userType === "careerCenter"
                       ?
@@ -119,6 +119,13 @@ function App() {
                   element={<ProfileForm />}
                 /> */}
                 <Route path="/jobOffers" element={<JobOffers />} />
+                <Route path="/announcment" element={<AnnouncPage />} />
+                <Route path="/coordinatorMessage" element={<CoordinatorMessage />} />
+                <Route path="/applicationStatus" element={<Applicationstatus />} />
+                <Route path="/adminPanel" element={<AdminPanel />} />
+                <Route path="/internSelector" element={<InternSelector />} />
+                <Route path="/jobOffers" element={<JobOffers/>} />
+                <Route path="/profileForm" element={<ProfileForm />} />
                 {/* <Route path="/welcome" element={<WelcomePage />} /> */}
               </Routes>
               </div>

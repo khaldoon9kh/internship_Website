@@ -1,13 +1,42 @@
 .headerMainCont {
-  flex-grow: 1;
+  flex-grow: 2;
   background-color: #1DB2AC;
   /* height: 75px; */
   display: flex;
   justify-content: flex-end;
+  max-height: 10vh;
+}
+.logoCont{
+  display: flex;
+  align-items: flex-start;
+  padding-left: 20px;
+  flex-grow: 1;
+}
+.logoHeader{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+.logoHeader h3, .logoHeader h4{
+  margin: 0px;
+  font-size: 20px;
+  font-family: 'DM Sans';
+  font-weight: bold;
+  color: whitesmoke;
+}
+.logo-image {
+  width: 5vw;
+  height: auto;
 }
 .profileImgCont{
   display: flex;
   justify-content: flex-end;
   align-items: center;
   margin-right: 20px;
+}
+.profileImgCont h3{
+  color: whitesmoke;
+  font-size: 20px;
+  margin-right: 10px;
 }
