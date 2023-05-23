@@ -17,7 +17,7 @@ function InternSelector() {
         >
         </div>
         <div className="intenrButtonContainer">
-          <Link className="internButton firstInternButton">
+          <Link to={"/applicationStatus"} className="internButton firstInternButton">
             <div className='internButtonHeader'>
               <h1>Summer Practice 1 </h1>
             </div>

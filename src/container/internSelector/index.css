@@ -102,6 +102,7 @@
   height: 80%;
 }
 
+
 /* .admin-button {
   background-color: #007bff;
 }
@@ -118,6 +119,6 @@
   background-color: #dc3545;
 } */
 
-.button:hover {
-  background-color: #09B3AD;
+.internButton:hover {
+  background-color: #C8D8D7;
 }
