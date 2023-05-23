@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ReactComponent as CalendarSVG } from "../../svgs/calendar.svg";
 import "./index.css";
 
 function InternSelector() {
@@ -16,14 +17,30 @@ function InternSelector() {
         >
         </div>
         <div className="intenrButtonContainer">
-          <Link className="internButton firstInternButton">
+          <Link to={"/applicationStatus"} className="internButton firstInternButton">
             <div className='internButtonHeader'>
               <h1>Summer Practice 1 </h1>
             </div>
             <div className="buttonSeparator">
             </div>
             <div className='internButtonBody'>
-              <p>First Internship Description</p>
+              <div className='internButtonBody-details'>
+                <div className='internDetailsCont'>
+                  <h2>Company:</h2>
+                  <h3>Facebook</h3>
+                </div>
+                <div className='internDetailsCont'>
+                  <h2>Application Date:</h2>
+                  <h3>12/12/2021</h3>
+                </div>
+              </div>
+              <div className='internButtonBody-status'>
+                <div className='internStatusCont'>
+                  <p>
+                    Awaiting Coordinator Approval 
+                  </p>
+                </div>
+              </div>
             </div>
           </Link>
           <Link className="internButton SecondInternButton">
@@ -33,7 +50,13 @@ function InternSelector() {
             <div className="buttonSeparator">
             </div>
             <div className='internButtonBody'>
-              <p>Second Internship Description</p>
+            <div className='internButtonBody-status'>
+                <div className='internStatusCont'>
+                  <p>
+                    Apply Now 
+                  </p>
+                </div>
+              </div>
             </div>
           </Link>
         </div>

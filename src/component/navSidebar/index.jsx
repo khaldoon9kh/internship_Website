@@ -43,7 +43,7 @@ function SideBar({userType, authToken}) {
             Profile
           </NavLink>
           <NavLink
-            to="/applicationStatus"
+            to="/internSelector"
             className={({ isActive, isPending }) =>
               isPending ? "navbar-container" : isActive ? "navbar-container" : ""
             }

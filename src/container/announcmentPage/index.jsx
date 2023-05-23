@@ -13,7 +13,7 @@ const AnnouncPage = () => {
     </div>
       <form>
         
-        <input type="email" id="from" name="from" placeholder='From:'/>
+        {/* <input type="email" id="from" name="from" placeholder='From:'/> */}
         <input type="email" id="to" name="to"  placeholder='To:' required/>
         <input type="text" id="subject" name="subject" placeholder='Subject:' required/>
 
