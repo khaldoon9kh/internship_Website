@@ -33,7 +33,7 @@ function SideBar({userType, authToken}) {
       <div className="sideMainCont">
         <div className="navItemsCont-top">
           <NavLink
-            to="/coorDash"
+            to="/profileForm"
             className={({ isActive, isPending }) =>
               isPending ? "navbar-container" : isActive ? "navbar-container" : ""
             }
