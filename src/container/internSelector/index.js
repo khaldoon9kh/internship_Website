@@ -50,7 +50,13 @@ function InternSelector() {
             <div className="buttonSeparator">
             </div>
             <div className='internButtonBody'>
-              <p>Second Internship Description</p>
+            <div className='internButtonBody-status'>
+                <div className='internStatusCont'>
+                  <p>
+                    Apply Now 
+                  </p>
+                </div>
+              </div>
             </div>
           </Link>
         </div>
