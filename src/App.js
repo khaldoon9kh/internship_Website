@@ -126,6 +126,7 @@ function App() {
                 <Route path="/internSelector" element={<InternSelector />} />
                 <Route path="/jobOffers" element={<JobOffers/>} />
                 <Route path="/profileForm" element={<ProfileForm />} />
+                <Route path="/coorDash" element={<CoordinatorDashboard />} />
                 {/* <Route path="/welcome" element={<WelcomePage />} /> */}
               </Routes>
               </div>
