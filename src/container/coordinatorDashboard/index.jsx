@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 import "./index.css";
+import { useNavigate } from 'react-router-dom';
 
 
 function CoordinatorDashboard() {
+  const navigate = useNavigate();
 
   const internships = [
     {
-      date: '2023-05-15',
+      id: 1,
+      date: '2023-05-10',
       studentNumber: 'A12345',
       department: 'Marketing',
       internshipType: 'Paid',
       status: 'Completed',
     },
     {
+      id: 2,
       date: '2023-05-20',
       studentNumber: 'B67890',
       department: 'Engineering',
@@ -21,6 +25,13 @@ function CoordinatorDashboard() {
     },
     // Add more internship data as needed
   ];
+
+    // Sort the internships array based on the date in descending order
+    internships.sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    const handleRowClick = (id) => {
+      navigate(`/interndetails/${id}`);
+    };
   
   return(
     <div className='outerContainer-coordinator-dashboeard'>
@@ -47,7 +58,10 @@ function CoordinatorDashboard() {
           </thead>
           <tbody>
             {internships.map((internship, index) => (
-              <tr key={index}>
+              <tr 
+                key={internship.id} 
+                onClick={() => handleRowClick(internship.id)}
+              >
                 <td>{internship.date}</td>
                 <td>{internship.studentNumber}</td>
                 <td>{internship.department}</td>
@@ -60,40 +74,6 @@ function CoordinatorDashboard() {
       </div>
     </div>  
   )
-  // <div className='coordinator-dashboeard-mainContainer'>
-  //       <h2>Internship applications</h2>
-
-  //       <div  className='coordinator-dashboeard-internshipCells'>
-  //         <div class="flex-container1">
-  //           <div className='internshipInfo'>
-  //             <h4 className='internship-name'>Software Internship</h4>
-  //             <h6 className='internship-dateSent'>date sent 
-  //               <time className='dateTime' datetime="DD-MM-YY"> 4/3/23</time>
-  //             </h6>
-  //           </div>
-  //           <div className='file-download-icon'>
-  //             <button>D</button>
-  //           </div>
-  //           <div class = "vertical-line" className='vertical-line'>
-  //             {/* VErtival Line */}
-  //           </div>
-  //           <div className='intern-info'>
-  //             <h4>Internship  application coming from  :  </h4> 
-  //             <h3 className='intern-name'>Ameer AbuGharbiah</h3>
-  //           </div>
-  //           <div className='sgk-button-container'>
-  //             <button className='sgk-button'>Issue SGK </button>
-  //           </div>
-  //         </div>
-          
-  //       </div>
-  //       <div className='coordinator-dashboeard-internshipCells'> 
-  //       </div>
-      
-  //       <div className='coordinator-dashboeard-internshipCells'></div>
-  //       <div className='coordinator-dashboeard-internshipCells'></div>
-     
-  //    </div>
 }
 
 export default CoordinatorDashboard;

@@ -19,6 +19,7 @@ import AdminPanel from "../src/container/adminPanel";
 import InternSelector from "./container/internSelector";
 import CareerDashboard from "./container/career-Dashboard";
 import AdminDashboard from "../src/container/adminDashboard";
+import InternshipDetailsContainer from "./container/coordInternDetCont";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
@@ -127,6 +128,7 @@ function App() {
                 <Route path="/jobOffers" element={<JobOffers/>} />
                 <Route path="/profileForm" element={<ProfileForm />} />
                 <Route path="/coorDash" element={<CoordinatorDashboard />} />
+                <Route path="/interndetails/:id" element={<InternshipDetailsContainer />} />
                 {/* <Route path="/welcome" element={<WelcomePage />} /> */}
               </Routes>
               </div>
