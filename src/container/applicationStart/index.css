@@ -1,4 +1,4 @@
-.internSelectorMainCont {
+.applicationStartMainCont {
   display: flex;
   flex-grow: 1;
   margin: 15px;
@@ -8,8 +8,23 @@
   justify-content: center;
   background-color: whitesmoke;
 }
-.intenrContain{
+.applyHeaderMainContain{
   display: flex;
   flex-grow: 1;
   flex-direction: column;
+  justify-content: space-around;
+}
+.applyHeaderCont{
+  display: flex;
+}
+.applyFormCont{
+  display: flex;
+  flex-grow: 9;
+  background-color: aqua;
+  margin-top: 10px;
+}
+.applyForm{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
