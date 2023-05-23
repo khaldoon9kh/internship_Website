@@ -1,10 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { ReactComponent as CalendarSVG } from "../../svgs/Calendar.svg";
+import { Link, useNavigate } from 'react-router-dom';
+import { ReactComponent as CalendarSVG } from "../../svgs/calendar.svg";
 import "./index.css";
 
 function InternSelector() {
   
+  const navigate = useNavigate();
+
+  const handleRowClick = () => {
+    navigate(`/internapply`);
+  };
+
   return (
     <div className="internSelectorMainCont">
       <div className='intenrContain'>
@@ -43,14 +49,17 @@ function InternSelector() {
               </div>
             </div>
           </Link>
-          <Link className="internButton SecondInternButton">
+          <div 
+            onClick={() => handleRowClick()}
+            className="internButton SecondInternButton"
+            >
             <div className='internButtonHeader'>
               <h1>Summer Practice 2</h1>
             </div>
             <div className="buttonSeparator">
             </div>
             <div className='internButtonBody'>
-            <div className='internButtonBody-status'>
+              <div className='internButtonBody-status'>
                 <div className='internStatusCont'>
                   <p>
                     Apply Now 
@@ -58,7 +67,7 @@ function InternSelector() {
                 </div>
               </div>
             </div>
-          </Link>
+          </div>
         </div>
       </div>
     </div>
