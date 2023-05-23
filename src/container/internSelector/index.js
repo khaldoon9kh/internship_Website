@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ReactComponent as CalendarSVG } from "../../svgs/calendar.svg";
+import { ReactComponent as CalendarSVG } from "../../svgs/Calendar.svg";
 import "./index.css";
 
 function InternSelector() {

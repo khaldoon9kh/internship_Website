@@ -1,0 +1,30 @@
+.applicationStartMainCont {
+  display: flex;
+  flex-grow: 1;
+  margin: 15px;
+  border-radius: 10px;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: center;
+  background-color: whitesmoke;
+}
+.applyHeaderMainContain{
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.applyHeaderCont{
+  display: flex;
+}
+.applyFormCont{
+  display: flex;
+  flex-grow: 9;
+  background-color: aqua;
+  margin-top: 10px;
+}
+.applyForm{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}

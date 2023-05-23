@@ -19,6 +19,7 @@ import AdminPanel from "../src/container/adminPanel";
 import InternSelector from "./container/internSelector";
 import CareerDashboard from "./container/career-Dashboard";
 import AdminDashboard from "../src/container/adminDashboard";
+import ApplicationStart from '../src/container/applicationStart';
 import InternshipDetailsContainer from "./container/coordInternDetCont";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
