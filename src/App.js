@@ -40,8 +40,10 @@ function App() {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           const userData = docSnap.data();
-          console.log("User Type:", userData.type);
+          // console.log("User Type:", userData.type);
           localStorage.setItem('userType', userData.type);
+          localStorage.setItem('intern1', userData.intern1);
+          localStorage.setItem('intern2', userData.intern2);
           setUserType(userData.type)
           return userData.type; // Return the user type
         } else {

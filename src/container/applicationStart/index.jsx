@@ -26,7 +26,7 @@ function ApplicationStart() {
   // Create a root reference
   const storage = getStorage();
 
-
+  
   // console.log(type)
 
   const handleCompanyNameChange = (e) => {

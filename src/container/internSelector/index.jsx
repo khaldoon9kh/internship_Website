@@ -9,47 +9,81 @@ import "./index.css";
 
 function InternSelector() {
   const [authToken, setAuthToken] = useState(null);
-  const [intern1, setintern1] = useState("");
-  const [intern2, setintern2] = useState("");
+  const [internStatus1, setInternStatus1] = useState("");
+  const [internStatus2, setInternStatus2] = useState("");
+  const [internDet1, setInternDet1] = useState(null);
+  const [internDet2, setInternDet2] = useState(null);
   const [loading, setLoading] = useState(true);
+  // let intern1DATA = null;
+  // let intern2DATA = null;
+
+  const fetchInternsDetails = async (token) => {
+    let intern1DATA = null;
+    let intern2DATA = null;
+    const intern1Ref = doc(db, "internships", token );
+    console.log("token from fetch intern details", token)
+    // const intern2Ref = doc(db, "interns", "intern2");
+    try {
+      setLoading(true);
+      const intern1Doc = await getDoc(intern1Ref);
+      if (intern1Doc.exists()) {
+        const userData = intern1Doc.data();
+        // console.log("This is user Data",userData)
+        let internData1 = userData.intern1;
+        let internData2 = userData.intern2;
+        if(internData1.status !== "closed"){
+          setInternDet1(internData1)
+          intern1DATA = internData1;
+          // console.log("this is data 1",intern1newDATA)
+        }else{
+          setInternStatus1("closed");
+        }
+        if(internData2.status !== "closed"){
+          setInternDet2(internData2)
+          intern2DATA = internData2;
+        }else{
+          setInternStatus2("closed");
+        }
+        // setLoading(false);
+        // console.log(internDet2)
+      } else {
+        console.log("No such document!");
+        return null;
+      }
+      // console.log(userData)
+    } catch (e) {
+      console.log("Error getting document:", e);
+    }
+    console.log("this is intern1", intern1DATA)
+    console.log("this is intern2", intern2DATA)
+    if(intern1DATA !== null && intern2DATA !==null){
+      setLoading(false);
+    }
+    // const intern2Doc = await getDoc(intern2Ref);
+    // setintern1(intern1Doc.data().status);
+    // setintern2(intern2Doc.data().status);
+  };
+
 
   useEffect(() => {
     const fetchAuthToken = localStorage.getItem('authToken');
+    setAuthToken(fetchAuthToken);
+    const fetchInternstatus1 = localStorage.getItem('intern1');
+    const fetchInternstatus2 = localStorage.getItem('intern2');
     // console.log(fetchAuthToken)
     setAuthToken(fetchAuthToken);
     // console.log("this is authToken", authToken )
-    const getUserTypeById = async (userId) => {
-      try {
-        const docRef = doc(db, "users", userId);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          const userData = docSnap.data();
-          // console.log("Intern1 Type:", userData.intern1);
-          // console.log("Intern2 Type:", userData.intern2);
-          setintern1(userData.intern1);
-          setintern2(userData.intern2);
-          // localStorage.setItem('userType', userData.type);
-          // setUserType(userData.type)
-          // return userData.type; // Return the user type
-        } else {
-          console.log("No such document!");
-          return null;
-        }
-      } catch (error) {
-        console.log("Error retrieving user type:", error);
-        return null;
-      }
-    };
     if (fetchAuthToken) {
-      getUserTypeById(fetchAuthToken);
-      // Authentication token exists in localStorage, do something with it
-      // setLogedIn(true)
+      fetchInternsDetails(fetchAuthToken);
+      setInternStatus1(fetchInternstatus1);
+      setInternStatus2(fetchInternstatus2);
     } else {
-      // Authentication token does not exist in localStorage
-      // setLogedIn(false)
+      navigate('/login');
     }
-    setLoading(false);
+    // console.log("this data after useeffect",intern1DATA)
+    // setLoading(false);
   }, []);
+
 
 
   const navigate = useNavigate();
@@ -63,6 +97,8 @@ function InternSelector() {
       <LoadingComp/>
     )
   }else{
+    console.log("this data after useeffect",internDet2.position)
+  // console.log(internDet2)
   return (
     <div className="internSelectorMainCont">
       <div className='intenrContain'>
@@ -75,51 +111,79 @@ function InternSelector() {
         >
         </div>
         <div className="intenrButtonContainer">
-          <Link to={"/applicationStatus"} className="internButton firstInternButton">
-            <div className='internButtonHeader'>
-              <h1>Summer Practice 1 </h1>
-            </div>
-            <div className="buttonSeparator">
-            </div>
-            <div className='internButtonBody'>
-              <div className='internButtonBody-details'>
-                <div className='internDetailsCont'>
-                  <h2>Company:</h2>
-                  <h3>Facebook</h3>
+          {internStatus1 !== "closed" ? 
+            <Link to={"/applicationStatus"} className="internButton firstInternButton">
+              <div className='internButtonHeader'>
+                <h1>Summer Practice 1 </h1>
+              </div>
+              <div className="buttonSeparator">
+              </div>
+              <div className='internButtonBody'>
+                <div className='internButtonBody-details'>
+                  <div className='internDetailsCont'>
+                    <h2>Company:</h2>
+                    <h3>Facebook</h3>
+                  </div>
+                  <div className='internDetailsCont'>
+                    <h2>Application Date:</h2>
+                    <h3>12/12/2021</h3>
+                  </div>
                 </div>
-                <div className='internDetailsCont'>
-                  <h2>Application Date:</h2>
-                  <h3>12/12/2021</h3>
+                <div className='internButtonBody-status'>
+                  <div className='internStatusCont'>
+                    <p>
+                      {internStatus1}
+                    </p>
+                  </div>
                 </div>
               </div>
-              <div className='internButtonBody-status'>
-                <div className='internStatusCont'>
-                  <p>
-                    Awaiting Coordinator Approval 
-                  </p>
+            </Link>
+          :
+          null
+          }
+          {internStatus2 !== "closed" ?   
+            <div 
+              onClick={() => handleRowClick("intern2")}
+              className="internButton SecondInternButton"
+              >
+              <div className='internButtonHeader'>
+                <h1>Summer Practice 2</h1>
+              </div>
+              <div className="buttonSeparator">
+              </div>
+              <div className='internButtonBody'>
+                <div className='internButtonBody-details'>
+                  {internDet2.companyName 
+                    ?
+                    <div className='internDetailsCont'>
+                      <h2>Company:</h2>
+                      <h3>{internDet2.companyName}</h3>
+                    </div>
+                    :
+                    null
+                  }
+                  {internDet2.date
+                    ?
+                    <div className='internDetailsCont'>
+                      <h2>Application Date:</h2>
+                      <h3>{internDet2.date}</h3>
+                    </div>
+                    :
+                    null
+                  }
+                </div>
+                <div className='internButtonBody-status'>
+                  <div className='internStatusCont'>
+                    <p>
+                      {internStatus2}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-          </Link>
-          <div 
-            onClick={() => handleRowClick("intern2")}
-            className="internButton SecondInternButton"
-            >
-            <div className='internButtonHeader'>
-              <h1>Summer Practice 2</h1>
-            </div>
-            <div className="buttonSeparator">
-            </div>
-            <div className='internButtonBody'>
-              <div className='internButtonBody-status'>
-                <div className='internStatusCont'>
-                  <p>
-                    Apply Now 
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          :
+          null
+          }
         </div>
       </div>
     </div>
