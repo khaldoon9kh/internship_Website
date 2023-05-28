@@ -3,6 +3,8 @@ import "./index.css";
 import { doc, setDoc } from "firebase/firestore"; 
 import {db} from '../../firebaseConfig';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { ReactComponent as LoadingSVG } from "../../svgs/loadingSVG.svg";
+import { ReactComponent as CompletedSVG } from "../../svgs/doneCheck.svg";
 // import { storage } from '../../firebaseConfig';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -16,6 +18,8 @@ function ApplicationStart() {
   const [selectedDate, setSelectedDate] = useState('');
   const [formLink, setFormLink] = useState('');
   const [transcriptLink, setTranscriptLink] = useState('');
+  const [formLoading, setFormLoading] = useState(null);
+  const [transLoading, setTrnasLoading] = useState(null);
   const fetchAuthToken = localStorage.getItem('authToken');
   const { type } = useParams();
   // Create a root reference
@@ -39,7 +43,7 @@ function ApplicationStart() {
   const handleFormPDFUpload = (e) => {
     const file = e.target.files[0];
     setFormPDF(file);
-    uploadFormToStorage(file);
+    // uploadFormToStorage(file);
   };
 
   const handleTranscriptPDFUpload = async (e) => {
@@ -53,13 +57,14 @@ function ApplicationStart() {
   
   const uploadFormToStorage = async (file) => {
     // const imagesRef = ref(storageRef, 'images');
-    const storageRef = ref(storage, `${fetchAuthToken}/form` + file.name);
+    const storageRef = ref(storage, `${fetchAuthToken}/form/` + file.name);
     const uploadTask = uploadBytesResumable(storageRef, file);
     // Listen for state changes, errors, and completion of the upload.
     uploadTask.on('state_changed',
     (snapshot) => {
       // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      setFormLoading(progress);
       console.log('Upload is ' + progress + '% done');
       switch (snapshot.state) {
         case 'paused':
@@ -99,13 +104,14 @@ function ApplicationStart() {
   
   const uploadTranscriptToStorage = async (file) => {
     // const imagesRef = ref(storageRef, 'images');
-    const storageRef = ref(storage, `${fetchAuthToken}/transcript`+ file.name);
+    const storageRef = ref(storage, `${fetchAuthToken}/transcript/`+ file.name);
     const uploadTask = uploadBytesResumable(storageRef, file);
     // Listen for state changes, errors, and completion of the upload.
     uploadTask.on('state_changed',
     (snapshot) => {
       // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+
       console.log('Upload is ' + progress + '% done');
       switch (snapshot.state) {
         case 'paused':
@@ -179,7 +185,7 @@ function ApplicationStart() {
             <h1>Summer internship Form</h1>
           </div>
           <div 
-            classname='internSelectorSeparator'
+            className='internSelectorSeparator'
             style={{display:"flex", backgroundColor: "#C8D8D7",height: "5px"}}
           >
           </div>
@@ -200,7 +206,15 @@ function ApplicationStart() {
           </div>
           <div>
             <label>Upload Form PDF:</label>
-            <input type="file" accept=".pdf" onChange={handleFormPDFUpload} />
+            <div className='formUploadCont'>
+              <input type="file" accept=".pdf" onChange={handleFormPDFUpload} />
+              <button 
+                onClick={() => uploadFormToStorage(formPDF)}
+                >
+                Upload
+              </button>
+              {formLoading === null? null : formLoading < 100 ? <LoadingSVG/> : formLoading === 100 ? <CompletedSVG/> : null}
+            </div>
           </div>
           <div>
             <label>Do you need a letter?</label>
@@ -212,7 +226,15 @@ function ApplicationStart() {
           {needsLetter === 'yes' && (
             <div>
               <label>Upload Transcript PDF:</label>
-              <input type="file" accept=".pdf" onChange={handleTranscriptPDFUpload} />
+              <div className='formUploadCont'>
+                <input type="file" accept=".pdf" onChange={handleTranscriptPDFUpload} />
+                <button 
+                  onClick={() => uploadTranscriptToStorage(transcriptPDF)}
+                  >
+                  Upload
+                </button>
+                {transLoading === null? null : transLoading < 100 ? <LoadingSVG/> : transLoading === 100 ? <CompletedSVG/> : null}
+              </div>
             </div>
           )}
           <button type="submit">Apply</button>

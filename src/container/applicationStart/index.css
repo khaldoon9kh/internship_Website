@@ -28,3 +28,12 @@
   flex-direction: column;
   flex-grow: 1;
 }
+.formUploadCont{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.formUploadCont button{
+  margin: 0px 10px;
+}
+
