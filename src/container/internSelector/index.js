@@ -8,7 +8,7 @@ function InternSelector() {
   const navigate = useNavigate();
 
   const handleRowClick = () => {
-    navigate(`/internapply`);
+    navigate(`/internapply/2`);
   };
 
   return (
