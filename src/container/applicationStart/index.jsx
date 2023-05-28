@@ -48,9 +48,19 @@ function ApplicationStart() {
         if(internType === "intern1"){
           setInternData(internData1);
           internDATA = internData1;
+          if(internDATA.status === "Open" || internDATA.status === "Letter Uploaded"){
+            setReadOnly(false)
+          }else{
+            setReadOnly(true)
+          }
         }else if(internType === "intern2"){
           setInternData(internData2);
           internDATA = internData2;
+          if(internDATA.status === "Open" || internDATA.status === "Letter Uploaded"){
+            setReadOnly(false)
+          }else{
+            setReadOnly(true)
+          }
         }
         // setLoading(false);
         // console.log(internDet2)
@@ -299,7 +309,7 @@ function ApplicationStart() {
               :
               null
             }
-            {internData.rejection
+            {readOnly && internData.rejection
               ?
             <div>
               <label>Rejection Reason:</label>
@@ -346,7 +356,7 @@ function ApplicationStart() {
                 {readOnly ? "Application Form:" : "Upload Form PDF:"}
               </label>
               <div className='formUploadCont'>
-                {internData.formLink
+                {readOnly && internData.formLink
                   ?
                     <a 
                       href={internData.formLink}
@@ -386,7 +396,7 @@ function ApplicationStart() {
                 }
               </div>
             </div>
-            {internData.letterLink
+            {readOnly && internData.letterLink
               ?
               <div>
                 <label>
