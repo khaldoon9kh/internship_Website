@@ -16,6 +16,7 @@ function InternSelector() {
   const [loading, setLoading] = useState(true);
   // let intern1DATA = null;
   // let intern2DATA = null;
+  const navigate = useNavigate();
 
   const fetchInternsDetails = async (token) => {
     let intern1DATA = null;
@@ -86,7 +87,7 @@ function InternSelector() {
 
 
 
-  const navigate = useNavigate();
+  
 
   const handleRowClick = (intern) => {
     navigate(`/internapply/${intern}`);
@@ -152,7 +153,42 @@ function InternSelector() {
               </div>
             </div>
           :
-          null
+            <div className="internButton SecondInternButton">
+              <div className='internButtonHeader'>
+                <h1>Summer Practice 2</h1>
+              </div>
+              <div className="buttonSeparator">
+              </div>
+              <div className='internButtonBody'>
+                <div className='internButtonBody-details'>
+                  {internDet1.companyName 
+                    ?
+                    <div className='internDetailsCont'>
+                      <h2>Company:</h2>
+                      <h3>{internDet1.companyName}</h3>
+                    </div>
+                    :
+                    null
+                  }
+                  {internDet1.date
+                    ?
+                    <div className='internDetailsCont'>
+                      <h2>Application Date:</h2>
+                      <h3>{internDet1.date}</h3>
+                    </div>
+                    :
+                    null
+                  }
+                </div>
+                <div className='internButtonBody-status'>
+                  <div className='internStatusCont'>
+                    <p>
+                      {internStatus2}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           }
           {internStatus2 !== "closed" ?   
             <div 
