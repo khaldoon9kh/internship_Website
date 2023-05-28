@@ -5,7 +5,7 @@ import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
 import { db } from './firebaseConfig';
 import HeaderLogin from "../src/component/headerLogin";
 import LoginPage from "../src/container/login";
-import WelcomePage from "../src/container/welcom";
+// import WelcomePage from "../src/container/welcom";
 import SideBar from '../src/component/navSidebar' 
 import Header from '../src/component/header';
 import UserSelector from '../src/container/userSelector'
@@ -129,7 +129,7 @@ function App() {
                 <Route path="/jobOffers" element={<JobOffers/>} />
                 <Route path="/profileForm" element={<ProfileForm />} />
                 <Route path="/coorDash" element={<CoordinatorDashboard />} />
-                <Route path="/internapply/:type" element={<ApplicationStart />} />
+                <Route path="/internapply/:internType" element={<ApplicationStart />} />
                 <Route path="/interndetails/:id" element={<InternshipDetailsContainer />} />
                 {/* <Route path="/welcome" element={<WelcomePage />} /> */}
               </Routes>

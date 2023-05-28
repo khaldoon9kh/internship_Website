@@ -1,16 +1,68 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ReactComponent as CalendarSVG } from "../../svgs/calendar.svg";
+import { ReactComponent as LoadingSVG } from "../../svgs/loadingSVG.svg";
+import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
+import LoadingComp from '../loadingComp';
+import { db } from '../../firebaseConfig';
 import "./index.css";
 
 function InternSelector() {
-  
+  const [authToken, setAuthToken] = useState(null);
+  const [intern1, setintern1] = useState("");
+  const [intern2, setintern2] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchAuthToken = localStorage.getItem('authToken');
+    // console.log(fetchAuthToken)
+    setAuthToken(fetchAuthToken);
+    // console.log("this is authToken", authToken )
+    const getUserTypeById = async (userId) => {
+      try {
+        const docRef = doc(db, "users", userId);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          // console.log("Intern1 Type:", userData.intern1);
+          // console.log("Intern2 Type:", userData.intern2);
+          setintern1(userData.intern1);
+          setintern2(userData.intern2);
+          // localStorage.setItem('userType', userData.type);
+          // setUserType(userData.type)
+          // return userData.type; // Return the user type
+        } else {
+          console.log("No such document!");
+          return null;
+        }
+      } catch (error) {
+        console.log("Error retrieving user type:", error);
+        return null;
+      }
+    };
+    if (fetchAuthToken) {
+      getUserTypeById(fetchAuthToken);
+      // Authentication token exists in localStorage, do something with it
+      // setLogedIn(true)
+    } else {
+      // Authentication token does not exist in localStorage
+      // setLogedIn(false)
+    }
+    setLoading(false);
+  }, []);
+
+
   const navigate = useNavigate();
 
-  const handleRowClick = () => {
-    navigate(`/internapply/2`);
+  const handleRowClick = (intern) => {
+    navigate(`/internapply/${intern}`);
   };
 
+  if (loading) {
+    return (
+      <LoadingComp/>
+    )
+  }else{
   return (
     <div className="internSelectorMainCont">
       <div className='intenrContain'>
@@ -50,7 +102,7 @@ function InternSelector() {
             </div>
           </Link>
           <div 
-            onClick={() => handleRowClick()}
+            onClick={() => handleRowClick("intern2")}
             className="internButton SecondInternButton"
             >
             <div className='internButtonHeader'>
@@ -72,6 +124,7 @@ function InternSelector() {
       </div>
     </div>
   );
+  }
 }
 
 export default InternSelector;

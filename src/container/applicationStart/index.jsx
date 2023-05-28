@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "./index.css";
-import { doc, setDoc } from "firebase/firestore"; 
+import { doc, setDoc, updateDoc } from "firebase/firestore"; 
 import {db} from '../../firebaseConfig';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { ReactComponent as LoadingSVG } from "../../svgs/loadingSVG.svg";
@@ -21,7 +21,8 @@ function ApplicationStart() {
   const [formLoading, setFormLoading] = useState(null);
   const [transLoading, setTrnasLoading] = useState(null);
   const fetchAuthToken = localStorage.getItem('authToken');
-  const { type } = useParams();
+  const { internType } = useParams();
+  console.log(internType)
   // Create a root reference
   const storage = getStorage();
 
@@ -55,7 +56,8 @@ function ApplicationStart() {
     setSelectedDate(e.target.value);
   };
   
-  const uploadFormToStorage = async (file) => {
+  const uploadFormToStorage = async (e,file) => {
+    e.preventDefault();
     // const imagesRef = ref(storageRef, 'images');
     const storageRef = ref(storage, `${fetchAuthToken}/form/` + file.name);
     const uploadTask = uploadBytesResumable(storageRef, file);
@@ -102,7 +104,8 @@ function ApplicationStart() {
     );
   };
   
-  const uploadTranscriptToStorage = async (file) => {
+  const uploadTranscriptToStorage = async (e,file) => {
+    e.preventDefault();
     // const imagesRef = ref(storageRef, 'images');
     const storageRef = ref(storage, `${fetchAuthToken}/transcript/`+ file.name);
     const uploadTask = uploadBytesResumable(storageRef, file);
@@ -150,7 +153,24 @@ function ApplicationStart() {
   };
 
   const handleSubmit = async (e) => {
-    const submittedData = {
+     e.preventDefault();
+     let submittedData
+    if (internType === 'intern1') {
+      submittedData = {
+          stName: "Khaldoon Khaldi",
+          stNum:"123456789",
+          department: "Software Engineering",
+          intern1: {
+            companyName: companyName,
+            position: position,
+            date: selectedDate,
+            status: "submitted",
+            form:formLink,
+            transcript:transcriptLink? transcriptLink : null,
+            }
+      }
+    }else if (internType === 'intern2'){
+      submittedData = {
         stName: "Khaldoon Khaldi",
         stNum:"123456789",
         department: "Software Engineering",
@@ -158,13 +178,23 @@ function ApplicationStart() {
           companyName: companyName,
           position: position,
           date: selectedDate,
-          status: "pending",
+          status: "submitted",
           form:formLink,
           transcript:transcriptLink? transcriptLink : null,
           }
       }
-    e.preventDefault();
+    }
       await setDoc(doc(db, "internships", fetchAuthToken), submittedData);
+      if (internType === 'intern1') {
+        await updateDoc(doc(db, "users", fetchAuthToken), {
+          intern1: "submitted"
+        });
+      }else if (internType === 'intern2'){
+        await updateDoc(doc(db, "users", fetchAuthToken), {
+          intern2: "submitted"
+        });
+      }
+      console.log(submittedData)
     // Example console log for testing
     // console.log({
     //   stName: "Khaldoon Khaldi",
@@ -191,7 +221,9 @@ function ApplicationStart() {
           </div>
       </div>
       <div className='applyFormCont'>
-        <form className='applyForm' onSubmit={handleSubmit}>
+        <form className='applyForm' 
+          // onSubmit={(e) => handleSubmit(e)}
+        >
           <div>
             <label>Company Name:</label>
             <input type="text" value={companyName} onChange={handleCompanyNameChange} />
@@ -209,7 +241,7 @@ function ApplicationStart() {
             <div className='formUploadCont'>
               <input type="file" accept=".pdf" onChange={handleFormPDFUpload} />
               <button 
-                onClick={() => uploadFormToStorage(formPDF)}
+                onClick={(e) => uploadFormToStorage(e,formPDF)}
                 >
                 Upload
               </button>
@@ -229,7 +261,7 @@ function ApplicationStart() {
               <div className='formUploadCont'>
                 <input type="file" accept=".pdf" onChange={handleTranscriptPDFUpload} />
                 <button 
-                  onClick={() => uploadTranscriptToStorage(transcriptPDF)}
+                  onClick={(e) => uploadTranscriptToStorage(e,transcriptPDF)}
                   >
                   Upload
                 </button>
@@ -237,7 +269,12 @@ function ApplicationStart() {
               </div>
             </div>
           )}
-          <button type="submit">Apply</button>
+          <button 
+            onClick={(e) => handleSubmit(e)}
+            type="submit"
+          >
+              Apply
+          </button>
       </form>
 
       </div>
