@@ -40,7 +40,7 @@ function CoordinatorDashboard() {
           <h1>List of Internships</h1>
         </div>
         <div 
-          classname='coordinatorSelectorSeparator'
+          className='coordinatorSelectorSeparator'
           style={{display:"flex", backgroundColor: "#C8D8D7",height: "5px"}}
         >
         </div>

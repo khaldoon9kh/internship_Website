@@ -1,3 +1,10 @@
+.loadingCont{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  flex-direction: column;
+}
 .internSelectorMainCont {
   display: flex;
   flex-grow: 1;
@@ -101,23 +108,6 @@
   width: 5px;
   height: 80%;
 }
-
-
-/* .admin-button {
-  background-color: #007bff;
-}
-
-.student-button {
-  background-color: #28a745;
-}
-
-.coordinator-button {
-  background-color: #ffc107;
-}
-
-.center-button {
-  background-color: #dc3545;
-} */
 
 .internButton:hover {
   background-color: #C8D8D7;

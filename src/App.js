@@ -5,7 +5,7 @@ import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
 import { db } from './firebaseConfig';
 import HeaderLogin from "../src/component/headerLogin";
 import LoginPage from "../src/container/login";
-import WelcomePage from "../src/container/welcom";
+// import WelcomePage from "../src/container/welcom";
 import SideBar from '../src/component/navSidebar' 
 import Header from '../src/component/header';
 import UserSelector from '../src/container/userSelector'
@@ -40,8 +40,10 @@ function App() {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           const userData = docSnap.data();
-          console.log("User Type:", userData.type);
+          // console.log("User Type:", userData.type);
           localStorage.setItem('userType', userData.type);
+          localStorage.setItem('intern1', userData.intern1);
+          localStorage.setItem('intern2', userData.intern2);
           setUserType(userData.type)
           return userData.type; // Return the user type
         } else {
@@ -129,7 +131,7 @@ function App() {
                 <Route path="/jobOffers" element={<JobOffers/>} />
                 <Route path="/profileForm" element={<ProfileForm />} />
                 <Route path="/coorDash" element={<CoordinatorDashboard />} />
-                <Route path="/internapply" element={<ApplicationStart />} />
+                <Route path="/internapply/:internType" element={<ApplicationStart />} />
                 <Route path="/interndetails/:id" element={<InternshipDetailsContainer />} />
                 {/* <Route path="/welcome" element={<WelcomePage />} /> */}
               </Routes>

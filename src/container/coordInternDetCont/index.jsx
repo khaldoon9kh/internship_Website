@@ -42,7 +42,7 @@ const InternshipDetailsContainer = () => {
             <h1>Internship Details:</h1>
         </div>
           <div 
-            classname='internSelectorSeparator'
+            className='internSelectorSeparator'
             style={{display:"flex", backgroundColor: "#C8D8D7",height: "5px"}}
           >
         </div>
