@@ -21,7 +21,7 @@ function InternSelector() {
     let intern1DATA = null;
     let intern2DATA = null;
     const intern1Ref = doc(db, "internships", token );
-    console.log("token from fetch intern details", token)
+    // console.log("token from fetch intern details", token)
     // const intern2Ref = doc(db, "interns", "intern2");
     try {
       setLoading(true);
@@ -54,8 +54,8 @@ function InternSelector() {
     } catch (e) {
       console.log("Error getting document:", e);
     }
-    console.log("this is intern1", intern1DATA)
-    console.log("this is intern2", intern2DATA)
+    // console.log("this is intern1", intern1DATA)
+    // console.log("this is intern2", intern2DATA)
     if(intern1DATA !== null && intern2DATA !==null){
       setLoading(false);
     }
@@ -97,7 +97,7 @@ function InternSelector() {
       <LoadingComp/>
     )
   }else{
-    console.log("this data after useeffect",internDet2.position)
+    // console.log("this data after useeffect",internDet2.position)
   // console.log(internDet2)
   return (
     <div className="internSelectorMainCont">
@@ -111,33 +111,46 @@ function InternSelector() {
         >
         </div>
         <div className="intenrButtonContainer">
-          {internStatus1 !== "closed" ? 
-            <Link to={"/applicationStatus"} className="internButton firstInternButton">
+          {internStatus1 !== "closed" ?   
+            <div 
+              onClick={() => handleRowClick("intern1")}
+              className="internButton SecondInternButton"
+              >
               <div className='internButtonHeader'>
-                <h1>Summer Practice 1 </h1>
+                <h1>Summer Practice 2</h1>
               </div>
               <div className="buttonSeparator">
               </div>
               <div className='internButtonBody'>
                 <div className='internButtonBody-details'>
-                  <div className='internDetailsCont'>
-                    <h2>Company:</h2>
-                    <h3>Facebook</h3>
-                  </div>
-                  <div className='internDetailsCont'>
-                    <h2>Application Date:</h2>
-                    <h3>12/12/2021</h3>
-                  </div>
+                  {internDet1.companyName 
+                    ?
+                    <div className='internDetailsCont'>
+                      <h2>Company:</h2>
+                      <h3>{internDet1.companyName}</h3>
+                    </div>
+                    :
+                    null
+                  }
+                  {internDet1.date
+                    ?
+                    <div className='internDetailsCont'>
+                      <h2>Application Date:</h2>
+                      <h3>{internDet1.date}</h3>
+                    </div>
+                    :
+                    null
+                  }
                 </div>
                 <div className='internButtonBody-status'>
                   <div className='internStatusCont'>
                     <p>
-                      {internStatus1}
+                      {internStatus2}
                     </p>
                   </div>
                 </div>
               </div>
-            </Link>
+            </div>
           :
           null
           }
