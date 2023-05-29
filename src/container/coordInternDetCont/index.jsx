@@ -10,7 +10,7 @@ import { ReactComponent as CompletedSVG } from "../../svgs/doneCheck.svg";
 
 const InternshipDetailsContainer = () => {
   const [action, setAction] = useState('');
-  const [rejectionReason, setRejectionReason] = useState('');
+  const [rejectionReason, setRejectionReason] = useState(null);
   const [letterPDF, setLetterPDF] = useState(null);
   const [loading, setLoading] = useState(true);
   const [stName, setStName] = useState(null);
@@ -19,6 +19,8 @@ const InternshipDetailsContainer = () => {
   const [internData, setInternData] = useState(null);
   const [letterLoading, setLetterLoading] = useState(null);
   const [letterLink, setLetterLink] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const { id, internType } = useParams();
   const storage = getStorage();
   // console.log(id, internType)
@@ -120,25 +122,62 @@ const InternshipDetailsContainer = () => {
     );
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let submittedData
-      if (internType === 'intern1') {
-        submittedData = {
-            intern1: {
-              status: needsLetter === "yes" ? "Awaitng Letter" : "Awaing Approval",
-              letterLink: letterLink,
-            }
-        }
-      }else if (internType === 'intern2'){
-        submittedData = {
-          intern2: {
-            status: needsLetter === "yes" ? "Awaitng Letter" : "Awaing Approval",
-            letterLink: letterLink,
-          }
-        }
-      }
+  const handleSubmit = async (e) => {
+    if (action === "") {
+      alert("Please select an action");
+    } else if (action === "Reject" && rejectionReason === null) {
+      alert("Please enter a reason for rejection");
+    } else if (action === "Send Letter" && letterPDF === null) {
+      alert("Please upload a letter");
+    } else 
+    {
+      setShowModal(true);
+      setSubmitting(true);
+      e.preventDefault();
+      let status = null;
+      if (action === "Send Letter") 
+      {
+        status = "Letter Uploaded";
+      }else if (action === "Approve") 
+      {
+        status = "Awaiting SGK";
+      }else if (action === "Reject"){
+        status = "Rejected";
+      };
 
+      let submittedData = null;
+        if (internType === 'intern1') {
+          submittedData = {
+              intern1: {
+                ...internData,
+                status: status,
+                letterLink: action === "Send Letter" ? letterLink : null,
+                rejectionReason: action === "Rejected" ? rejectionReason : null,
+              }
+          }
+        }else if (internType === 'intern2'){
+          submittedData = {
+            intern2: {
+              ...internData,
+              status: status,
+              letterLink: action === "Send Letter" ? letterLink : null,
+              rejectionReason: action === "Rejected" ? rejectionReason : null,
+            }
+          }
+      }
+      await updateDoc(doc(db, "internships", id), submittedData);
+      if (internType === 'intern1') {
+        await updateDoc(doc(db, "users", id), {
+          intern1: status
+        });
+        setSubmitting(false);
+      }else if (internType === 'intern2'){
+        await updateDoc(doc(db, "users", id), {
+          intern2: status
+        });
+        setSubmitting(false);
+      }
+    }
     // Handle form submission here
     // You can access the selected action, rejection reason,
     // and uploaded letter PDF in the component's state
@@ -150,6 +189,11 @@ const InternshipDetailsContainer = () => {
       rejectionReason,
       letterPDF,
     });
+  };
+
+  const closeModal = () => {
+    // Close the modal
+    setShowModal(false);
   };
 
 
@@ -171,6 +215,18 @@ const InternshipDetailsContainer = () => {
         </div>
       </div>
       <div className="internMain-container">
+        {showModal && (
+            <div className="modalOverlay">
+              <div className="modalContent">
+                {submitting && (
+                  <LoadingSVG/>
+                  )
+                }
+                <h2>{submitting ? "Updating Application" : "Application Updated!"}</h2>
+                <button onClick={closeModal}>Close</button>
+              </div>
+            </div>
+          )}
         <div className="container-internship-detail">
           <div className="internship-detail">
             <div className="detail-label">Application Date:</div>
@@ -293,54 +349,65 @@ const InternshipDetailsContainer = () => {
                 }
               </div>
             </div>
-            <div className="actionRequiredCont">
-              <label>Action Required:</label>
-              <select value={action} onChange={handleActionChange}>
-                <option value="">Select Action</option>
-                <option value="Approve">Approve</option>
-                <option value="Reject">Reject</option>
-                <option value="Send Letter">Send Letter</option>
-              </select>
-              {action === 'Reject' && (
-                <input
-                  type="text"
-                  value={rejectionReason}
-                  onChange={handleRejectionReasonChange}
-                  placeholder="Reason for rejection"
-                />
-              )}
-              {action === 'Send Letter' && (
-              <div>
-                <label>Upload Transcript PDF:</label>
-                <div className='formUploadCont'>
-                  <input 
-                    className='inputCoord letterInput'
-                    type="file" 
-                    accept=".pdf" 
-                    onChange={handleLetterPDFUpload} 
-                  />
-                  <button 
-                    onClick={(e) => uploadLetterToStorage(e,letterPDF)}
-                  >
-                    Upload
-                  </button>
-                  {letterLoading === null
-                    ? 
-                    null 
-                    : 
-                    letterLoading < 100 
-                    ? 
-                    <LoadingSVG/> 
-                    : 
-                    letterLoading === 100 
-                    ? <CompletedSVG/> 
-                    : 
-                    null}
-                </div>
-              </div>
-              )}
+            <div 
+                className='internSelectorSeparator'
+                style={{display:"flex", backgroundColor: "#C8D8D7",height: "5px"}}
+            >
             </div>
-            <button type="submit" onClick={handleSubmit}>Submit</button>
+            <div className="internship-actions">
+              <div className="actionRequiredCont">
+                <label className='actionLabel'>Action Required:</label>
+                <select value={action} onChange={handleActionChange}>
+                  <option value="">Select Action</option>
+                  <option value="Approve">Approve</option>
+                  <option value="Reject">Reject</option>
+                  <option value="Send Letter">Send Letter</option>
+                </select>
+                {action === 'Reject' && (
+                  <input
+                    className='inputCoord rejectionInput'
+                    type="text"
+                    value={rejectionReason}
+                    onChange={handleRejectionReasonChange}
+                    placeholder="Reason for rejection"
+                  />
+                )}
+                {action === 'Send Letter' && (
+                <div className='letterUploadbox'>
+                  <label>Upload Transcript PDF:</label>
+                  <div className='coordfFormUploadCont'>
+                    <input 
+                      className='inputCoord letterInput'
+                      type="file" 
+                      accept=".pdf" 
+                      onChange={handleLetterPDFUpload} 
+                    />
+                    <button 
+                      className='coordUploadBtn'
+                      onClick={(e) => uploadLetterToStorage(e,letterPDF)}
+                    >
+                      Upload
+                    </button>
+                    {letterLoading === null
+                      ? 
+                      null 
+                      : 
+                      letterLoading < 100 
+                      ? 
+                      <LoadingSVG/> 
+                      : 
+                      letterLoading === 100 
+                      ? <CompletedSVG/> 
+                      : 
+                      null}
+                  </div>
+                </div>
+                )}
+              </div>
+              <button
+                className='coordSubmitBtn'
+              type="submit" onClick={handleSubmit}>Submit</button>
+            </div>
         </div>
       </div>
     </div>

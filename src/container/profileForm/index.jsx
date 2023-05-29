@@ -155,7 +155,7 @@ const ProfileForm = () => {
                 />
             </div>
           </div>
-          <button type="submit">Submit</button>
+          <button className='buttonProfile' type="submit">Submit</button>
         </form>
       </div>
     </div>

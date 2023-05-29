@@ -127,7 +127,7 @@ option{
 
 }
 
-button[type="submit"] {
+.buttonProfile {
   background-color: #183282;
   color: white;
   padding: 12px 20px;
@@ -140,7 +140,7 @@ button[type="submit"] {
   width: '100%'
 }
 
-button[type="submit"]:hover {
+.buttonProfile:hover {
   background-color: #45a049;
 }
   

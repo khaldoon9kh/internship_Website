@@ -7,7 +7,7 @@
 }
 
 
-h1 {
+.announcHeaderCont h1 {
   margin: 0;
   font-size: 24px;
 }
@@ -23,69 +23,30 @@ aside {
   margin-right: 20px;
 }
 
-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-nav li {
-  margin-bottom: 10px;
-}
-
-nav a {
-  display: block;
-  padding: 10px;
-  color: #000;
-  text-decoration: none;
-}
-
-nav a:hover {
-  background-color: #007bff;
-  color: #fff;
-}
-
-button {
-  display: block;
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0069d9;
-}
-
 section {
   flex: 1;
 }
 
-h2 {
+.announcHeaderCont h2 {
   margin-top: 0;
   font-size: 24px;
 }
 
-form {
+.announcForm {
   background-color: #fff;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-label {
+.announcLabel {
   display: block;
   font-weight: bold;
   margin-top: 10px;
   margin-bottom: 5px;
 }
 
-input[type="email"],
-input[type="text"],
-textarea {
+.announcInput {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
@@ -93,7 +54,7 @@ textarea {
   border-radius: 5px;
 }
 
-button[type="submit"] {
+.announcButton {
   padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
@@ -102,6 +63,6 @@ button[type="submit"] {
   cursor: pointer;
 }
 
-button[type="submit"]:hover {
+.announcButton:hover {
   background-color: #0069d9;
 }

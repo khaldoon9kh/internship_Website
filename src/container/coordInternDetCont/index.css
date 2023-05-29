@@ -45,8 +45,8 @@
   margin-top: 20px;
 }
 
-button {
-  margin-top: 20px;
+.coordUploadBtn{
+  margin: 0px 10px;
 }
 .inputCoord{
   width: 210px;
@@ -64,5 +64,40 @@ button {
   flex-direction: column;
 }
 .letterInput{
-  margin-left: 20px;
+  width: 50%;
+}
+.rejectionInput{
+  width: 75%;
+  margin-top: 10px;
+}
+.letterUploadbox{
+  margin: 10px 0px;
+}
+.coordiInput{
+  margin-top: 10px;
+}
+.coordSubmitBtn{
+  width: 75%;
+}
+.internship-actions{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0px;
+}
+.actionRequiredCont, .letterUploadbox{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.actionLabel{
+  margin: 10px 0px;
+}
+.coordfFormUploadCont{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
 }
