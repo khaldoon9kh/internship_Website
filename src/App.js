@@ -42,8 +42,8 @@ function App() {
           const userData = docSnap.data();
           // console.log("User Type:", userData.type);
           localStorage.setItem('userType', userData.type);
-          localStorage.setItem('intern1', userData.intern1);
-          localStorage.setItem('intern2', userData.intern2);
+          // localStorage.setItem('intern1', userData.intern1);
+          // localStorage.setItem('intern2', userData.intern2);
           setUserType(userData.type)
           return userData.type; // Return the user type
         } else {

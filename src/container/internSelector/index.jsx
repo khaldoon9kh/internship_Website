@@ -16,6 +16,7 @@ function InternSelector() {
   const [loading, setLoading] = useState(true);
   // let intern1DATA = null;
   // let intern2DATA = null;
+  const navigate = useNavigate();
 
   const fetchInternsDetails = async (token) => {
     let intern1DATA = null;
@@ -33,6 +34,7 @@ function InternSelector() {
         let internData2 = userData.intern2;
         if(internData1.status !== "closed"){
           setInternDet1(internData1)
+          setInternStatus1(internData1.status);
           intern1DATA = internData1;
           // console.log("this is data 1",intern1newDATA)
         }else{
@@ -40,6 +42,7 @@ function InternSelector() {
         }
         if(internData2.status !== "closed"){
           setInternDet2(internData2)
+          setInternStatus2(internData2.status);
           intern2DATA = internData2;
         }else{
           setInternStatus2("closed");
@@ -80,13 +83,15 @@ function InternSelector() {
     } else {
       navigate('/login');
     }
+    // setInternStatus1(internDet1.status);
+    // setInternStatus2(internDet2.status);
     // console.log("this data after useeffect",intern1DATA)
     // setLoading(false);
   }, []);
 
 
 
-  const navigate = useNavigate();
+  
 
   const handleRowClick = (intern) => {
     navigate(`/internapply/${intern}`);
@@ -116,6 +121,43 @@ function InternSelector() {
               onClick={() => handleRowClick("intern1")}
               className="internButton SecondInternButton"
               >
+              <div className='internButtonHeader'>
+                <h1>Summer Practice 1</h1>
+              </div>
+              <div className="buttonSeparator">
+              </div>
+              <div className='internButtonBody'>
+                <div className='internButtonBody-details'>
+                  {internDet1.companyName 
+                    ?
+                    <div className='internDetailsCont'>
+                      <h2>Company:</h2>
+                      <h3>{internDet1.companyName}</h3>
+                    </div>
+                    :
+                    null
+                  }
+                  {internDet1.date
+                    ?
+                    <div className='internDetailsCont'>
+                      <h2>Application Date:</h2>
+                      <h3>{internDet1.date}</h3>
+                    </div>
+                    :
+                    null
+                  }
+                </div>
+                <div className='internButtonBody-status'>
+                  <div className='internStatusCont'>
+                    <p>
+                      {internStatus1}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          :
+            <div className="internButton SecondInternButton">
               <div className='internButtonHeader'>
                 <h1>Summer Practice 2</h1>
               </div>
@@ -151,8 +193,6 @@ function InternSelector() {
                 </div>
               </div>
             </div>
-          :
-          null
           }
           {internStatus2 !== "closed" ?   
             <div 
