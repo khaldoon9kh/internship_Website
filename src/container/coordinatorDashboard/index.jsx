@@ -64,8 +64,8 @@ function CoordinatorDashboard() {
     // Sort the internships array based on the date in descending order
     internships.sort((a, b) => new Date(b.date) - new Date(a.date));
     
-    const handleRowClick = (id) => {
-      navigate(`/interndetails/${id}`);
+    const handleRowClick = (id,internType) => {
+      navigate(`/interndetails/${id}/${internType}`);
     };
 
   if (loading) {
@@ -101,7 +101,7 @@ function CoordinatorDashboard() {
           {internsData.map((internship, index) => (
             <React.Fragment key={internship.id}>
               {/* Render intern1 */}
-              <tr onClick={() => handleRowClick(internship.id+"intern1")}>
+              <tr onClick={() => handleRowClick(internship.id,"intern1")}>
                 <td>{internship.intern1.status}</td>
                 <td>{internship.intern1.date}</td>
                 <td>{internship.stNum}</td>
@@ -110,7 +110,7 @@ function CoordinatorDashboard() {
               </tr>
 
               {/* Render intern2 */}
-              <tr onClick={() => handleRowClick(internship.id+"intern2")}>
+              <tr onClick={() => handleRowClick(internship.id,"intern2")}>
                 <td>{internship.intern2.status}</td>
                 <td>{internship.intern2.date}</td>
                 <td>{internship.stNum}</td>

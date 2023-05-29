@@ -132,7 +132,7 @@ function App() {
                 <Route path="/profileForm" element={<ProfileForm />} />
                 <Route path="/coorDash" element={<CoordinatorDashboard />} />
                 <Route path="/internapply/:internType" element={<ApplicationStart />} />
-                <Route path="/interndetails/:id" element={<InternshipDetailsContainer />} />
+                <Route path="/interndetails/:id/:internType" element={<InternshipDetailsContainer />} />
                 {/* <Route path="/welcome" element={<WelcomePage />} /> */}
               </Routes>
               </div>
