@@ -34,6 +34,7 @@ function InternSelector() {
         let internData2 = userData.intern2;
         if(internData1.status !== "closed"){
           setInternDet1(internData1)
+          setInternStatus1(internData1.status);
           intern1DATA = internData1;
           // console.log("this is data 1",intern1newDATA)
         }else{
@@ -41,6 +42,7 @@ function InternSelector() {
         }
         if(internData2.status !== "closed"){
           setInternDet2(internData2)
+          setInternStatus2(internData2.status);
           intern2DATA = internData2;
         }else{
           setInternStatus2("closed");
@@ -81,6 +83,8 @@ function InternSelector() {
     } else {
       navigate('/login');
     }
+    // setInternStatus1(internDet1.status);
+    // setInternStatus2(internDet2.status);
     // console.log("this data after useeffect",intern1DATA)
     // setLoading(false);
   }, []);
@@ -118,7 +122,7 @@ function InternSelector() {
               className="internButton SecondInternButton"
               >
               <div className='internButtonHeader'>
-                <h1>Summer Practice 2</h1>
+                <h1>Summer Practice 1</h1>
               </div>
               <div className="buttonSeparator">
               </div>
@@ -146,7 +150,7 @@ function InternSelector() {
                 <div className='internButtonBody-status'>
                   <div className='internStatusCont'>
                     <p>
-                      {internStatus2}
+                      {internStatus1}
                     </p>
                   </div>
                 </div>

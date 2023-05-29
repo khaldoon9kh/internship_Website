@@ -11,22 +11,24 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 
 function ApplicationStart() {
-  const [companyName, setCompanyName] = useState('');
-  const [position, setPosition] = useState('');
+  const [companyName, setCompanyName] = useState(null);
+  const [position, setPosition] = useState(null);
   const [needsLetter, setNeedsLetter] = useState('no');
   const [formPDF, setFormPDF] = useState(null);
   const [transcriptPDF, setTranscriptPDF] = useState(null);
-  const [selectedDate, setSelectedDate] = useState('');
-  const [formLink, setFormLink] = useState('');
-  const [transcriptLink, setTranscriptLink] = useState('');
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [formLink, setFormLink] = useState(null);
+  const [transcriptLink, setTranscriptLink] = useState(null);
   const [formLoading, setFormLoading] = useState(null);
   const [transLoading, setTrnasLoading] = useState(null);
   const [loading, setLoading] = useState(false);
   const [internData, setInternData] = useState(null);
   const [readOnly, setReadOnly] = useState(false)
+  const [showModal, setShowModal] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const fetchAuthToken = localStorage.getItem('authToken');
   const { internType } = useParams();
-  console.log(internType)
+  // console.log(internType)
   // Create a root reference
   const storage = getStorage();
   const navigate = useNavigate();
@@ -181,7 +183,7 @@ function ApplicationStart() {
     (snapshot) => {
       // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-
+      setTrnasLoading(progress);
       console.log('Upload is ' + progress + '% done');
       switch (snapshot.state) {
         case 'paused':
@@ -221,57 +223,63 @@ function ApplicationStart() {
 
   const handleSubmit = async (e) => {
      e.preventDefault();
+     setShowModal(true);
+     setSubmitting(true);
      let submittedData
-    if (internType === 'intern1') {
-      submittedData = {
-          stName: "Khaldoon Khaldi",
-          stNum:"123456789",
-          department: "Software Engineering",
-          intern1: {
-            companyName: companyName,
-            position: position,
-            date: selectedDate,
-            status: "submitted",
-            formLink:formLink,
-            transcript:transcriptLink? transcriptLink : null,
-            }
-      }
-    }else if (internType === 'intern2'){
-      submittedData = {
-        stName: "Khaldoon Khaldi",
-        stNum:"123456789",
-        department: "Software Engineering",
-        intern2: {
-          companyName: companyName,
-          position: position,
-          date: selectedDate,
-          status: "submitted",
-          formLink:formLink,
-          transcript:transcriptLink? transcriptLink : null,
+     if (companyName ==null || position == null || selectedDate == null || needsLetter == null || formLink == null || transcriptLink == null) {
+      // alert("Please fill all the fields")
+      console.log("Please fill all the fields")
+      }else{
+        
+        if (internType === 'intern1') {
+          submittedData = {
+              stName: "Khaldoon Khaldi",
+              stNum:"123456789",
+              department: "Software Engineering",
+              intern1: {
+                companyName: companyName,
+                position: position,
+                date: selectedDate,
+                status: needsLetter === "yes" ? "Awaitng Letter" : "Awaing Approval",
+                formLink:formLink,
+                transcriptLink: transcriptLink,
+                requestLetter: needsLetter
+                }
           }
+        }else if (internType === 'intern2'){
+          submittedData = {
+            stName: "Khaldoon Khaldi",
+            stNum:"123456789",
+            department: "Software Engineering",
+            intern2: {
+              companyName: companyName,
+              position: position,
+              date: selectedDate,
+              status: needsLetter === "yes" ? "Awaitng Letter" : "Awaing Approval",
+              formLink:formLink,
+              transcriptLink:transcriptLink,
+              }
+          }
+        }
+        await updateDoc(doc(db, "internships", fetchAuthToken), submittedData);
+        if (internType === 'intern1') {
+          await updateDoc(doc(db, "users", fetchAuthToken), {
+            intern1: "submitted"
+          });
+          setSubmitting(false);
+        }else if (internType === 'intern2'){
+          await updateDoc(doc(db, "users", fetchAuthToken), {
+            intern2: "submitted"
+          });
+          setSubmitting(false);
+        }
+       
       }
-    }
-      await setDoc(doc(db, "internships", fetchAuthToken), submittedData);
-      if (internType === 'intern1') {
-        await updateDoc(doc(db, "users", fetchAuthToken), {
-          intern1: "submitted"
-        });
-      }else if (internType === 'intern2'){
-        await updateDoc(doc(db, "users", fetchAuthToken), {
-          intern2: "submitted"
-        });
-      }
-      console.log(submittedData)
-    // Example console log for testing
-    // console.log({
-    //   stName: "Khaldoon Khaldi",
-    //   stNum:"123456789",
-    //   companyName,
-    //   position,
-    //   needsLetter,
-    //   formPDF,
-    //   transcriptPDF,
-    // });
+  };
+
+  const closeModal = () => {
+    // Close the modal
+    setShowModal(false);
   };
 
   if (loading || internData===null) {
@@ -292,6 +300,19 @@ function ApplicationStart() {
             >
             </div>
         </div>
+        {showModal && (
+          <div className="modalOverlay">
+            <div className="modalContent">
+              {submitting && (
+                <LoadingSVG/>
+                )
+              }
+              <h2>{submitting ? "Uploading Application" : "Form Submitted!"}</h2>
+              { !submitting ? <p>Thank you for submitting the form.</p> : null}
+              <button onClick={closeModal}>Close</button>
+            </div>
+          </div>
+        )}
         <div className='applyFormCont'>
           <form className='applyForm' 
             // onSubmit={(e) => handleSubmit(e)}
@@ -414,7 +435,7 @@ function ApplicationStart() {
               :
               null
             }
-            {internData.transcriptLink
+            {readOnly && internData.transcriptLink
               ?
               <div>
                 <label>
@@ -430,7 +451,29 @@ function ApplicationStart() {
                 </div>
               </div>
               :
-              null
+              <div>
+                <label>Upload Transcript PDF:</label>
+                <div className='formUploadCont'>
+                  <input type="file" accept=".pdf" onChange={handleTranscriptPDFUpload} />
+                  <button 
+                    onClick={(e) => uploadTranscriptToStorage(e,transcriptPDF)}
+                    >
+                    Upload
+                  </button>
+                  {transLoading === null
+                    ? 
+                    null 
+                    : 
+                    transLoading < 100 
+                    ? 
+                    <LoadingSVG/> 
+                    : 
+                    transLoading === 100 
+                    ? <CompletedSVG/> 
+                    : 
+                    null}
+                </div>
+              </div>
             }
             {internData.letterLink 
               ?
@@ -444,20 +487,7 @@ function ApplicationStart() {
                 </select>
               </div>
             }
-            {needsLetter === 'yes' && (
-              <div>
-                <label>Upload Transcript PDF:</label>
-                <div className='formUploadCont'>
-                  <input type="file" accept=".pdf" onChange={handleTranscriptPDFUpload} />
-                  <button 
-                    onClick={(e) => uploadTranscriptToStorage(e,transcriptPDF)}
-                    >
-                    Upload
-                  </button>
-                  {transLoading === null? null : transLoading < 100 ? <LoadingSVG/> : transLoading === 100 ? <CompletedSVG/> : null}
-                </div>
-              </div>
-            )}
+            
             {readOnly
               ?
               null
@@ -470,7 +500,6 @@ function ApplicationStart() {
               </button>
             }
         </form>
-
         </div>
       </div>  
     )
