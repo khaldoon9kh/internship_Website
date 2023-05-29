@@ -243,7 +243,7 @@ function ApplicationStart() {
                 status: needsLetter === "yes" ? "Awaitng Letter" : "Awaing Approval",
                 formLink:formLink,
                 transcriptLink: transcriptLink,
-                requestLetter: needsLetter
+                needsLetter: needsLetter
                 }
           }
         }else if (internType === 'intern2'){
@@ -258,6 +258,7 @@ function ApplicationStart() {
               status: needsLetter === "yes" ? "Awaitng Letter" : "Awaing Approval",
               formLink:formLink,
               transcriptLink:transcriptLink,
+              needsLetter: needsLetter
               }
           }
         }
@@ -372,51 +373,6 @@ function ApplicationStart() {
                 onChange={handleDateChange} 
               />
             </div>
-            <div>
-              <label>
-                {readOnly ? "Application Form:" : "Upload Form PDF:"}
-              </label>
-              <div className='formUploadCont'>
-                {readOnly && internData.formLink
-                  ?
-                    <a 
-                      href={internData.formLink}
-                      target="_blank"
-                    >
-                      {internData.formLink ? "Form Link" : "No File Uploaded"}
-                    </a>
-                  :
-                  <>
-                    <input 
-                      type="file" 
-                      accept=".pdf" 
-                      // readOnly={readOnly}
-                      onChange={handleFormPDFUpload} 
-                    />
-                    <button 
-                      onClick={(e) => uploadFormToStorage(e,formPDF)}
-                      >
-                      Upload
-                    </button>
-                    {formLoading === null
-                      ? 
-                      null 
-                      : 
-                      formLoading < 100 
-                      ? 
-                      <LoadingSVG/> 
-                      : 
-                      formLoading === 100 
-                      ? 
-                      <CompletedSVG/> 
-                      : 
-                      null
-                    }
-                  </>
-                  
-                }
-              </div>
-            </div>
             {readOnly && internData.letterLink
               ?
               <div>
@@ -486,6 +442,56 @@ function ApplicationStart() {
                   <option value="no">No</option>
                 </select>
               </div>
+            }
+            {needsLetter === "no" || needsLetter === "submitted"
+              ? 
+              <div>
+                <label>
+                  {readOnly ? "Application Form:" : "Upload Form PDF:"}
+                </label>
+                <div className='formUploadCont'>
+                  {readOnly && internData.formLink
+                    ?
+                      <a 
+                        href={internData.formLink}
+                        target="_blank"
+                      >
+                        {internData.formLink ? "Form Link" : "No File Uploaded"}
+                      </a>
+                    :
+                    <>
+                      <input 
+                        type="file" 
+                        accept=".pdf" 
+                        // readOnly={readOnly}
+                        onChange={handleFormPDFUpload} 
+                      />
+                      <button 
+                        onClick={(e) => uploadFormToStorage(e,formPDF)}
+                        >
+                        Upload
+                      </button>
+                      {formLoading === null
+                        ? 
+                        null 
+                        : 
+                        formLoading < 100 
+                        ? 
+                        <LoadingSVG/> 
+                        : 
+                        formLoading === 100 
+                        ? 
+                        <CompletedSVG/> 
+                        : 
+                        null
+                      }
+                    </>
+                    
+                  }
+                </div>
+              </div>
+              :
+              null
             }
             
             {readOnly
