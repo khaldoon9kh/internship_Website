@@ -22,19 +22,21 @@ import AdminDashboard from "../src/container/adminDashboard";
 import ApplicationStart from '../src/container/applicationStart';
 import InternshipDetailsContainer from "./container/coordInternDetCont";
 import CareerInternDetailsContainer from "./container/careerinternDetCont";
+import LoadingComp from './container/loadingComp';
+import LogOut from './container/logOut';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [logedIn, setLogedIn] = useState(false);
-  const [authToken, setAuthToken] = useState(localStorage.getItem('authToken'));
+  const [authToken, setAuthToken] = useState(null);
   const [userType, setUserType] = useState(null)
   
   useEffect(() => {
     const fetchAuthToken = localStorage.getItem('authToken');
-    setAuthToken(fetchAuthToken);
-    console.log("this is authToken", authToken )
+    const fetchLoggedIn = localStorage.getItem('logedIn');
+    // console.log("this is authToken", authToken )
     const getUserTypeById = async (userId) => {
       try {
         const docRef = doc(db, "users", userId);
@@ -57,14 +59,15 @@ function App() {
       }
     };
     if (fetchAuthToken) {
-      const userType = getUserTypeById(authToken);
+      getUserTypeById(fetchAuthToken);
+      setAuthToken(fetchAuthToken);
       // Authentication token exists in localStorage, do something with it
-      setLogedIn(true)
+      setLogedIn(fetchLoggedIn)
+      setLoading(false);
     } else {
       // Authentication token does not exist in localStorage
       setLogedIn(false)
     }
-    setLoading(false);
   }, [])
 
 
@@ -83,7 +86,11 @@ function App() {
   }else{
     if (loading || userType === null || authToken === null) {
       // Show a loading indicator while the check is in progress
-      return <div>Loading...</div>;
+      return (
+        <div className="wrapper_Loading">
+          <LoadingComp />
+        </div>
+      );
     }else{
       return (  
         <Router>
@@ -136,6 +143,9 @@ function App() {
                 <Route path="/internapply/:internType" element={<ApplicationStart />} />
                 <Route path="/careerintern/:id/:internType" element={<CareerInternDetailsContainer />} />
                 <Route path="/interndetails/:id/:internType" element={<InternshipDetailsContainer />} />
+                <Route path="/" element={<UserSelector />} />
+                <Route path="/login/:userType" element={<LoginPage />} />
+                <Route path="/logout" element={<LogOut />} />
                 {/* <Route path="/welcome" element={<WelcomePage />} /> */}
               </Routes>
               </div>

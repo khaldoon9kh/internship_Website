@@ -68,18 +68,21 @@ function InternSelector() {
 
   useEffect(() => {
     const fetchAuthToken = localStorage.getItem('authToken');
-    setAuthToken(fetchAuthToken);
-    const fetchInternstatus1 = localStorage.getItem('intern1');
-    const fetchInternstatus2 = localStorage.getItem('intern2');
+    const fetchUserType = localStorage.getItem('userType');
+
+    // const fetchInternstatus1 = localStorage.getItem('intern1');
+    // const fetchInternstatus2 = localStorage.getItem('intern2');
     // console.log(fetchAuthToken)
-    setAuthToken(fetchAuthToken);
     // console.log("this is authToken", authToken )
-    if (fetchAuthToken) {
+    if (!fetchAuthToken) {
+      navigate(`/`);
+    }else if(fetchUserType !== "student"){
+      navigate(`/`);
+    }{
       fetchInternsDetails(fetchAuthToken);
-      setInternStatus1(fetchInternstatus1);
-      setInternStatus2(fetchInternstatus2);
-    } else {
-      navigate('/login');
+      setAuthToken(fetchAuthToken);
+      // setInternStatus1(fetchInternstatus1);
+      // setInternStatus2(fetchInternstatus2);
     }
     // setInternStatus1(internDet1.status);
     // setInternStatus2(internDet2.status);

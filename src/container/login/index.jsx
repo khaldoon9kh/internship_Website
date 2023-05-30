@@ -12,7 +12,7 @@ function LoginPage() {
   const [errorMessage, setErrorMessage] = useState('');
   const { userType } = useParams();
   const navigate = useNavigate();
-  console.log(userType)
+  // console.log(userType)
 
   function handleUsernameChange(event) {
     setUsername(event.target.value);
@@ -31,8 +31,9 @@ function LoginPage() {
       .then((userCredential) => {
         // Signed in 
         const userID = userCredential.user.uid;
-        console.log(userID)
+        // console.log(userID)
         localStorage.setItem('authToken', userID);
+        localStorage.setItem('logedIn', true);
         navigate('/dashboard');
         window.location.reload();
       })
@@ -41,8 +42,10 @@ function LoginPage() {
         const errorMessage = error.message;
         console.log(errorMessage)
         setErrorMessage("Your email or password are incorrect"); // Update error message state
+        // alert("Your email or password are incorrect")
       });
   }
+
 
 
   return (

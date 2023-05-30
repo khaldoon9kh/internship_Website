@@ -1,0 +1,70 @@
+.user-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: whitesmoke;
+  height: 85vh;
+}
+.usersContain{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  height: 95%;
+  border-radius: 10px;
+  background-color: white;
+  flex-direction: column;
+}
+
+.button-container {
+  /* background-color: orange; */
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 40px;
+  width: 50%;
+}
+
+.selectorHeader{
+  font-family: 'DM Sans';
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  width: 100%;
+  border: 1px solid #09B3AD;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'DM Sans';
+  color: black;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin: 5px 0;
+  transition: background-color 0.3s ease;
+}
+
+/* .admin-button {
+  background-color: #007bff;
+}
+
+.student-button {
+  background-color: #28a745;
+}
+
+.coordinator-button {
+  background-color: #ffc107;
+}
+
+.center-button {
+  background-color: #dc3545;
+} */
+
+.button:hover {
+  background-color: #09B3AD;
+}

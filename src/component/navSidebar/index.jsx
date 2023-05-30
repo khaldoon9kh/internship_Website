@@ -52,7 +52,7 @@ function SideBar({userType, authToken}) {
             <NotificationLogo/>
             Application status
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to="/profileForm"
             className={({ isActive, isPending }) =>
               isPending ? "navbar-container" : isActive ? "navbar-container" : ""
@@ -61,7 +61,7 @@ function SideBar({userType, authToken}) {
           >
             <MailLogo/>
             Mail
-          </NavLink>
+          </NavLink> */}
           <NavLink
             to="/jobOffers"
             className={({ isActive, isPending }) =>
@@ -70,9 +70,9 @@ function SideBar({userType, authToken}) {
             // className="navbar-container"
           >
             <JobCenter/>
-            Career center
+            Internships Center
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to="/profileForm"
             className={({ isActive, isPending }) =>
               isPending ? "navbar-container" : isActive ? "navbar-container" : ""
@@ -81,9 +81,9 @@ function SideBar({userType, authToken}) {
           >
             <NotLogo/>
             Notification
-          </NavLink>
+          </NavLink> */}
           <NavLink
-            to="/profileForm"
+            to="/logOut"
             className={({ isActive, isPending }) =>
               isPending ? "navbar-container" : isActive ? "navbar-container" : ""
             }
