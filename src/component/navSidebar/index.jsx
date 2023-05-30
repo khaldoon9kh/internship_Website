@@ -38,17 +38,17 @@ function SideBar() {
     return (
       <div className="sideMainCont">
         <div className="navItemsCont-top">
-          { userType === "student"
+          { userType === "student" || userType === "admin"
           ?
             <NavLink
-            to="/profileForm"
+            to= {userType === "student" ? "/profileForm" : "/adminPanel"}
             className={({ isActive, isPending }) =>
               isPending ? "navbar-container" : isActive ? "navbar-container" : ""
             }
             // className="navbar-container"
           >
             <ProfileLogo/>
-            Profile
+            {userType === "student" ? "Profile" : "Admin Panel"}
           </NavLink>
           :
           null
