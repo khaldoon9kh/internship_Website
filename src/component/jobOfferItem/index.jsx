@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ReactComponent as LocationLogo } from "../../svgs/MapPinLine.svg";
 import { ReactComponent as TimeLogo } from "../../svgs/Clock.svg";
-import { ReactComponent as Calender } from "../../svgs/calendar.svg";
+import { ReactComponent as Calender } from "../../svgs/Calendar.svg";
 import './index.css'
 
 
-const JobOfferItem = () => {
-  
+const JobOfferItem = ({jobOffer}) => {
   return (
       <div class="job-offer-item">
         <div class="logo-container">
@@ -16,27 +15,25 @@ const JobOfferItem = () => {
         </div>
         <div class="job-description">
           <div class="company-name">
-            <h4>Facebook</h4>
-            <h2>Content controller</h2>
+            <h4>{jobOffer.companyName}</h4>
+            <h2>{jobOffer.position}</h2>
           </div>
           <div class="location-time">
             <div className='info-cont'>
               <LocationLogo/>
-              <p>Istanbul</p>
+              <p>{jobOffer.location}</p>
             </div>
             <div className='info-cont'>
               <TimeLogo/>
-              <p>Full time</p>
+              <p>{jobOffer.duration}</p>
             </div>
             <div className='info-cont'>
               <Calender/>
-              <p>30 mins ago</p>
+              <p>{jobOffer.date}</p>
             </div>
           </div>
           <div>
-            <p>As HOP Health Platform, we aim to be a leading online platform in health issues. We are looking for a content editor to create, edit and publish health related content.
-                In this role, you will produce informative, reliable and impressive content on health-related topics, edit posts and develop content strategies to improve the quality of our platform.
-            </p>
+            <p>{jobOffer.description}</p>
           </div>
           
         </div>

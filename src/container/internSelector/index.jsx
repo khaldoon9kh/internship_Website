@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ReactComponent as CalendarSVG } from "../../svgs/calendar.svg";
-import { ReactComponent as LoadingSVG } from "../../svgs/loadingSVG.svg";
 import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
 import LoadingComp from '../loadingComp';
 import { db } from '../../firebaseConfig';
