@@ -1,6 +1,5 @@
   .job-offer-item {
     display: flex;
-    flex-grow: 5;
     background-color: white;
     /* width: 970px; */
     padding: 10px;
@@ -29,7 +28,7 @@
   .info-cont p{
     margin: 0px;
   }
-  
+
   .logo {
     margin-right: 12px;   
   }
@@ -38,11 +37,11 @@
     height:auto;
     
   }
-  
+
   .company-name h2, .company-name h4 {
     margin: 0px;
   }
-  
+
   .job-description {
   }
 
@@ -61,8 +60,7 @@
     cursor: pointer;
     margin-top: 10px;
   }
-  
+
   button:hover {
     background-color: #0052a3;
   }
- 
