@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { db } from "../../firebaseConfig";
 import { doc, setDoc, getDoc, collection, query, where, getDocs } from "firebase/firestore";
+import { ReactComponent as LoadingSVG } from "../../svgs/loadingSVG.svg";
+import { ReactComponent as CompletedSVG } from "../../svgs/doneCheck.svg";
 import './index.css'
 
 const AdminPanel = () => {
-  const [intenrEmail, setInternEmail] = useState('');
-  const [careerEmail, setCareerEmail] = useState('');
   const [careerCenterEmail, setCareerCenterEmail] = useState('');
   const [internshipCoordinatorEmail, setInternshipCoordinatorEmail] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const auth = getAuth();
   
   const getUserTypeById = async (userEmail,userType,_password) => {
@@ -25,6 +27,7 @@ const AdminPanel = () => {
           const userObject = newArray.find(user => user.email === userEmail);
           editUserType(userObject.id, userType, userEmail);
         });
+        setSubmitting(false);
         // console.log("find user")
       }else{
         console.log("notFind user")
@@ -34,12 +37,13 @@ const AdminPanel = () => {
           const userData = userCredential.user;
           // console.log(userData.uid)
           editUserType(userData.uid, userType, userEmail)
-
+          setSubmitting(false);
           // ...
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
+          setSubmitting(false);
           // ..
         });
         // console.log("No such document!");
@@ -71,6 +75,7 @@ const AdminPanel = () => {
       // }
     } catch (error) {
       console.log("Error retrieving user type:", error);
+      setSubmitting(true);
     }
   };
   const editUserType = async (authToken, userType, email ) => {
@@ -78,32 +83,56 @@ const AdminPanel = () => {
     await setDoc(profileRef, {type: userType, email: email}, { merge: true });
   }
   
-  // const handleCareerCenterEmailChange = (e) => {
-  //   setCareerCenterEmail(e.target.value);
-  // };
-
-  // const handleInternshipCoordinatorEmailChange = (e) => {
-  //   setInternshipCoordinatorEmail(e.target.value);
-  // };
 
   const handleCareerCenterSubmit = (e) => {
-    e.preventDefault();
-    const _tempPassword = "123456"
-    getUserTypeById(careerCenterEmail,"careerCenter",_tempPassword)
-    // Perform any necessary actions with the career center email
-    // console.log('Career Center Email:', careerCenterEmail);
+    if (careerCenterEmail === '') {
+      alert('Please enter a valid email address.');
+    }else{
+      setShowModal(true);
+      setSubmitting(true);
+      e.preventDefault();
+      const _tempPassword = "123456"
+      getUserTypeById(careerCenterEmail,"careerCenter",_tempPassword)
+      // Perform any necessary actions with the career center email
+      // console.log('Career Center Email:', careerCenterEmail);
+    }
+
   };
 
   const handleInternshipCoordinatorSubmit = (e) => {
-    e.preventDefault();
-    const _tempPassword = "123456";
-    console.log(internshipCoordinatorEmail)
-    getUserTypeById(internshipCoordinatorEmail,"coordinator",_tempPassword)
-    // Perform any necessary actions with the internship coordinator email
+    if (internshipCoordinatorEmail === '') {
+      alert('Please enter a valid email address.');
+    }else{
+      setShowModal(true);
+      setSubmitting(true);
+      e.preventDefault();
+      const _tempPassword = "123456";
+      console.log(internshipCoordinatorEmail)
+      getUserTypeById(internshipCoordinatorEmail,"coordinator",_tempPassword)
+      // Perform any necessary actions with the internship coordinator email
+    }
+  };
+
+  const closeModal = () => {
+    // Close the modal
+    setShowModal(false);
   };
 
   return (
     <div className="admin-panel-outerContainer">
+      {showModal && (
+          <div className="modalOverlay">
+            <div className="modalContent">
+              {submitting && (
+                <LoadingSVG/>
+                )
+              }
+              <h2>{submitting ? "Uploading Application" : "Form Submitted!"}</h2>
+              { !submitting ? <p>Thank you for submitting the form.</p> : null}
+              <button onClick={closeModal}>Close</button>
+            </div>
+          </div>
+        )}
        <div className="userTypeForm">
         <div className='page-info-container'>
           <h2 className='page-info-txt1'>
