@@ -20,6 +20,10 @@ const JobOffers = () => {
       querySnapshot.forEach((doc) => {
         jobOffers.push({ id: doc.id, ...doc.data() });
       });
+
+    // Sort the internships array based on the date in descending order
+    jobOffers.sort((a, b) => new Date(b.datepicker) - new Date(a.datepicker)).reverse();
+
       setjobOffersDATA(jobOffers);
     } catch (e) 
     {
