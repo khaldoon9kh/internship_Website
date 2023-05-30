@@ -1,10 +1,20 @@
 import React, { useState } from 'react';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { db } from "../../firebaseConfig";
+import { doc, setDoc } from "firebase/firestore";
+
 import "./index.css";
 
 const AdminDashboard = () => {
   const [careerCenterEmail, setCareerCenterEmail] = useState('');
   const [internshipCoordinatorEmail, setInternshipCoordinatorEmail] = useState('');
-
+  const auth = getAuth();
+  
+  const editUserType = async (authToken, userType ) => {
+    const profileRef = doc(db, 'users', authToken);
+    await setDoc(profileRef, {type: userType}, { merge: true });
+  }
+  
   const handleCareerCenterEmailChange = (e) => {
     setCareerCenterEmail(e.target.value);
   };
@@ -15,14 +25,42 @@ const AdminDashboard = () => {
 
   const handleCareerCenterSubmit = (e) => {
     e.preventDefault();
+
+    const _tempPassword = "123456";
+    createUserWithEmailAndPassword(auth, careerCenterEmail, _tempPassword)
+    .then((userCredential) => {
+      // Signed in 
+      const userData = userCredential.user;
+      console.log(userData.uid)
+      editUserType(userData.uid, "careerCenter")
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // ..
+    });
     // Perform any necessary actions with the career center email
-    console.log('Career Center Email:', careerCenterEmail);
+    // console.log('Career Center Email:', careerCenterEmail);
   };
 
   const handleInternshipCoordinatorSubmit = (e) => {
     e.preventDefault();
+    const _tempPassword = "123456";
+    createUserWithEmailAndPassword(auth, internshipCoordinatorEmail, _tempPassword)
+    .then((userCredential) => {
+      // Signed in 
+      const userData = userCredential.user;
+      console.log(userData.uid)
+      editUserType(userData.uid, "coordinator")
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // ..
+    });
     // Perform any necessary actions with the internship coordinator email
-    console.log('Internship Coordinator Email:', internshipCoordinatorEmail);
   };
 
   return (
