@@ -88,7 +88,7 @@
 
 
   
-label {
+.labelProfile {
   margin-bottom: 10px;
   font-size: 14px;
   font-family: 'DM Sans';
@@ -96,7 +96,7 @@ label {
   color: #7C7C8D;
 }
 
-input {
+.inputProfile {
   padding: 10px;
   border-radius: 4px;
   border: 1px solid #E9EAEC;
@@ -106,7 +106,6 @@ input {
   font-family: 'DM Sans';
   font-weight: 700;
   text-align: left;
-
 }
 
 select{
@@ -128,7 +127,7 @@ option{
 
 }
 
-button[type="submit"] {
+.buttonProfile {
   background-color: #183282;
   color: white;
   padding: 12px 20px;
@@ -141,7 +140,7 @@ button[type="submit"] {
   width: '100%'
 }
 
-button[type="submit"]:hover {
+.buttonProfile:hover {
   background-color: #45a049;
 }
   

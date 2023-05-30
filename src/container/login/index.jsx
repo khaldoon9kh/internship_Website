@@ -58,10 +58,11 @@ function LoginPage() {
               </div>
             )}
             <div className="input-group">
-              <label for="username">
+              <label className='lableLogin' for="username">
                 Email:
               </label>
                 <input 
+                  className='inputLogin'
                   id='username' 
                   type="text" 
                   value={username} 
@@ -70,10 +71,11 @@ function LoginPage() {
                 />
             </div>
             <div className="input-group">
-              <label for="password">
+              <label className='lableLogin' for="password">
                 Password:
               </label>
                 <input 
+                  className='inputLogin'
                   type="password" 
                   placeholder='Use your OBS password'
                   value={password} 
@@ -81,7 +83,7 @@ function LoginPage() {
                 />
             </div>
             <div className="input-group">
-              <button type="submit">Login</button>
+              <button className='buttonLogin' type="submit">Login</button>
             </div>
           </form>
         </div>

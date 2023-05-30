@@ -37,10 +37,11 @@ const ProfileForm = () => {
         <form onSubmit={handleFormSubmit}>
           <div className="profile-form-first">
             <div className="input-group">
-              <label htmlFor="username">
+              <label className='labelProfile' htmlFor="username">
                 Name:
               </label>
               <input
+                className='inputProfile'
                 id='username' 
                 type="text" 
                 placeholder="First Name" 
@@ -49,10 +50,11 @@ const ProfileForm = () => {
               />
             </div>
             <div className="input-group">
-              <label htmlFor="lastName">
+              <label className='labelProfile' htmlFor="lastName">
                 Surname:
               </label>
               <input 
+                className='inputProfile'
                 id='lastName'
                 type="text" 
                 placeholder="Last Name" 
@@ -61,7 +63,7 @@ const ProfileForm = () => {
               />
             </div>
             <div className="input-group">
-              <label htmlFor="faculty">
+              <label className='labelProfile' htmlFor="faculty">
                 Faculty
               </label>
               <select 
@@ -78,7 +80,7 @@ const ProfileForm = () => {
               </select>
             </div>
             <div className="input-group">
-              <label htmlFor="department">
+              <label className='labelProfile' htmlFor="department">
                 Department
               </label>
               <select 
@@ -96,7 +98,7 @@ const ProfileForm = () => {
               </select>
             </div>
             <div className="input-group">
-              <label htmlFor="grade">
+              <label className='labelProfile' htmlFor="grade">
                 Grade
               </label>
               <select 
@@ -115,10 +117,11 @@ const ProfileForm = () => {
           </div>
           <div className="profile-form-second">
             <div className="input-group">
-              <label htmlFor="email">
+              <label className='labelProfile' htmlFor="email">
                 Email Address
               </label>
               <input 
+                className='inputProfile'
                 htmlFor='email'
                 type="email" 
                 placeholder="Email Address" 
@@ -127,10 +130,11 @@ const ProfileForm = () => {
               />
             </div>
             <div className="input-group">
-              <label htmlFor="universityEmail">
+              <label className='labelProfile' htmlFor="universityEmail">
                 University Email
               </label>
               <input 
+                className='inputProfile'
                 type="email" 
                 placeholder="University Email" 
                 value={universityEmail} 
@@ -138,10 +142,11 @@ const ProfileForm = () => {
               />
             </div>
             <div className="input-group">
-              <label htmlFor="phoneNumber">
+              <label className='labelProfile' htmlFor="phoneNumber">
                 Phone Number
               </label>
               <input 
+                className='inputProfile'
                 id='phoneNumber'
                 type="tel" 
                 placeholder="Phone Number" 
@@ -150,7 +155,7 @@ const ProfileForm = () => {
                 />
             </div>
           </div>
-          <button type="submit">Submit</button>
+          <button className='buttonProfile' type="submit">Submit</button>
         </form>
       </div>
     </div>

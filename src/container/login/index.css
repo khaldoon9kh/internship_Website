@@ -61,7 +61,7 @@
   }
   
   
-  label {
+  .lableLogin {
     margin-bottom: 10px;
     font-size: 16px;
   }
@@ -74,7 +74,7 @@
     max-width: 100%;
   }
   
-  button[type="submit"] {
+  .buttonLogin {
     background-color: #2A62B7;
     color: white;
     padding: 12px 20px;
@@ -87,7 +87,7 @@
     width: '100%'
   }
   
-  button[type="submit"]:hover {
+  .buttonLogin:hover {
     background-color: #45a049;
   }
   

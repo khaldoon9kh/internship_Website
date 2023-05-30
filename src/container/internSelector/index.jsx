@@ -122,7 +122,7 @@ function InternSelector() {
               className="internButton SecondInternButton"
               >
               <div className='internButtonHeader'>
-                <h1>Summer Practice 1</h1>
+                <h2>Summer Practice 1</h2>
               </div>
               <div className="buttonSeparator">
               </div>
@@ -157,42 +157,7 @@ function InternSelector() {
               </div>
             </div>
           :
-            <div className="internButton SecondInternButton">
-              <div className='internButtonHeader'>
-                <h1>Summer Practice 2</h1>
-              </div>
-              <div className="buttonSeparator">
-              </div>
-              <div className='internButtonBody'>
-                <div className='internButtonBody-details'>
-                  {internDet1.companyName 
-                    ?
-                    <div className='internDetailsCont'>
-                      <h2>Company:</h2>
-                      <h3>{internDet1.companyName}</h3>
-                    </div>
-                    :
-                    null
-                  }
-                  {internDet1.date
-                    ?
-                    <div className='internDetailsCont'>
-                      <h2>Application Date:</h2>
-                      <h3>{internDet1.date}</h3>
-                    </div>
-                    :
-                    null
-                  }
-                </div>
-                <div className='internButtonBody-status'>
-                  <div className='internStatusCont'>
-                    <p>
-                      {internStatus2}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            null
           }
           {internStatus2 !== "closed" ?   
             <div 
@@ -200,7 +165,7 @@ function InternSelector() {
               className="internButton SecondInternButton"
               >
               <div className='internButtonHeader'>
-                <h1>Summer Practice 2</h1>
+                <h2>Summer Practice 2</h2>
               </div>
               <div className="buttonSeparator">
               </div>

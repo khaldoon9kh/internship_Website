@@ -6,7 +6,7 @@
   flex-direction: column;
   /* align-items: center; */
   justify-content: center;
-  background-color: whitesmoke;
+  background-color: white;
 }
 .applyHeaderMainContain{
   display: flex;
@@ -16,12 +16,15 @@
 }
 .applyHeaderCont{
   display: flex;
+  justify-content: center;
 }
 .applyFormCont{
   display: flex;
   flex-grow: 9;
-  background-color: aqua;
+  background-color: white;
   margin-top: 10px;
+  padding: 20px;
+
 }
 .applyForm{
   display: flex;
