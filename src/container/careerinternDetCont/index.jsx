@@ -8,17 +8,17 @@ import LoadingComp from '../loadingComp';
 import { ReactComponent as LoadingSVG } from "../../svgs/loadingSVG.svg";
 import { ReactComponent as CompletedSVG } from "../../svgs/doneCheck.svg";
 
-const InternshipDetailsContainer = () => {
+const CareerInternDetailsContainer = () => {
   const [action, setAction] = useState('');
   const [rejectionReason, setRejectionReason] = useState(null);
-  const [letterPDF, setLetterPDF] = useState(null);
+  const [sgkPDF, setsgkPDF] = useState(null);
   const [loading, setLoading] = useState(true);
   const [stName, setStName] = useState(null);
   const [stNumber, setStNumber] = useState(null);
   const [stDepartment, setStDepartment] = useState(null);
   const [internData, setInternData] = useState(null);
-  const [letterLoading, setLetterLoading] = useState(null);
-  const [letterLink, setLetterLink] = useState(null);
+  const [sgkLoading, setsgkLoading] = useState(null);
+  const [sgkLink, setsgkLink] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const { id, internType } = useParams();
@@ -27,12 +27,15 @@ const InternshipDetailsContainer = () => {
 
   const fetchInternDetails = async (token) => {
     let internDATA = null;
-    const internRef = doc(db, "internships", token );
+    console.log("this is token", token)
+    // let tempToken = "KWxWyof82lYAEaFOyUzsqcSSLcp1"
+    const internRef = doc(db, "sgk", token );
     try {
       const internDoc = await getDoc(internRef);
       if (internDoc.exists()) 
       {
         const internshipData = internDoc.data();
+        console.log(internshipData)
         setStName(internshipData.stName);
         setStNumber(internshipData.stNum);
         setStDepartment(internshipData.department);
@@ -69,22 +72,22 @@ const InternshipDetailsContainer = () => {
     setRejectionReason(e.target.value);
   };
 
-  const handleLetterPDFUpload = (e) => {
+  const handleSGKPDFUpload = (e) => {
     const file = e.target.files[0];
-    setLetterPDF(file);
+    setsgkPDF(file);
   };
 
-  const uploadLetterToStorage = async (e,file) => {
+  const uploadSGKToStorage = async (e,file) => {
     e.preventDefault();
     // const imagesRef = ref(storageRef, 'images');
-    const storageRef = ref(storage, `${id}/letter/`+ file.name);
+    const storageRef = ref(storage, `${id}/sgk/`+ file.name);
     const uploadTask = uploadBytesResumable(storageRef, file);
     // Listen for state changes, errors, and completion of the upload.
     uploadTask.on('state_changed',
     (snapshot) => {
       // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      setLetterLoading(progress);
+      setsgkLoading(progress);
       console.log('Upload is ' + progress + '% done');
       switch (snapshot.state) {
         case 'paused':
@@ -115,7 +118,7 @@ const InternshipDetailsContainer = () => {
       // Upload completed successfully, now we can get the download URL
       getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
         // console.log('File available at', downloadURL);
-        setLetterLink(downloadURL);
+        setsgkLink(downloadURL);
         // return downloadURL;
       });
     }
@@ -128,7 +131,7 @@ const InternshipDetailsContainer = () => {
       alert("Please select an action");
     } else if (action === "Reject" && rejectionReason === null) {
       alert("Please enter a reason for rejection");
-    } else if (action === "Send Letter" && letterLink === null) {
+    } else if (action === "Approve" && sgkLink === null) {
       alert("Please upload a letter");
     } else 
     {
@@ -136,14 +139,11 @@ const InternshipDetailsContainer = () => {
       setSubmitting(true);
       e.preventDefault();
       let status = null;
-      if (action === "Send Letter") 
+      if (action === "Approve") 
       {
-        status = "Letter Uploaded";
-      }else if (action === "Approve") 
-      {
-        status = "Awaiting SGK";
+        status = "SGK submitted";
       }else if (action === "Reject"){
-        status = "Rejected";
+        status = "SGK Rejected";
       };
 
       let submittedData = null;
@@ -152,8 +152,8 @@ const InternshipDetailsContainer = () => {
               intern1: {
                 ...internData,
                 status: status,
-                letterLink: action === "Send Letter" ? letterLink : null,
-                rejectionReason: action === "Rejected" ? rejectionReason : null,
+                sgkLink: sgkLink ? sgkLink : null,
+                sgkRejectionReason: action === "Rejected" ? rejectionReason : null,
               }
           }
         }else if (internType === 'intern2'){
@@ -161,8 +161,8 @@ const InternshipDetailsContainer = () => {
             intern2: {
               ...internData,
               status: status,
-              letterLink: action === "Send Letter" ? letterLink : null,
-              rejectionReason: action === "Rejected" ? rejectionReason : null,
+              sgkLink: sgkLink ? sgkLink : null,
+              sgkRejectionReason: action === "Rejected" ? rejectionReason : null,
             }
           }
         }
@@ -187,6 +187,8 @@ const InternshipDetailsContainer = () => {
               intern1: {
                 ...internData,
                 status: status,
+                sgkLink: sgkLink ? sgkLink : null,
+                sgkRejectionReason: action === "Rejected" ? rejectionReason : null,
               }
           }
         }else if (internType === 'intern2'){
@@ -197,6 +199,8 @@ const InternshipDetailsContainer = () => {
             intern2: {
               ...internData,
               status: status,
+              sgkLink: sgkLink ? sgkLink : null,
+              sgkRejectionReason: action === "Rejected" ? rejectionReason : null,
             }
           }
         }
@@ -209,11 +213,11 @@ const InternshipDetailsContainer = () => {
     // and perform any necessary actions
 
     // Example console log for testing
-    console.log({
-      action,
-      rejectionReason,
-      letterPDF,
-    });
+    // console.log({
+    //   action,
+    //   rejectionReason,
+    //   letterPDF,
+    // });
   };
 
   const closeModal = () => {
@@ -226,7 +230,8 @@ const InternshipDetailsContainer = () => {
     return (
       <LoadingComp/>
     )
-  }else{
+  }{
+    console.log(internData)
   return (
     <div className="internship-details-container">
       <div className='internshipDetailsHeader'>
@@ -386,7 +391,7 @@ const InternshipDetailsContainer = () => {
                   <option value="">Select Action</option>
                   <option value="Approve">Approve</option>
                   <option value="Reject">Reject</option>
-                  <option value="Send Letter">Send Letter</option>
+                  {/* <option value="Send Letter">Send Letter</option> */}
                 </select>
                 {action === 'Reject' && (
                   <input
@@ -397,31 +402,31 @@ const InternshipDetailsContainer = () => {
                     placeholder="Reason for rejection"
                   />
                 )}
-                {action === 'Send Letter' && (
+                {action === 'Approve' && (
                 <div className='letterUploadbox'>
-                  <label>Upload Transcript PDF:</label>
+                  <label>Upload SGK Document:</label>
                   <div className='coordfFormUploadCont'>
                     <input 
                       className='inputCoord letterInput'
                       type="file" 
                       accept=".pdf" 
-                      onChange={handleLetterPDFUpload} 
+                      onChange={handleSGKPDFUpload} 
                     />
                     <button 
                       className='coordUploadBtn'
-                      onClick={(e) => uploadLetterToStorage(e,letterPDF)}
+                      onClick={(e) => uploadSGKToStorage(e,sgkPDF)}
                     >
                       Upload
                     </button>
-                    {letterLoading === null
+                    {sgkLoading === null
                       ? 
                       null 
                       : 
-                      letterLoading < 100 
+                      sgkLoading < 100 
                       ? 
                       <LoadingSVG/> 
                       : 
-                      letterLoading === 100 
+                      sgkLoading === 100 
                       ? <CompletedSVG/> 
                       : 
                       null}
@@ -440,4 +445,4 @@ const InternshipDetailsContainer = () => {
 }
 };
 
-export default InternshipDetailsContainer;
+export default CareerInternDetailsContainer;

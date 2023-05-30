@@ -101,22 +101,32 @@ function CoordinatorDashboard() {
           {internsData.map((internship, index) => (
             <React.Fragment key={internship.id}>
               {/* Render intern1 */}
-              <tr onClick={() => handleRowClick(internship.id,"intern1")}>
-                <td>{internship.intern1.status}</td>
-                <td>{internship.intern1.date}</td>
-                <td>{internship.stNum}</td>
-                <td>{internship.department}</td>
-                <td>Summer Practice 1</td>
-              </tr>
-
+              {internship.intern1 
+                ?
+                <tr onClick={() => handleRowClick(internship.id,"intern1")}>
+                  <td>{internship.intern1.status}</td>
+                  <td>{internship.intern1.date}</td>
+                  <td>{internship.stNum}</td>
+                  <td>{internship.department}</td>
+                  <td>Summer Practice 1</td>
+                </tr>
+              :
+              null
+              }
               {/* Render intern2 */}
-              <tr onClick={() => handleRowClick(internship.id,"intern2")}>
-                <td>{internship.intern2.status}</td>
-                <td>{internship.intern2.date}</td>
-                <td>{internship.stNum}</td>
-                <td>{internship.department}</td>
-                <td>Summer Practice 2</td>
-              </tr>
+              {internship.intern2    
+                ?
+                <tr onClick={() => handleRowClick(internship.id,"intern2")}>
+                  <td>{internship.intern2.status}</td>
+                  <td>{internship.intern2.date}</td>
+                  <td>{internship.stNum}</td>
+                  <td>{internship.department}</td>
+                  <td>Summer Practice 2</td>
+                </tr>
+                :
+                null
+              }
+              
             </React.Fragment>
           )
           )
