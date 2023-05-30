@@ -320,7 +320,7 @@ function ApplicationStart() {
           >
             {readOnly
               ?
-            <div className="internship-detail">
+            <div className="application-detail">
               <label className="detail-label">Status:</label>
               <input 
                 className='inputCoord' 
@@ -334,7 +334,7 @@ function ApplicationStart() {
             }
             {readOnly && internData.rejection
               ?
-            <div className="internship-detail">
+            <div className="application-detail">
               <label className="detail-label">Rejection Reason:</label>
               <input 
                 className='inputCoord' 
@@ -346,7 +346,7 @@ function ApplicationStart() {
               :
               null
             }
-            <div className="internship-detail">
+            <div className="application-detail">
               <label className="detail-label">Company Name:</label>
               <input 
                 className='inputCoord' 
@@ -356,7 +356,7 @@ function ApplicationStart() {
                 onChange={handleCompanyNameChange} 
               />
             </div>
-            <div className="internship-detail">
+            <div className="application-detail">
               <label className="detail-label">Position:</label>
               <input 
                 className='inputCoord' 
@@ -366,7 +366,7 @@ function ApplicationStart() {
                 onChange={handlePositionChange} 
               />
             </div>
-            <div className="internship-detail">
+            <div className="application-detail">
               <label className="detail-label">
                 {readOnly ? "Application Date:" : "Select Date:"}
               </label>
@@ -380,9 +380,9 @@ function ApplicationStart() {
             </div>
             {readOnly && internData.letterLink
               ?
-              <div>
-                <label>
-                  {readOnly ? "Application Letter:" : "Upload Form PDF:"}
+              <div className="application-detail">
+                <label className="detail-label">
+                  Application Letter:
                 </label>
                 <div className='formUploadCont'>
                   <a 
@@ -396,62 +396,10 @@ function ApplicationStart() {
               :
               null
             }
-            {readOnly && internData.transcriptLink
-              ?
-              <div>
-                <label>
-                  {readOnly ? "Student Transcript:" : "Upload Form PDF:"}
-                </label>
-                <div className='formUploadCont'>
-                  <a 
-                    href={internData.transcriptLink}
-                    target="_blank"
-                  >
-                    {internData.transcriptLink ? "Transcript Link" : "No File Uploaded"}
-                  </a>
-                </div>
-              </div>
-              :
-              <div>
-                <label>Upload Transcript PDF:</label>
-                <div className='formUploadCont'>
-                  <input type="file" accept=".pdf" onChange={handleTranscriptPDFUpload} />
-                  <button 
-                    onClick={(e) => uploadTranscriptToStorage(e,transcriptPDF)}
-                    >
-                    Upload
-                  </button>
-                  {transLoading === null
-                    ? 
-                    null 
-                    : 
-                    transLoading < 100 
-                    ? 
-                    <LoadingSVG/> 
-                    : 
-                    transLoading === 100 
-                    ? <CompletedSVG/> 
-                    : 
-                    null}
-                </div>
-              </div>
-            }
-            {internData.letterLink 
-              ?
-              null
-              :
-              <div>
-                <label>Do you need a letter?</label>
-                <select value={needsLetter} onChange={handleNeedsLetterChange}>
-                  <option value="yes">Yes</option>
-                  <option value="no">No</option>
-                </select>
-              </div>
-            }
             {needsLetter === "no" || needsLetter === "submitted"
               ? 
-              <div>
-                <label>
+              <div className="uploadCont">
+                <label className="detail-label">
                   {readOnly ? "Application Form:" : "Upload Form PDF:"}
                 </label>
                 <div className='formUploadCont'>
@@ -498,6 +446,59 @@ function ApplicationStart() {
               :
               null
             }
+            {readOnly && internData.transcriptLink
+              ?
+              <div className="uploadCont">
+                <label className="detail-label">
+                  {readOnly ? "Student Transcript:" : "Upload Form PDF:"}
+                </label>
+                <div className='formUploadCont'>
+                  <a 
+                    href={internData.transcriptLink}
+                    target="_blank"
+                  >
+                    {internData.transcriptLink ? "Transcript Link" : "No File Uploaded"}
+                  </a>
+                </div>
+              </div>
+              :
+              <div>
+                <label className="detail-label">Upload Transcript PDF:</label>
+                <div className='formUploadCont'>
+                  <input type="file" accept=".pdf" onChange={handleTranscriptPDFUpload} />
+                  <button 
+                    onClick={(e) => uploadTranscriptToStorage(e,transcriptPDF)}
+                    >
+                    Upload
+                  </button>
+                  {transLoading === null
+                    ? 
+                    null 
+                    : 
+                    transLoading < 100 
+                    ? 
+                    <LoadingSVG/> 
+                    : 
+                    transLoading === 100 
+                    ? <CompletedSVG/> 
+                    : 
+                    null}
+                </div>
+              </div>
+            }
+            {readOnly && internData.letterLink 
+              ?
+              null
+              :
+              <div>
+                <label>Do you need a letter?</label>
+                <select readOnly={readOnly} value={needsLetter} onChange={handleNeedsLetterChange}>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+            }
+            
             
             {readOnly
               ?
