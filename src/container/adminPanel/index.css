@@ -1,10 +1,19 @@
 .admin-panel-outerContainer{
-  background-color: rgb(245, 245, 245);
-  flex:1;
-  height: 100%;
-  width: 100%;
-  padding: 30px;
-  font-family: "DM Sans";
+  display: flex;
+  flex-grow: 1;
+  margin: 15px;
+  flex-direction: column;
+  /* align-items: center; */
+  /* justify-content: center; */
+  background-color: whitesmoke;
+}
+.userTypeForm{
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
 }
 .page-info-txt1{
   font-family: "Arial"; /* ichanged the font family to be able to make it bold */
@@ -29,6 +38,7 @@
   margin-bottom: 23px;
   font-family: 'DM Sans';
   color: #6A6A6A;
+  padding: 20px;
 } 
 .assign-internship-txt{
   font-family: "DM Sans";
@@ -77,12 +87,12 @@
 
 
 
-.hl{
+/* .hl{
   margin-top: 23px;
   border-top: 3px solid #939CA1;
   height: 0px;
   width: 25px;
-}
+} */
 
 .assign-btn{
   background-color: white;

@@ -131,6 +131,7 @@ function App() {
                   element={<ProfileForm />}
                 /> */}
                 <Route path="/jobOffers" element={<JobOffers />} />
+                <Route path="/admin-dashboard" element={<AdminDashboard />} />
                 <Route path="/announcment" element={<AnnouncPage />} />
                 <Route path="/coordinatorMessage" element={<CoordinatorMessage />} />
                 <Route path="/applicationStatus" element={<Applicationstatus />} />
