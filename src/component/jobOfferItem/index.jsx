@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ReactComponent as LocationLogo } from "../../svgs/MapPinLine.svg";
 import { ReactComponent as TimeLogo } from "../../svgs/Clock.svg";
-import { ReactComponent as Calender } from "../../svgs/calendar.svg";
+import { ReactComponent as Calender } from "../../svgs/Calendar.svg";
 import './index.css'
 
 
