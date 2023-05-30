@@ -1,4 +1,4 @@
-
+import React, { useEffect, useState } from 'react';
 import { ReactComponent as NotificationLogo } from "../../svgs/notification-status.svg";
 import { ReactComponent as MailLogo } from "../../svgs/message-notif.svg";
 import { ReactComponent as NotLogo } from "../../svgs/notification.svg";
@@ -10,20 +10,26 @@ import { getAuth } from "firebase/auth";
 import { useNavigate, useParams, NavLink } from 'react-router-dom';
 import "./index.css";
 
-function SideBar({userType, authToken}) {
-  // const [userType, setUserType] = useState(userType)
-  console.log("userType", userType)
+function SideBar() {
+  const [authToken, setAuthToken] = useState(null)
+  const [loggedIn, setLoggedIn] = useState(null)
+  const [userType, setUserType] = useState(null)
+  // console.log("userType", userType)
   const navigate = useNavigate();
-  function signOut() {
-    getAuth.signOut().then(() => {
-      // Sign-out successful.
-      localStorage.removeItem('authToken');
+
+  useEffect(() => {
+    const fetchAuthToken = localStorage.getItem('authToken');
+    const fetchLoggedIn = localStorage.getItem('logedIn');
+    const fetchUserType = localStorage.getItem('userType');
+    if (fetchAuthToken || fetchLoggedIn || fetchUserType) {
+      setAuthToken(fetchAuthToken);
+      setLoggedIn(fetchLoggedIn);
+      setUserType(fetchUserType);
+    }
+    else {
       navigate('/');
-    }).catch((error) => {
-      // An error happened.
-      console.log(error);
-    });
-  }
+    }
+  }, [])
 
   if (userType === null) {
     return <div>Loading...</div>;
@@ -32,7 +38,9 @@ function SideBar({userType, authToken}) {
     return (
       <div className="sideMainCont">
         <div className="navItemsCont-top">
-          <NavLink
+          { userType === "student"
+          ?
+            <NavLink
             to="/profileForm"
             className={({ isActive, isPending }) =>
               isPending ? "navbar-container" : isActive ? "navbar-container" : ""
@@ -42,16 +50,36 @@ function SideBar({userType, authToken}) {
             <ProfileLogo/>
             Profile
           </NavLink>
-          <NavLink
-            to="/internSelector"
-            className={({ isActive, isPending }) =>
-              isPending ? "navbar-container" : isActive ? "navbar-container" : ""
-            }
-            // className="navbar-container"
-          >
-            <NotificationLogo/>
-            Application status
-          </NavLink>
+          :
+          null
+          }
+          {
+            userType === "coordinator" || userType === "coordinator" 
+            ?
+            <NavLink
+              to={
+                userType === "student" 
+                ? 
+                "/internSelector"
+                : 
+                "/coorDash"
+              }
+              className={({ isActive, isPending }) =>
+                isPending ? "navbar-container" : isActive ? "navbar-container" : ""
+              }
+              // className="navbar-container"
+            >
+              <NotificationLogo/>
+             { userType === "student" 
+                ? 
+                "Applications status"
+                : 
+                "Internships Records"
+                }
+            </NavLink>
+            :
+            null
+          }
           {/* <NavLink
             to="/profileForm"
             className={({ isActive, isPending }) =>
@@ -70,7 +98,7 @@ function SideBar({userType, authToken}) {
             // className="navbar-container"
           >
             <JobCenter/>
-            Internships Center
+            Internships Opportunities
           </NavLink>
           {/* <NavLink
             to="/profileForm"
