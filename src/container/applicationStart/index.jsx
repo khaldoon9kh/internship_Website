@@ -50,7 +50,7 @@ function ApplicationStart() {
         if(internType === "intern1"){
           setInternData(internData1);
           internDATA = internData1;
-          if(internDATA.status === "Open" || internDATA.status === "Letter Uploaded"){
+          if(internDATA.status === "Open" || internDATA.status === "Letter Uploaded" || internDATA === "SGK submitted"){
             setReadOnly(false)
           }else{
             setReadOnly(true)
@@ -58,7 +58,7 @@ function ApplicationStart() {
         }else if(internType === "intern2"){
           setInternData(internData2);
           internDATA = internData2;
-          if(internDATA.status === "Open" || internDATA.status === "Letter Uploaded"){
+          if(internDATA.status === "Open" || internDATA.status === "Letter Uploaded" || internDATA === "SGK submitted"){
             setReadOnly(false)
           }else{
             setReadOnly(true)
@@ -485,6 +485,24 @@ function ApplicationStart() {
                     null}
                 </div>
               </div>
+            }
+            {readOnly && internData.sgkLink
+              ?
+              <div className="application-detail">
+                <label className="detail-label">
+                  SGK Document:
+                </label>
+                <div className='formUploadCont'>
+                  <a 
+                    href={internData.sgkLink}
+                    target="_blank"
+                  >
+                    {internData.sgkLink ? "SGK Link" : "No File Uploaded"}
+                  </a>
+                </div>
+              </div>
+              :
+              null
             }
             {readOnly && internData.letterLink 
               ?

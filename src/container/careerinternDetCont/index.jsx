@@ -230,7 +230,28 @@ const CareerInternDetailsContainer = () => {
     return (
       <LoadingComp/>
     )
-  }{
+  }else if (internData.length === 0) {
+    return (
+      <div className="internship-details-container">
+        <div className='internshipDetailsHeader'>
+          <div className='intenrSelectorHeader'>
+              <h1>Internship Details:</h1>
+          </div>
+          <div 
+            className='internSelectorSeparator'
+            style={{display:"flex", backgroundColor: "#C8D8D7",height: "5px"}}
+          >
+          </div>
+        </div>
+        <div className="internMain-container">
+          <div className="container-inner">
+            <h1>Internship Details Not Found</h1>
+          </div>
+        </div>
+      </div>
+    )
+  }
+  {
     console.log(internData)
   return (
     <div className="internship-details-container">
