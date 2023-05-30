@@ -20,8 +20,11 @@ const JobOffers = () => {
       querySnapshot.forEach((doc) => {
         jobOffers.push({ id: doc.id, ...doc.data() });
       });
+
+    // Sort the internships array based on the date in descending order
+    jobOffers.sort((a, b) => new Date(b.datepicker) - new Date(a.datepicker)).reverse();
+
       setjobOffersDATA(jobOffers);
-      
     } catch (e) 
     {
       console.log("Error getting document:", e);
@@ -43,8 +46,8 @@ const JobOffers = () => {
   }
 
   return (
-    <div class="job-offer-page">
-      <div class="job-offer-header">
+    <div className="job-offer-page">
+      <div className="job-offer-header">
         <h1>Job Offers</h1>
         <div className='jobOfferBody'>
           <h3>
@@ -53,16 +56,16 @@ const JobOffers = () => {
           <hr/>
         </div>
         
-        {/* <div class="search-box">
+        {/* <div className="search-box">
         <input id='search' type="text" placeholder="Search..."/>
           <button>Search</button>
         </div> */}
       </div>
-      <div class="job-offers-container">
+      <div className="job-offers-container">
   
       {
         jobOffersDATA.map((jobOffer, index) => (
-          <JobOfferItem jobOffer={jobOffer}/>
+          <JobOfferItem key={jobOffer.id} jobOffer={jobOffer}/>
         ))
       }
         

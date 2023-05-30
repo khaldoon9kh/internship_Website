@@ -47,7 +47,8 @@ section {
 }
 
 .announcInput {
-  width: 100%;
+  width: fill-available;
+  width: -webkit-fill-available;
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
@@ -55,6 +56,8 @@ section {
 }
 
 .announcButton {
+  display: block;
+  margin: 0 auto;
   padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
@@ -65,4 +68,13 @@ section {
 
 .announcButton:hover {
   background-color: #0069d9;
+}
+
+.thumbnail {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.cancelButton {
+  margin-top: 8px;
 }

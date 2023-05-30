@@ -1,68 +1,61 @@
-  .job-offer-item {
-    display: flex;
-    flex-grow: 5;
-    background-color: white;
-    /* width: 970px; */
-    padding: 10px;
-    box-shadow: 5px 10px 20px lightblue;
-    border: 2px solid rgba(173, 216, 230, 0.615);
-    border-radius: 5px;
-    margin: 10px 0px;
-    
-  }
-  .logo-container {
-    display: flex;
-
-  }
-
-  .location-time{
-    display: flex;
-    margin: 5px 0px;
-    /* justify-content: space-evenly; */
-  }
-  .info-cont{
-    display: flex;
-    flex-grow: 2;
-    max-width: 10rem;
-    align-items: center;
-  }
-  .info-cont p{
-    margin: 0px;
-  }
+.job-offer-item {
+  display: flex;
+  background-color: white;
+  /* width: 970px; */
+  padding: 10px;
+  box-shadow: 5px 10px 20px lightblue;
+  border: 2px solid rgba(173, 216, 230, 0.615);
+  border-radius: 5px;
+  margin: 10px 0px;
   
-  .logo {
-    margin-right: 12px;   
-  }
-  .logo img {
-    max-width: 75px;
-    height:auto;
-    
-  }
+}
+.logo-container {
+  display: flex;
+
+}
+
+.location-time{
+  display: flex;
+  margin: 5px 0px;
+  /* justify-content: space-evenly; */
+}
+.info-cont{
+  display: flex;
+  flex-grow: 2;
+  max-width: 10rem;
+  align-items: center;
+}
+.info-cont p{
+  margin: 0px;
+}
+
+.logo {
+  margin-right: 12px;   
+}
+.logo img {
+  max-width: 75px;
+  height:auto;
   
-  .company-name h2, .company-name h4 {
-    margin: 0px;
-  }
-  
-  .job-description {
-  }
+}
 
+.company-name h2, .company-name h4 {
+  margin: 0px;
+}
 
+#search{
+  width: 220px;
+}
 
-  #search{
-    width: 220px;
-  }
+button {
+  background-color: #0066cc;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
 
-  button {
-    background-color: #0066cc;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  button:hover {
-    background-color: #0052a3;
-  }
- 
+button:hover {
+  background-color: #0052a3;
+}
