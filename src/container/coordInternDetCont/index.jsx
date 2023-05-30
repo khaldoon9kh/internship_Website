@@ -123,6 +123,7 @@ const InternshipDetailsContainer = () => {
   };
 
   const handleSubmit = async (e) => {
+    let sgkSubmittedData = null;
     if (action === "") {
       alert("Please select an action");
     } else if (action === "Reject" && rejectionReason === null) {
@@ -164,7 +165,7 @@ const InternshipDetailsContainer = () => {
               rejectionReason: action === "Rejected" ? rejectionReason : null,
             }
           }
-      }
+        }
       await updateDoc(doc(db, "internships", id), submittedData);
       if (internType === 'intern1') {
         await updateDoc(doc(db, "users", id), {
@@ -176,6 +177,30 @@ const InternshipDetailsContainer = () => {
           intern2: status
         });
         setSubmitting(false);
+      }
+      if (action === "Approve"){
+        if (internType === 'intern1') {
+          sgkSubmittedData = {
+              stName: stName,
+              stNum: stNumber,
+              department: stDepartment,
+              intern1: {
+                ...internData,
+                status: status,
+              }
+          }
+        }else if (internType === 'intern2'){
+          sgkSubmittedData = {
+            stName: stName,
+            stNum: stNumber,
+            department: stDepartment,
+            intern2: {
+              ...internData,
+              status: status,
+            }
+          }
+        }
+        await setDoc(doc(db, "sgk", id), sgkSubmittedData);
       }
     }
     // Handle form submission here
