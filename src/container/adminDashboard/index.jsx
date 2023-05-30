@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { db } from "../../firebaseConfig";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, collection, query, where, getDocs } from "firebase/firestore";
 
 import "./index.css";
 
@@ -10,9 +10,70 @@ const AdminDashboard = () => {
   const [internshipCoordinatorEmail, setInternshipCoordinatorEmail] = useState('');
   const auth = getAuth();
   
-  const editUserType = async (authToken, userType ) => {
+  const getUserTypeById = async (userEmail,userType,_password) => {
+    try {
+      const q = query(collection(db, "users"), where("email", "==", userEmail));
+      const querySnapshot = await getDocs(q);
+      const newArray = [];
+      // console.log(querySnapshot.size>0)
+      if (querySnapshot.size > 0){
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          data.id = doc.id; // Add the id property to the data object
+          newArray.push(data); // P
+          const userObject = newArray.find(user => user.email === userEmail);
+          editUserType(userObject.id, userType, userEmail);
+        });
+        // console.log("find user")
+      }else{
+        createUserWithEmailAndPassword(auth, careerCenterEmail, _password)
+        .then((userCredential) => {
+          // Signed in 
+          const userData = userCredential.user;
+          // console.log(userData.uid)
+          editUserType(userData.uid, userType, userEmail)
+
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+        });
+        // console.log("No such document!");
+        // console.log("no user")
+      }
+
+      // const docRef = doc(db, "users", userEmail);
+      // const docSnap = await getDoc(docRef);
+      // if (querySnapshot.length > 0) {
+      //   const userObject = usersArray.find(user => user.email === userEmail);
+      //   editUserType(userData.type, userType);
+      //   console.log("userexicts");
+      //   // console.log("User Type:", userData.type);
+      // } else {
+      //   createUserWithEmailAndPassword(auth, careerCenterEmail, _password)
+      //   .then((userCredential) => {
+      //     // Signed in 
+      //     const userData = userCredential.user;
+      //     console.log(userData.uid)
+      //     editUserType(userData.uid, userType)
+      //     // ...
+      //   })
+      //   .catch((error) => {
+      //     const errorCode = error.code;
+      //     const errorMessage = error.message;
+      //     // ..
+      //   });
+      //   console.log("No such document!");
+      // }
+    } catch (error) {
+      console.log("Error retrieving user type:", error);
+    }
+  };
+  const editUserType = async (authToken, userType, email ) => {
     const profileRef = doc(db, 'users', authToken);
-    await setDoc(profileRef, {type: userType}, { merge: true });
+    await setDoc(profileRef, {type: userType, email: email}, { merge: true });
   }
   
   const handleCareerCenterEmailChange = (e) => {
@@ -26,20 +87,8 @@ const AdminDashboard = () => {
   const handleCareerCenterSubmit = (e) => {
     e.preventDefault();
 
-    const _tempPassword = "123456";
-    createUserWithEmailAndPassword(auth, careerCenterEmail, _tempPassword)
-    .then((userCredential) => {
-      // Signed in 
-      const userData = userCredential.user;
-      console.log(userData.uid)
-      editUserType(userData.uid, "careerCenter")
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
-    });
+    const _tempPassword = "123456"
+    getUserTypeById(careerCenterEmail,"careerCenter",_tempPassword)
     // Perform any necessary actions with the career center email
     // console.log('Career Center Email:', careerCenterEmail);
   };
@@ -47,19 +96,7 @@ const AdminDashboard = () => {
   const handleInternshipCoordinatorSubmit = (e) => {
     e.preventDefault();
     const _tempPassword = "123456";
-    createUserWithEmailAndPassword(auth, internshipCoordinatorEmail, _tempPassword)
-    .then((userCredential) => {
-      // Signed in 
-      const userData = userCredential.user;
-      console.log(userData.uid)
-      editUserType(userData.uid, "coordinator")
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
-    });
+    getUserTypeById(internshipCoordinatorEmail,"coordinator",_tempPassword)
     // Perform any necessary actions with the internship coordinator email
   };
 
