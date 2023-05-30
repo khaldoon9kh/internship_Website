@@ -9,6 +9,7 @@ import './index.css'
 const JobOffers = () => {
   const [jobOffersDATA, setjobOffersDATA] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [productID, setProductID] = useState('');
 
   const fetchJobOffers = async () => {
     // get collection from DB      
@@ -23,7 +24,6 @@ const JobOffers = () => {
 
     // Sort the internships array based on the date in descending order
     jobOffers.sort((a, b) => new Date(b.datepicker) - new Date(a.datepicker)).reverse();
-
       setjobOffersDATA(jobOffers);
     } catch (e) 
     {
@@ -37,6 +37,19 @@ const JobOffers = () => {
 
   useEffect(() => {
     fetchJobOffers();
+
+    const handleHashChange = () => {
+      const hash = window.location.hash.substr(1); // Remove the '#' symbol
+      setProductID(hash);
+    };
+
+    // Attach the event listener for hash change
+    window.addEventListener('hashchange', handleHashChange);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
   }, []);
   
   if (loading) {
@@ -44,6 +57,11 @@ const JobOffers = () => {
       <LoadingComp/>
     )
   }
+
+  const handleGoBack = () => {
+    window.history.replaceState(null, null, window.location.pathname);
+    setProductID('');
+  };
 
   return (
     <div className="job-offer-page">
@@ -54,6 +72,12 @@ const JobOffers = () => {
             You may browse for an internship here
           </h3>
           <hr/>
+          {productID && (
+            <button onClick={handleGoBack}>
+              <span>&#8592;</span> Back
+            </button>
+          )}
+          
         </div>
         
         {/* <div className="search-box">
@@ -63,11 +87,17 @@ const JobOffers = () => {
       </div>
       <div className="job-offers-container">
   
-      {
+      {productID ? (
+        // Render content if hash exists
+        <div>// Some content for hash change</div>
+      ) : (
+        // Render content if no hash exists
         jobOffersDATA.map((jobOffer, index) => (
-          <JobOfferItem key={jobOffer.id} jobOffer={jobOffer}/>
+          <a className='jobOfferDetailsLink' href={`#${jobOffer.id}`} key={jobOffer.id}>
+            <JobOfferItem jobOffer={jobOffer} />
+          </a>
         ))
-      }
+      )}
         
       </div>
     </div>

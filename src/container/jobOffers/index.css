@@ -1,6 +1,6 @@
 
 .job-offer-page {
-  /* max-width: 800px; */
+  width: 100%;
   display: flex;
   flex-direction: column;
   margin: 20px;
@@ -38,4 +38,12 @@
 
 .job-description {
   width: 100%;
+}
+
+.jobOfferDetailsLink,
+.jobOfferDetailsLink:visited,
+.jobOfferDetailsLink:focus,
+.jobOfferDetailsLink:link {
+  color: #000;
+  text-decoration: none;
 }
