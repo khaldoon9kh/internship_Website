@@ -320,9 +320,10 @@ function ApplicationStart() {
           >
             {readOnly
               ?
-            <div>
-              <label>Status:</label>
+            <div className="internship-detail">
+              <label className="detail-label">Status:</label>
               <input 
+                className='inputCoord' 
                 type="text" 
                 value={internData.status} 
                 readOnly={true}
@@ -333,9 +334,10 @@ function ApplicationStart() {
             }
             {readOnly && internData.rejection
               ?
-            <div>
-              <label>Rejection Reason:</label>
+            <div className="internship-detail">
+              <label className="detail-label">Rejection Reason:</label>
               <input 
+                className='inputCoord' 
                 type="text" 
                 value={internData.rejection} 
                 readOnly={true}
@@ -344,29 +346,32 @@ function ApplicationStart() {
               :
               null
             }
-            <div>
-              <label>Company Name:</label>
+            <div className="internship-detail">
+              <label className="detail-label">Company Name:</label>
               <input 
+                className='inputCoord' 
                 type="text" 
                 value={readOnly ? internData.companyName : companyName} 
                 readOnly={readOnly}
                 onChange={handleCompanyNameChange} 
               />
             </div>
-            <div>
-              <label>Position:</label>
+            <div className="internship-detail">
+              <label className="detail-label">Position:</label>
               <input 
+                className='inputCoord' 
                 type="text" 
                 value={readOnly ? internData.position : position} 
                 readOnly={readOnly}
                 onChange={handlePositionChange} 
               />
             </div>
-            <div>
-              <label>
+            <div className="internship-detail">
+              <label className="detail-label">
                 {readOnly ? "Application Date:" : "Select Date:"}
               </label>
               <input 
+                className='inputCoord' 
                 type="date" 
                 value={readOnly ? internData.date : selectedDate} 
                 readOnly={readOnly}

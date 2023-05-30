@@ -56,6 +56,10 @@
   width: 25%;
   margin: 10px;
 }
+.internButtonHeader h2{
+  font-size: 24px;
+  margin: 0px 10px 0px 0px;
+}
 .internButtonBody {
   width: 75%;
   margin: 10px;
