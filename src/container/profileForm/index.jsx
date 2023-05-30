@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { doc, setDoc, updateDoc , getDoc } from "firebase/firestore"; 
+import { ReactComponent as LoadingSVG } from "../../svgs/loadingSVG.svg";
+import { ReactComponent as CompletedSVG } from "../../svgs/doneCheck.svg";
 import { db } from '../../firebaseConfig';
+import { useNavigate } from 'react-router-dom';
 import './index.css'
 
 
@@ -13,10 +16,15 @@ const ProfileForm = () => {
   const [universityEmail, setUniversityEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [stNumber, setStNumber] = useState('');
+  const [showModal, setShowModal] = useState(false);
   const [authToken, setAuthToken] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate();
+
   
   useEffect(() => {
     // Fetch data from API here
+    // TO DO - Fetch data from API here
     const fetchAuthToken = localStorage.getItem('authToken');
     setAuthToken(fetchAuthToken);
   }, []);
@@ -36,6 +44,8 @@ const ProfileForm = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
+    setShowModal(true);
+    setSubmitting(true);
       let submittedData = {
         stName: firstName,
         stNum:  stNumber,
@@ -49,6 +59,7 @@ const ProfileForm = () => {
       const profileRef = doc(db, 'users', authToken);
       await setDoc(profileRef, submittedData, { merge: true });
       console.log(submittedData)
+      setSubmitting(false);
       // await updateDoc(doc(db, "internships", authToken), submittedData);
       // if (internType === 'intern1') {
       //   await updateDoc(doc(db, "users", authToken), {
@@ -63,11 +74,30 @@ const ProfileForm = () => {
       // }
   }
 
+  const closeModal = () => {
+    // Close the modal
+    setShowModal(false);
+    navigate(`/internSelector`);
+  };
 
 
   return (
     <div className="profile-form-outerContainer">
       <div className='profile-form-mainContainer'> 
+        {showModal && (
+            <div className="modalOverlay">
+              <div className="modalContent">
+                {submitting 
+                ? 
+                  <LoadingSVG/>
+                :
+                  <CompletedSVG/>
+                }
+                <h2>{submitting ? "Updating Application" : "Application Updated!"}</h2>
+                <button onClick={closeModal}>Close</button>
+              </div>
+            </div>
+          )}
         <div className='header-Main-coordinator-dashboeard'>
           <div className='header-profile'>
             <h1>Profile Information</h1>
