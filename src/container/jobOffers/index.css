@@ -18,9 +18,17 @@
   flex-grow: 1;
   /* background-color: #0052a3; */
 }
-.job-offer-header h1, .job-offer-header h3{
+.job-offer-header .jobOffersTitle, .job-offer-header h3{
   margin: 10px 0;
 }
+
+.jobOffersTitle .jobOffersNumber {
+  color: #7d8590;
+  font-size: .5em;
+  font-weight: 700;
+  margin-left: 5px;
+}
+
 .jobOfferBody{
   flex-grow: 1;
   width: 100%;
