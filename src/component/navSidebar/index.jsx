@@ -54,7 +54,7 @@ function SideBar() {
           null
           }
           {
-            userType === "coordinator" || userType === "coordinator" 
+            userType === "student" || userType === "coordinator" || userType === "careerCenter"
             ?
             <NavLink
               to={
@@ -62,7 +62,11 @@ function SideBar() {
                 ? 
                 "/internSelector"
                 : 
+                userType === "coordinator"
+                ?
                 "/coorDash"
+                :
+                "/careerdashboard"
               }
               className={({ isActive, isPending }) =>
                 isPending ? "navbar-container" : isActive ? "navbar-container" : ""
