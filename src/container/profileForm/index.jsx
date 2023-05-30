@@ -31,8 +31,16 @@ const ProfileForm = () => {
     // Fetch data from API here
     // TO DO - Fetch data from API here
     const fetchAuthToken = localStorage.getItem('authToken');
-    setAuthToken(fetchAuthToken);
-    fetchInternDetails(fetchAuthToken);
+    const fetchUserType = localStorage.getItem('userType');
+    if (!fetchAuthToken) {
+      navigate(`/`);
+    }else if(fetchUserType !== "student"){
+      navigate(`/`);
+    }else
+    {
+      setAuthToken(fetchAuthToken);
+      fetchInternDetails(fetchAuthToken);
+    }
   }, []);
 
   const faculties = {
