@@ -7,7 +7,7 @@ import './index.css'
 
 
 const JobOffers = () => {
-  const [jobOffersDATA, setjobOffersDATA] = useState(null);
+  const [jobOffersDATA, setjobOffersDATA] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchJobOffers = async () => {
@@ -45,10 +45,15 @@ const JobOffers = () => {
     )
   }
 
+  const jobOffersLength = jobOffersDATA.length;
+  const jobOfferNumText = `${jobOffersLength} job ${jobOffersDATA.length === 1 ? 'offer' : 'offers'}`;
+
   return (
     <div className="job-offer-page">
       <div className="job-offer-header">
-        <h1>Job Offers</h1>
+        <h1 className='jobOffersTitle'>Job Offers 
+          <span className='jobOffersNumber'>({jobOfferNumText})</span>
+        </h1>
         <div className='jobOfferBody'>
           <h3>
             You may browse for an internship here
