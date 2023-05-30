@@ -7,7 +7,7 @@ import './index.css'
 
 
 const JobOffers = () => {
-  const [jobOffersDATA, setjobOffersDATA] = useState(null);
+  const [jobOffersDATA, setjobOffersDATA] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchJobOffers = async () => {
