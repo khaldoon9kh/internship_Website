@@ -19,11 +19,13 @@ function LogOut() {
     // }).catch((error) => {
     //   console.log(error)  // An error happened.
     // });
-    window.location.reload();
     navigate('/');
+    window.location.reload();
   }
 
-  signOut();
+  useEffect(() => {
+    signOut();
+  }, [])
 
 
   return (
