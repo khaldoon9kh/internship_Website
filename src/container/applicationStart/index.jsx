@@ -6,6 +6,8 @@ import {db} from '../../firebaseConfig';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { ReactComponent as LoadingSVG } from "../../svgs/loadingSVG.svg";
 import { ReactComponent as CompletedSVG } from "../../svgs/doneCheck.svg";
+import { ReactComponent as DeletIcon } from "../../svgs/deleteIcon.svg";
+
 // import { storage } from '../../firebaseConfig';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -26,6 +28,8 @@ function ApplicationStart() {
   const [readOnly, setReadOnly] = useState(false)
   const [showModal, setShowModal] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [deleteForm, setDeleteForm] = useState(false);
+  const [deleteTranscript, setDeleteTranscript] = useState(false);
   const fetchAuthToken = localStorage.getItem('authToken');
   const { internType } = useParams();
   // console.log(internType)
@@ -50,7 +54,7 @@ function ApplicationStart() {
         if(internType === "intern1"){
           setInternData(internData1);
           internDATA = internData1;
-          if(internDATA.status === "Open" || internDATA.status === "Letter Uploaded" || internDATA === "SGK submitted"){
+          if(internDATA.status === "open" || internDATA.status === "Letter Uploaded" || internDATA === "SGK submitted"){
             setReadOnly(false)
           }else{
             setReadOnly(true)
@@ -58,7 +62,7 @@ function ApplicationStart() {
         }else if(internType === "intern2"){
           setInternData(internData2);
           internDATA = internData2;
-          if(internDATA.status === "Open" || internDATA.status === "Letter Uploaded" || internDATA === "SGK submitted"){
+          if(internDATA.status === "open" || internDATA.status === "Letter Uploaded" || internDATA === "SGK submitted"){
             setReadOnly(false)
           }else{
             setReadOnly(true)
@@ -127,98 +131,110 @@ function ApplicationStart() {
   
   const uploadFormToStorage = async (e,file) => {
     e.preventDefault();
-    // const imagesRef = ref(storageRef, 'images');
-    const storageRef = ref(storage, `${fetchAuthToken}/form/` + file.name);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-    // Listen for state changes, errors, and completion of the upload.
-    uploadTask.on('state_changed',
-    (snapshot) => {
-      // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      setFormLoading(progress);
-      console.log('Upload is ' + progress + '% done');
-      switch (snapshot.state) {
-        case 'paused':
-          console.log('Upload is paused');
-          break;
-        case 'running':
-          console.log('Upload is running');
-          break;
+    if (formPDF === null) {
+      alert("Please select a file");
+      return;
+    }else{
+      const storageRef = ref(storage, `${fetchAuthToken}/form/` + file.name);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      // Listen for state changes, errors, and completion of the upload.
+      uploadTask.on('state_changed',
+      (snapshot) => {
+        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setFormLoading(progress);
+        console.log('Upload is ' + progress + '% done');
+        switch (snapshot.state) {
+          case 'paused':
+            console.log('Upload is paused');
+            break;
+          case 'running':
+            console.log('Upload is running');
+            break;
+        }
+      }, 
+      (error) => {
+        // A full list of error codes is available at
+        // https://firebase.google.com/docs/storage/web/handle-errors
+        switch (error.code) {
+          case 'storage/unauthorized':
+            // User doesn't have permission to access the object
+            break;
+          case 'storage/canceled':
+            // User canceled the upload
+            break;
+          // ...
+          case 'storage/unknown':
+            // Unknown error occurred, inspect error.serverResponse
+            break;
+        }
+      }, 
+      () => {
+        // Upload completed successfully, now we can get the download URL
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          // console.log('File available at', downloadURL);
+          setFormLink(downloadURL);
+          // return downloadURL;
+        });
       }
-    }, 
-    (error) => {
-      // A full list of error codes is available at
-      // https://firebase.google.com/docs/storage/web/handle-errors
-      switch (error.code) {
-        case 'storage/unauthorized':
-          // User doesn't have permission to access the object
-          break;
-        case 'storage/canceled':
-          // User canceled the upload
-          break;
-        // ...
-        case 'storage/unknown':
-          // Unknown error occurred, inspect error.serverResponse
-          break;
-      }
-    }, 
-    () => {
-      // Upload completed successfully, now we can get the download URL
-      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-        // console.log('File available at', downloadURL);
-        setFormLink(downloadURL);
-        // return downloadURL;
-      });
+      );
+
     }
-    );
+    // const imagesRef = ref(storageRef, 'images');
   };
   
   const uploadTranscriptToStorage = async (e,file) => {
     e.preventDefault();
-    // const imagesRef = ref(storageRef, 'images');
-    const storageRef = ref(storage, `${fetchAuthToken}/transcript/`+ file.name);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-    // Listen for state changes, errors, and completion of the upload.
-    uploadTask.on('state_changed',
-    (snapshot) => {
-      // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      setTrnasLoading(progress);
-      console.log('Upload is ' + progress + '% done');
-      switch (snapshot.state) {
-        case 'paused':
-          console.log('Upload is paused');
-          break;
-        case 'running':
-          console.log('Upload is running');
-          break;
+    if (transcriptPDF === null) {
+      alert("Please select a file To Upload to Transcript");
+      return;
+    }else{
+      // const imagesRef = ref(storageRef, 'images');
+      const storageRef = ref(storage, `${fetchAuthToken}/transcript/`+ file.name);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      // Listen for state changes, errors, and completion of the upload.
+      uploadTask.on('state_changed',
+      (snapshot) => {
+        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setTrnasLoading(progress);
+        console.log('Upload is ' + progress + '% done');
+        switch (snapshot.state) {
+          case 'paused':
+            console.log('Upload is paused');
+            break;
+          case 'running':
+            console.log('Upload is running');
+            break;
+        }
+      }, 
+      (error) => {
+        // A full list of error codes is available at
+        // https://firebase.google.com/docs/storage/web/handle-errors
+        switch (error.code) {
+          case 'storage/unauthorized':
+            // User doesn't have permission to access the object
+            break;
+          case 'storage/canceled':
+            // User canceled the upload
+            break;
+          // ...
+          case 'storage/unknown':
+            // Unknown error occurred, inspect error.serverResponse
+            break;
+        }
+      }, 
+      () => {
+        // Upload completed successfully, now we can get the download URL
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          // console.log('File available at', downloadURL);
+          setTranscriptLink(downloadURL);
+          // return downloadURL;
+        });
       }
-    }, 
-    (error) => {
-      // A full list of error codes is available at
-      // https://firebase.google.com/docs/storage/web/handle-errors
-      switch (error.code) {
-        case 'storage/unauthorized':
-          // User doesn't have permission to access the object
-          break;
-        case 'storage/canceled':
-          // User canceled the upload
-          break;
-        // ...
-        case 'storage/unknown':
-          // Unknown error occurred, inspect error.serverResponse
-          break;
-      }
-    }, 
-    () => {
-      // Upload completed successfully, now we can get the download URL
-      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-        // console.log('File available at', downloadURL);
-        setTranscriptLink(downloadURL);
-        // return downloadURL;
-      });
+      );
+
     }
-    );
   };
 
   const handleSubmit = async (e) => {
@@ -281,7 +297,26 @@ function ApplicationStart() {
   const closeModal = () => {
     // Close the modal
     setShowModal(false);
+    navigate("/applicationStatus");
   };
+
+  useEffect(() => {
+
+  }, [])
+
+  const handleDeleteForm = (e) => {
+    setDeleteForm(true);
+    setFormLink(null);
+    setFormPDF(null);
+    alert("Form Deleted")
+  }
+
+  const handleDeleteTranscript = () => {
+    setDeleteTranscript(true);
+    setTranscriptLink(null);
+    setTranscriptPDF(null);
+    alert("Transcript Deleted")
+  }
 
   if (loading || internData===null) {
     return (
@@ -321,7 +356,7 @@ function ApplicationStart() {
             {readOnly
               ?
             <div className="application-detail">
-              <label className="detail-label">Status:</label>
+              <label className="apply-detail-label">Status:</label>
               <input 
                 className='inputCoord' 
                 type="text" 
@@ -335,7 +370,7 @@ function ApplicationStart() {
             {readOnly && internData.rejection
               ?
             <div className="application-detail">
-              <label className="detail-label">Rejection Reason:</label>
+              <label className="apply-detail-label">Rejection Reason:</label>
               <input 
                 className='inputCoord' 
                 type="text" 
@@ -347,7 +382,7 @@ function ApplicationStart() {
               null
             }
             <div className="application-detail">
-              <label className="detail-label">Company Name:</label>
+              <label className="apply-detail-label">Company Name:</label>
               <input 
                 className='inputCoord' 
                 type="text" 
@@ -357,7 +392,7 @@ function ApplicationStart() {
               />
             </div>
             <div className="application-detail">
-              <label className="detail-label">Position:</label>
+              <label className="apply-detail-label">Position:</label>
               <input 
                 className='inputCoord' 
                 type="text" 
@@ -367,7 +402,7 @@ function ApplicationStart() {
               />
             </div>
             <div className="application-detail">
-              <label className="detail-label">
+              <label className="apply-detail-label">
                 {readOnly ? "Application Date:" : "Select Date:"}
               </label>
               <input 
@@ -381,7 +416,7 @@ function ApplicationStart() {
             {readOnly && internData.letterLink
               ?
               <div className="application-detail">
-                <label className="detail-label">
+                <label className="apply-detail-label">
                   Application Letter:
                 </label>
                 <div className='formUploadCont'>
@@ -396,10 +431,8 @@ function ApplicationStart() {
               :
               null
             }
-            {needsLetter === "no" || needsLetter === "submitted"
-              ? 
               <div className="uploadCont">
-                <label className="detail-label">
+                <label className="apply-detail-label">
                   {readOnly ? "Application Form:" : "Upload Form PDF:"}
                 </label>
                 <div className='formUploadCont'>
@@ -415,7 +448,8 @@ function ApplicationStart() {
                     <>
                       <input 
                         type="file" 
-                        accept=".pdf" 
+                        accept=".pdf"
+                        
                         // readOnly={readOnly}
                         onChange={handleFormPDFUpload} 
                       />
@@ -434,8 +468,14 @@ function ApplicationStart() {
                         : 
                         formLoading === 100 
                         ? 
+                        <div hidden={deleteForm}>
                         <CompletedSVG/> 
-                        : 
+                        <div className='deleteIconCont' onClick={(e) => handleDeleteForm(e)}>
+                        <DeletIcon
+                        />
+                        </div>
+                        </div>
+                        :
                         null
                       }
                     </>
@@ -443,13 +483,10 @@ function ApplicationStart() {
                   }
                 </div>
               </div>
-              :
-              null
-            }
             {readOnly && internData.transcriptLink
               ?
               <div className="uploadCont">
-                <label className="detail-label">
+                <label className="apply-detail-label">
                   {readOnly ? "Student Transcript:" : "Upload Form PDF:"}
                 </label>
                 <div className='formUploadCont'>
@@ -462,8 +499,8 @@ function ApplicationStart() {
                 </div>
               </div>
               :
-              <div>
-                <label className="detail-label">Upload Transcript PDF:</label>
+              <div className="uploadCont">
+                <label className="apply-detail-label">Upload Transcript PDF:</label>
                 <div className='formUploadCont'>
                   <input type="file" accept=".pdf" onChange={handleTranscriptPDFUpload} />
                   <button 
@@ -480,7 +517,13 @@ function ApplicationStart() {
                     <LoadingSVG/> 
                     : 
                     transLoading === 100 
-                    ? <CompletedSVG/> 
+                    ? 
+                    <div hidden={deleteTranscript}>
+                        <CompletedSVG/> 
+                        <div className='deleteIconCont' onClick={(e) => handleDeleteTranscript()}>
+                        <DeletIcon/>
+                      </div>
+                    </div>
                     : 
                     null}
                 </div>
@@ -489,7 +532,7 @@ function ApplicationStart() {
             {readOnly && internData.sgkLink
               ?
               <div className="application-detail">
-                <label className="detail-label">
+                <label className="apply-detail-label">
                   SGK Document:
                 </label>
                 <div className='formUploadCont'>
@@ -508,9 +551,9 @@ function ApplicationStart() {
               ?
               null
               :
-              <div>
-                <label>Do you need a letter?</label>
-                <select readOnly={readOnly} value={needsLetter} onChange={handleNeedsLetterChange}>
+              <div className="uploadCont">
+                <label className="select-label-apply apply-detail-label">Do you need a letter?</label>
+                <select className='inputCoord'  readOnly={readOnly} value={needsLetter} onChange={handleNeedsLetterChange}>
                   <option value="yes">Yes</option>
                   <option value="no">No</option>
                 </select>
@@ -522,12 +565,15 @@ function ApplicationStart() {
               ?
               null
               :
+              <div className="buttonFormApplyCont">
               <button 
+              className="buttoApplyForm"
                 onClick={(e) => handleSubmit(e)}
                 type="submit"
               >
                   Apply
               </button>
+              </div>
             }
         </form>
         </div>

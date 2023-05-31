@@ -8,6 +8,20 @@
   justify-content: center;
   background-color: white;
 }
+.apply-detail-label{
+  margin: 10px;
+  font-weight: bold;
+}
+.buttonFormApplyCont{
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  margin: 10px;
+}
+.buttoApplyForm{
+  width: 50%;
+  height: 50px;
+}
 .applyHeaderMainContain{
   display: flex;
   flex-grow: 1;
