@@ -27,23 +27,28 @@ function InternSelector() {
       const intern1Doc = await getDoc(intern1Ref);
       if (intern1Doc.exists()) {
         const userData = intern1Doc.data();
-        // console.log("This is user Data",userData)
-        let internData1 = userData.intern1;
-        let internData2 = userData.intern2;
-        if(internData1.status !== "closed"){
+        console.log("This is user Data",userData)
+        console.log(userData.intern1)
+        if(userData.intern1 === undefined){
+          // console.log("this is data 1",intern1newDATA)
+          setInternStatus1("closed");
+          console.log("closed intern1")
+        }else{
+          let internData1 = userData.intern1;
           setInternDet1(internData1)
           setInternStatus1(internData1.status);
           intern1DATA = internData1;
-          // console.log("this is data 1",intern1newDATA)
-        }else{
-          setInternStatus1("closed");
+          console.log("Open intern1")
         }
-        if(internData2.status !== "closed"){
+        if(userData.intern2 === undefined){
+          setInternStatus2("closed");
+          console.log("closed intern2") 
+        }else{
+          console.log("open intern2")
+          let internData2 = userData.intern2;
           setInternDet2(internData2)
           setInternStatus2(internData2.status);
           intern2DATA = internData2;
-        }else{
-          setInternStatus2("closed");
         }
         // setLoading(false);
         // console.log(internDet2)
@@ -57,7 +62,7 @@ function InternSelector() {
     }
     // console.log("this is intern1", intern1DATA)
     // console.log("this is intern2", intern2DATA)
-    if(intern1DATA !== null && intern2DATA !==null){
+    if(intern1DATA !== undefined && intern2DATA !==undefined){
       setLoading(false);
     }
     // const intern2Doc = await getDoc(intern2Ref);

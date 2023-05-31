@@ -66,14 +66,19 @@ const ProfileForm = () => {
       {
         setReadOnly(true);
         const personalData = fetchedPersonalData.data();
-        // console.log(personalData)
-        setFirstName(personalData.stName);
-        setStNumber(personalData.stNum);
-        setFaculty(personalData.faculty);
-        setGrade(personalData.grade);
-        setPhoneNumber(personalData.phone);
-        setDepartment(personalData.department);
-        constPersonalDATA = personalData;
+        console.log(personalData)
+        if (personalData.stName === null && personalData.stNum === null && personalData.faculty === null && personalData.department === null && personalData.grade === null && personalData.phone === null) {
+          setReadOnly(false);
+          // console.log(personalData)
+      }else{
+          setFirstName(personalData.stName);
+          setStNumber(personalData.stNum);
+          setFaculty(personalData.faculty);
+          setGrade(personalData.grade);
+          setPhoneNumber(personalData.phone);
+          setDepartment(personalData.department);
+          constPersonalDATA = personalData;
+        }
       } else {
         console.log("No such document!");
         return null;
@@ -88,34 +93,27 @@ const ProfileForm = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
-    setShowModal(true);
-    setSubmitting(true);
-      let submittedData = {
-        stName: firstName,
-        stNum:  stNumber,
-        faculty: faculty,
-        department: department,
-        grade: grade,
-        phone: phoneNumber,
-        intern1: "open",
-        intern2: "open",
-      };
-      const profileRef = doc(db, 'users', authToken);
-      await setDoc(profileRef, submittedData, { merge: true });
-      console.log(submittedData)
-      setSubmitting(false);
-      // await updateDoc(doc(db, "internships", authToken), submittedData);
-      // if (internType === 'intern1') {
-      //   await updateDoc(doc(db, "users", authToken), {
-      //     intern1: status
-      //   });
-      //   setSubmitting(false);
-      // }else if (internType === 'intern2'){
-      //   await updateDoc(doc(db, "users", authToken), {
-      //     intern2: status
-      //   });
-      //   setSubmitting(false);
-      // }
+    if (firstName === '' || stNumber === '' || faculty === '' || department === '' || grade === '' || phoneNumber === '') {
+      alert('Please fill in all fields');
+      return;
+    }{
+      setShowModal(true);
+      setSubmitting(true);
+        let submittedData = {
+          stName: firstName,
+          stNum:  stNumber,
+          faculty: faculty,
+          department: department,
+          grade: grade,
+          phone: phoneNumber,
+          intern1: "open",
+          intern2: "open",
+        };
+        const profileRef = doc(db, 'users', authToken);
+        await setDoc(profileRef, submittedData, { merge: true });
+        // console.log(submittedData)
+        setSubmitting(false);
+    }
   }
 
   const closeModal = () => {

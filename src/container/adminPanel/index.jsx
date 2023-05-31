@@ -3,7 +3,6 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { db } from "../../firebaseConfig";
 import { doc, setDoc, getDoc, collection, query, where, getDocs } from "firebase/firestore";
 import { ReactComponent as LoadingSVG } from "../../svgs/loadingSVG.svg";
-import { ReactComponent as CompletedSVG } from "../../svgs/doneCheck.svg";
 import './index.css'
 
 const AdminPanel = () => {
@@ -46,33 +45,9 @@ const AdminPanel = () => {
           setSubmitting(false);
           // ..
         });
-        // console.log("No such document!");
-        // console.log("no user")
+        console.log("No such document!");
+        console.log("no user")
       }
-
-      // const docRef = doc(db, "users", userEmail);
-      // const docSnap = await getDoc(docRef);
-      // if (querySnapshot.length > 0) {
-      //   const userObject = usersArray.find(user => user.email === userEmail);
-      //   editUserType(userData.type, userType);
-      //   console.log("userexicts");
-      //   // console.log("User Type:", userData.type);
-      // } else {
-      //   createUserWithEmailAndPassword(auth, careerCenterEmail, _password)
-      //   .then((userCredential) => {
-      //     // Signed in 
-      //     const userData = userCredential.user;
-      //     console.log(userData.uid)
-      //     editUserType(userData.uid, userType)
-      //     // ...
-      //   })
-      //   .catch((error) => {
-      //     const errorCode = error.code;
-      //     const errorMessage = error.message;
-      //     // ..
-      //   });
-      //   console.log("No such document!");
-      // }
     } catch (error) {
       console.log("Error retrieving user type:", error);
       setSubmitting(true);
